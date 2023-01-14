@@ -1,0 +1,16 @@
+.nav{
+    @apply relative text-gray-500 font-medium tracking-[1px] hover:text-blue-600 p-1  
+}
+
+.nav::after{
+    @apply content-[''] bg-blue-600 h-[2px] w-[0%] left-0 -bottom-[5px] rounded-2xl absolute duration-300
+}
+
+.nav:hover::after{
+    @apply w-[100%]
+}
+
+
+.nav:hover::after{
+    box-shadow: 0px 0px 3px;
+}
