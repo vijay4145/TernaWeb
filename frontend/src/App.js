@@ -7,18 +7,16 @@ import { Tempaaa } from "./components/Tempaaa";
 function App() {
   return (
     <>
+
     <div>
-      <div className='sticky top-0 bg-white'>
+      <div className='sticky top-0 bg-white z-10'>
         <Navbar/>
       </div>
-      <div className='sticky top-0 z-[-1]'>
-        <Home/>
-      </div>
+      <Home/>
+      <Tempaaa/>
 
-    <div style={{zIndex: '3', backgroundColor: 'white'}}>
-    <Tempaaa/>
 
-    </div>
+    {/* </div> */}
     </div>
     
     </>

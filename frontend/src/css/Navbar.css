@@ -14,3 +14,11 @@
 .nav:hover::after{
     box-shadow: 0px 0px 3px;
 }
+
+
+
+@media only screen and (max-width: 1100px){
+    .nav{
+        display: none;
+    }
+}
