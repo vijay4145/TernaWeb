@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import university_icon from "../lottie_animation/university.png";
 import '../css/Navbar.css';
-
+import { Link } from 'react-router-dom';
 export const Navbar = () => {
+
   return (
     <>
-        <div className='flex flex-row justify-between' style={{width: '95vw', overflowX: 'hidden'}}>
+        <div className='flex flex-row justify-between' style={{width: '97vw', overflowX: 'hidden'}}>
           <div name="title" className="flex flex-row item-center content-center m-1">
               <img src={university_icon} alt="" />
               <div className="flex flex-col">
@@ -16,11 +17,12 @@ export const Navbar = () => {
               </div>
           </div>
 
-          <ul className='flex flex-row justify content-center items-center gap-x-20 mx-8 z-10'>
-            <li className='nav'>Home</li>
-            <li className='nav'>Committees</li>
-            <li className='nav'>Question Papers</li>
-            <li className='nav'>Events</li>
+          <ul className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>
+            <Link className='nav' to='/'>Home</Link>
+            <Link className='nav' to='/events'>Events</Link>
+            <Link className='nav' to='/CommittesOverview' >Committees</Link>
+            <Link className='nav' to='/pastYearPapers'>Question Papers</Link>
+            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-2'>Login</button>
           </ul>
 
         </div>

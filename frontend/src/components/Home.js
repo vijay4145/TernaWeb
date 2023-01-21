@@ -1,24 +1,20 @@
 import React, { useEffect } from "react";
-import { Navbar } from "./Navbar";
 import Lottie from "lottie-react";
 import * as welcome_animation from "../lottie_animation/welcome.json";
 import * as note_animation from '../lottie_animation/note_animation.json';
 import '../css/Home.css'
+import {HomeEvent} from '../components/HomeEvent'
 
-export const Home = () => {
-  // const options = {
-  //     animationData: wave_animation,
-  //     loop: true
-  //   };
-
-  //   const  View = useLottie(options);
+export const Home = (props) => {
+  useEffect(()=>{
+    props.setProgress(100);
+  },[])
 
   return (
     <>
       <div className="flex content-center items-center p-4" style={{minHeight: '90vh', marginTop: '10px'}}>
         <div className="flex flex-row justify-between" style={{width: '95vw'}}>
           <div className="main-content">
-            {/* <Navbar/> */}
 
 
             <div name='mainContentAtCenter' className="flex flex-col justify-between items-center content-center break-words">
@@ -28,12 +24,12 @@ export const Home = () => {
                 <h1 className="text-2xl font-semibold text-blue-900 break-words">Welcome to <br></br> <span className="font-extrabold text-4xl">Terna Engineering College</span> </h1>
                 <p><br/>Get past year IAT papers, <br></br> Get notification of upcoming Events <br></br>Explore every committees of terna at your fingerTip</p>
                 <br></br>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> <a href="#committeSection">Explore Terna</a></button>
+                <a href="#Event"> <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Explore Terna</button></a>
               </div>
               
               
               
-              <div name="animation_at_bottom" className="flex flex-row flex-wrap">
+              <div name="animation_at_bottom" className="flex flex-row flex-wrap max-sm:hidden">
                 <div style={{position: 'relative'}}>
                   <Lottie animationData={note_animation} ></Lottie>
                   <div style={{position: 'absolute', top: '0',width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
@@ -73,6 +69,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
+      <HomeEvent/>
     </>
   );
 };
