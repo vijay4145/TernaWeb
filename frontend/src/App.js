@@ -3,7 +3,7 @@ import { Home } from "./components/Home";
 import { Navbar } from "./components/Navbar";
 import { CommittesOverview } from "./components/CommittesOverview";
 import { PastYearPaper } from "./components/PastYearPaper";
-import { Events } from './components/Events';
+import { Events } from './components/Event/Events';
 import LoadingBar from 'react-top-loading-bar'
 import {
   BrowserRouter as Router,
@@ -27,8 +27,6 @@ function App() {
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
       />
-      <Routes>
-          <Route exact path="/login" element={<Login/>} />
           
         <div>
           <div className="sticky top-0 bg-white z-10">
@@ -43,7 +41,6 @@ function App() {
           </Routes>
         </div>
         
-      </Routes>
       </Router>
     </>
   );
