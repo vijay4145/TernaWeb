@@ -22,7 +22,16 @@ export const Events = (props) => {
         <EventCard/>
 
       </section>
-      <section id='pastEvents'>
+
+      <br/>
+      <br/>
+      <br/>
+      <section id='pastEvents' className='mt-3 mx-4'>
+        <h1 className='text-blue-900 font-semibold text-3xl'>Past Events :</h1>
+        <EventCard/>
+        <EventCard/>
+        <EventCard/>
+        <EventCard/>
       </section>
 
       <br/>
