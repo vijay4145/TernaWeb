@@ -13,7 +13,6 @@ import {
   Routes,
 } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Login } from "./components/Authentication/Login";
 
 function App() {
   const [progress, setProgress] = useState(0);

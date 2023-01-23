@@ -22,7 +22,7 @@ export const Navbar = () => {
             <Link className='nav' to='/events'>Events</Link>
             <Link className='nav' to='/CommittesOverview' >Committees</Link>
             <Link className='nav' to='/pastYearPapers'>Question Papers</Link>
-            <a href='/login'><button className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-2'>Login</button></a>
+            <a href='/'><button className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-2'>Login</button></a>
           </ul>
 
         </div>
