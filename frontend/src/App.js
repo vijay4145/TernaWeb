@@ -60,7 +60,7 @@ function App() {
           
         <div>
           <div className="sticky top-0 bg-white z-10">
-            <Navbar signInWithGoogle={signInWithGoogle}/>
+            <Navbar signInWithGoogle={signInWithGoogle} auth={auth}/>
           </div>
 
           <Routes>

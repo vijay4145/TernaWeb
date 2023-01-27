@@ -1,0 +1,19 @@
+.account-drop-down:hover .dropdown-items{
+    display: block;
+    max-height: 500px;
+    transition: max-height .6s ease-in-out;
+    border: 1px solid #FAF9F6;
+    
+}
+
+.dropdown-items{
+    /* display: none; */
+    max-height: 0px;
+    transition: max-height .15s ease;
+    overflow: hidden;
+}
+
+.dropdown-subitems:hover{
+    /* background-color: wheat; */
+    background-color: #FAF9F6;
+}

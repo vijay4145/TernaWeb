@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import university_icon from "../lottie_animation/university.png";
 import '../css/Navbar.css';
 import { Link } from 'react-router-dom';
+import { AccountDropDown } from './Navbar/AccountDropDown';
 export const Navbar = (props) => {
 
   return (
@@ -22,7 +23,11 @@ export const Navbar = (props) => {
             <Link className='nav' to='/events'>Events</Link>
             <Link className='nav' to='/CommittesOverview' >Committees</Link>
             <Link className='nav' to='/pastYearPapers'>Question Papers</Link>
+            {
+              (props.auth !== null) ? (<AccountDropDown/>)
+              :
             <button onClick={props.signInWithGoogle} className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-2'>Login</button>
+            }
           </ul>
 
         </div>
