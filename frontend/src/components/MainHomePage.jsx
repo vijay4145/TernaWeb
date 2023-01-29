@@ -10,7 +10,7 @@ import {
     Routes,
   } from "react-router-dom";
 import "../config/firebase-config";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { useEffect } from 'react';
 
 
@@ -19,15 +19,13 @@ import { useEffect } from 'react';
 export const MainHomePage = (props) => {
     
     const provider = new GoogleAuthProvider();
-    const auth = getAuth();
     const signInWithGoogle = async ()=>{
-
-        if(auth.currentUser !== null){
-          console.log(auth.currentUser.displayName);
-          console.log(auth.currentUser.getIdToken());
+      var currentUser = await getAuth().currentUser;
+      var auth = await getAuth();
+        if(currentUser !== null){
+          console.log(currentUser.displayName);
         }else{
-    
-        signInWithPopup(auth, provider)
+        signInWithRedirect(auth, provider)
           .then((result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -46,6 +44,7 @@ export const MainHomePage = (props) => {
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
+            // console.log("error code is " + errorCode);
           });
         }};
 
@@ -53,7 +52,7 @@ export const MainHomePage = (props) => {
     <>
     <div>
             <div className="sticky top-0 bg-white z-10">
-              <Navbar signInWithGoogle={signInWithGoogle} auth={auth}/>
+              <Navbar signInWithGoogle={signInWithGoogle}/>
             </div>
 
             <Routes>

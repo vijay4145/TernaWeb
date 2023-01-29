@@ -3,7 +3,17 @@ import university_icon from "../lottie_animation/university.png";
 import '../css/Navbar.css';
 import { Link } from 'react-router-dom';
 import { AccountDropDown } from './Navbar/AccountDropDown';
+import { useEffect } from 'react';
+import { getAuth } from "firebase/auth";
+
 export const Navbar = (props) => {
+  var currentUser = getAuth().currentUser;
+  useEffect(() => {
+    console.log(currentUser);
+  }, [])
+  
+  console.log(getAuth());
+  
 
   return (
     <>
@@ -24,7 +34,7 @@ export const Navbar = (props) => {
             <Link className='nav' to='/CommittesOverview' >Committees</Link>
             <Link className='nav' to='/pastYearPapers'>Question Papers</Link>
             {
-              (props.auth !== null) ? (<AccountDropDown/>)
+              (currentUser !== null) ? (<AccountDropDown/>)
               :
             <button onClick={props.signInWithGoogle} className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-2'>Login</button>
             }
