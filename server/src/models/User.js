@@ -3,10 +3,12 @@ const { USER } = require('../data/Database');
 
 const userSchema = new mongoose.Schema({
     USER_EMAIL : {
-        type: String
+        type: String,
+        required: true
     },
     USER_NAME : {
-        type : String
+        type : String,
+        required: true
     },
     TAGS : {
         type : String

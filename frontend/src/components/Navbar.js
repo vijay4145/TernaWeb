@@ -7,9 +7,9 @@ import { useEffect } from 'react';
 import { getAuth } from "firebase/auth";
 
 export const Navbar = (props) => {
-  var currentUser = getAuth().currentUser;
+  const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
-    console.log(currentUser);
+    setCurrentUser(getAuth.currentUser);
   }, [])
   
   console.log(getAuth());

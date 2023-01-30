@@ -1,11 +1,12 @@
 const {admin} = require('../../config/firebase-config');
 
-const checkAuthorization = (req, res, next) =>{
+const verifyToken = (req, res, next) =>{
     const token = req.headers.authorization;
         const decodeValue = admin.auth().verifyIdToken(token).then(decodedToken =>{
             const uid = decodedToken.uid;
-            console.log(uid);
-            return next();  
+            req.body.email = decodedToken.email;
+            console.log(req);;
+            next();  
 
         }).catch((error)=>{
             res.status(401);
@@ -15,4 +16,4 @@ const checkAuthorization = (req, res, next) =>{
 
 }
 
-module.exports = {checkAuthorization};
+module.exports =  { verifyToken };

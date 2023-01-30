@@ -1,16 +1,20 @@
 const express = require('express');
 const app = express();
-const home = require('./src/routes/HomeRoute');
+const homeRouter = require('./src/routes/HomeRoute');
 const event = require('./src/routes/EventsRoute');
-const {checkAuthorization } = require('./src/middleware/Firebase/VerifyToken');
+const { verifyToken } = require('./src/middleware/Firebase/VerifyToken');
+const UserRoute = require('./src/routes/UserRoute');
+const connectToMongo = require('./src/services/Database/DbConnection');
 
+app.use(express.json());
 // routers
-app.use('/', home);
-app.use('/events', event);
+app.use('/', homeRouter);
+// app.use('/events', event);
+app.use('/user', UserRoute);
 
-app.get('/auth', checkAuthorization,(req, res)=>{
+app.get('/auth', verifyToken ,(req, res)=>{
     console.log(req.headers);
-    return res.json({greeting: "you requested for login"});
+    return res.json({greeting: "you are a verified user"});
 })
 
 module.exports = app;

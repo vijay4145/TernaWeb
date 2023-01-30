@@ -8,7 +8,7 @@ const {fetchDataFromFirebaseRealtimeDatabase} = require('../middleware/Firebase/
 // TODO: get data from firebase
 // TODO: send response
 
-router.get("/upcomingEvents",fetchDataFromFirebaseRealtimeDatabase, upcomingEvent);
+// router.get("/upcomingEvents",fetchDataFromFirebaseRealtimeDatabase, upcomingEvent);
 // router.route("/pastEvents").get(pastEvents);
 
 module.exports = router;
