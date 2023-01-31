@@ -1,11 +1,9 @@
 const User = require('../../models/User');
 
 class UserDbService {
-    static async pushDataToDb(data, email){
-        console.log("email in services is " + email);
-        console.log(data);
+    static async addUserToDb(data){
         let user = new User({
-            USER_EMAIL : email,
+            USER_EMAIL : data.email,
             USER_NAME : data.name,
         });
         if(data.tags)

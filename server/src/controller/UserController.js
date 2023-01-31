@@ -3,10 +3,9 @@ const { UserDbService } = require('../services/Database/UserDbService');
 module.exports.addUser = {
     post : async (req, res) =>{
         try{
-            // console.log(("user email is " + req.body.email));
-            UserDbService.pushDataToDb(await req.body, await req.body.email);
+            UserDbService.addUserToDb(req.body);
             res.status(200);
-            res.json("successfull at email " + email);
+            res.json({email : res.body.email});
         }catch(err){
             console.log(err);
             res.status(404);
