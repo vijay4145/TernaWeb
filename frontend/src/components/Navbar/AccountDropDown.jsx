@@ -5,12 +5,16 @@ import "../../css/Navbar/AccountDropDown.css";
 import userIcon2 from "../../lottie_animation/user_icon2.png";
 import logoutIcon from "../../lottie_animation/logout.png";
 import { Link } from 'react-router-dom';
+import { getAuth } from "firebase/auth";
 
 
 
 
 
 export const AccountDropDown = () => {
+  const logout = ()=>{
+    getAuth().signOut();
+  }
 
 
   return (
@@ -26,7 +30,7 @@ export const AccountDropDown = () => {
                     <img src={accountSettingsIcon} className="h-6"/>
                     <h3>&nbsp;Account Settings</h3>
                 </Link> <hr/>
-                <li className="dropdown-subitems p-4 flex flex-row">
+                <li onClick={logout} className="dropdown-subitems p-4 flex flex-row">
                   <img src={logoutIcon} className="h-6"/>
                   <h3>&nbsp;Log out</h3>
                 </li>       <hr/>

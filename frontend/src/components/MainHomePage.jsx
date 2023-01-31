@@ -20,8 +20,8 @@ export const MainHomePage = (props) => {
     
     const provider = new GoogleAuthProvider();
     const signInWithGoogle = async ()=>{
-      var currentUser = await getAuth().currentUser;
-      var auth = await getAuth();
+      var currentUser =  getAuth().currentUser;
+      var auth =  getAuth();
         if(currentUser !== null){
           console.log(currentUser.displayName);
         }else{

@@ -4,15 +4,18 @@ import '../css/Navbar.css';
 import { Link } from 'react-router-dom';
 import { AccountDropDown } from './Navbar/AccountDropDown';
 import { useEffect } from 'react';
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import "../config/firebase-config";
 
 export const Navbar = (props) => {
   const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
-    setCurrentUser(getAuth.currentUser);
+    onAuthStateChanged(getAuth(), async(user)=>{
+      setCurrentUser(user);
+    })
   }, [])
   
-  console.log(getAuth());
+  // console.log(getAuth());
   
 
   return (
