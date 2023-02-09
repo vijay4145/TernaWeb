@@ -1,6 +1,7 @@
 import React from "react";
+import { useEffect } from "react";
 
-export const EventCard = () => {
+export const EventCard = (props) => {
       const imgUrl = "https://cdn4.vectorstock.com/i/1000x1000/69/03/flat-icon-sport-events-vector-9456903.jpg";
   return (
     <>

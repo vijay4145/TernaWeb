@@ -12,6 +12,7 @@ export const Navbar = (props) => {
   useEffect(() => {
     onAuthStateChanged(getAuth(), async(user)=>{
       setCurrentUser(user);
+      console.log(user);
     })
   }, [])
   

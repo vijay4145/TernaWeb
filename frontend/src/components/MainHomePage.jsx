@@ -19,6 +19,8 @@ import { useEffect } from 'react';
 export const MainHomePage = (props) => {
     
     const provider = new GoogleAuthProvider();
+
+
     const signInWithGoogle = async ()=>{
       var currentUser =  getAuth().currentUser;
       var auth =  getAuth();
@@ -43,6 +45,7 @@ export const MainHomePage = (props) => {
             const email = error.customData.email;
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
+            console.log(errorMessage);
             // ...
             // console.log("error code is " + errorCode);
           });
@@ -50,6 +53,7 @@ export const MainHomePage = (props) => {
 
   return (
     <>
+    {/* <button onclick={logou}>log out</button> */}
     <div>
             <div className="sticky top-0 bg-white z-10">
               <Navbar signInWithGoogle={signInWithGoogle}/>
