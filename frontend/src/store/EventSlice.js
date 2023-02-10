@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = []
-    // EVENT_HEADING : "",
-    // EVENT_SCHEDULE: "",
-    // EVENT_TAGS: [],
+    // EVENT_HEADING : "",  1
+    // EVENT_SCHEDULE: "",  1
+    // EVENT_TAGS: [],  
     // EVENT_REGISTER_LINK: '',
-    // EVENT_DESCRIPTION: '',
-    // EVENT_IMAGE_URL: '',
-    // EVENT_POSTED_BY : ''
+    // EVENT_DESCRIPTION: '', 1
+    // EVENT_IMAGE_URL: '',   1
+    // EVENT_POSTED_BY : ''   1
 
 
 export const eventSlice = createSlice({

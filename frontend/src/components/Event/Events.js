@@ -4,11 +4,21 @@ import "aos/dist/aos.css";
 import { EventCard } from "./EventCard";
 import { addEventSlice } from "../../store/EventSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { AiOutlinePlusCircle } from 'react-icons/ai'
+import { AiOutlinePlusCircle, AiFillCloseCircle } from 'react-icons/ai'
+import { useState } from "react";
+import { AddEvent } from "./AddEvent";
 
 export const Events = (props) => {
   const dispatch = useDispatch();
   const event = useSelector((state) => state.EventSlice);
+  const [formVisible, setFormVisible] = useState(false);
+  let addEventForm;
+  if(formVisible) addEventForm = <AddEvent/>
+
+  const toggleFormVisibility = ()=>{
+    if(formVisible) setFormVisible(false);
+    else setFormVisible(true);
+  }
 
   useEffect(() => {
     // addEventSlice.
@@ -30,17 +40,22 @@ export const Events = (props) => {
 
   return (
     <>
+    
+    {addEventForm}
       <div className="floating-Add-Button fixed bottom-4 right-5 z-10">
-        <button type="button" className= "rounded-full hover:bg-blue-700 text-6xl bg-blue-600">
-          <AiOutlinePlusCircle color="#ffffff"/>
-        </button>
+      <button type="button" className= "rounded-full hover:bg-blue-900 text-6xl bg-blue-600" onClick={toggleFormVisibility}>
+        {!formVisible && <AiOutlinePlusCircle color="#ffffff"/>}
+        {formVisible && <AiFillCloseCircle color="#ffffff"/>}
+      </button>
       </div>
+    {!formVisible && <section id="eventListSection">
+
       <section id="upcomingEvents" className="mt-3 mx-4">
         <h1 className="text-blue-900 font-semibold text-3xl">
           Upcoming Events :
         </h1>
         {event.map((eve, i) => {
-          return <EventCard keys={i} />;
+          return <EventCard keys={i} key={i}/>;
         })}
       </section>
 
@@ -57,6 +72,7 @@ export const Events = (props) => {
 
       <br />
       <br />
+    </section>}
     </>
   );
 };
