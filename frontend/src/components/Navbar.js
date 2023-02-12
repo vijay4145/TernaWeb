@@ -35,7 +35,7 @@ export const Navbar = (props) => {
           <ul className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>
             <Link className='nav' to='/'>Home</Link>
             <Link className='nav' to='/events'>Events</Link>
-            <Link className='nav' to='/CommittesOverview' >Committees</Link>
+            <Link className='nav' to='/committees' >Committees</Link>
             <Link className='nav' to='/pastYearPapers'>Question Papers</Link>
             {
               (currentUser !== null) ? (<AccountDropDown/>)

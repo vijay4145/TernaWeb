@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const homeRouter = require('./src/routes/HomeRoute');
 const eventsRoute = require('./src/routes/EventsRoute');
+const committeeRoute = require('./src/routes/CommitteesRoute');
 const { verifyToken } = require('./src/middleware/Firebase/VerifyToken');
 const UserRoute = require('./src/routes/UserRoute');
 const connectToMongo = require('./src/services/Database/DbConnection');
@@ -18,6 +19,7 @@ app.use(express.json());
 // routers
 app.use('/', homeRouter);
 app.use('/events', eventsRoute);
+app.use('/committees', committeeRoute);
 app.use('/user', UserRoute);
 
 app.get('/auth', verifyToken ,(req, res)=>{

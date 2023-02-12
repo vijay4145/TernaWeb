@@ -2,7 +2,6 @@ const {admin} = require('../../config/firebase-config');
 
 const verifyToken = (req, res, next) =>{
     const token = req.headers.authorization;
-    console.log(token);
         const decodeValue = admin.auth().verifyIdToken(token).then(decodedToken =>{
             const uid = decodedToken.uid;
             req.body.email = decodedToken.email;

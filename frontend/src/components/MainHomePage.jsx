@@ -12,6 +12,7 @@ import {
 import "../config/firebase-config";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { useEffect } from 'react';
+import { CommitteesList } from './Committees/CommitteesList';
 
 
 
@@ -61,7 +62,7 @@ export const MainHomePage = (props) => {
             </div>
 
             <Routes>
-              <Route exact path="/committesOverview" element={<CommittesOverview setProgress={props.setProgress}/>}/>
+              <Route exact path="/committees" element={<CommitteesList setProgress={props.setProgress}/>}/>
               <Route exact path="/" element={<Home setProgress={props.setProgress}/>} />
               <Route exact path="/pastYearPapers" element={<PastYearPaper setProgress={props.setProgress}/>} />
               <Route exact path="/events" element={<Events setProgress={props.setProgress}/>} />
