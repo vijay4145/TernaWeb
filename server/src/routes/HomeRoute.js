@@ -5,6 +5,6 @@ const { home } = require('../controller/HomeController')
 const router = express.Router(); // New router instance from express library
 
 //routes
-router.route("/", home.get);
+router.get("/", home.get);
 
 module.exports = router

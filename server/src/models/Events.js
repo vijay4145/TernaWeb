@@ -11,21 +11,21 @@ const eventSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    EVENT_TAGS:{
-        type: String
-    },
+    EVENT_TAGS:[],
     EVENT_REGISTER_LINK :{
-        type: String
+        type: String,
+        required: true
     },
     EVENT_DESCRIPTION :{
-        type: String
+        type: String,
+        required: true
     },
     EVENT_IMAGE_URL : {
         type: String
     },
     EVENT_POSTED_BY : {
         type: String,
-        ref : USER.DATABASE_TABLE_NAME
+        // ref : USER.DATABASE_TABLE_NAME
     }
 })
 

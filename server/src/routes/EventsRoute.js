@@ -1,14 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const {upcomingEvent, pastEvents} = require('../controller/EventController');
-const {fetchDataFromFirebaseRealtimeDatabase} = require('../middleware/Firebase/RealtimeDatabase');
-
+const { addEvent } = require('../controller/EventController');
+const { verifyToken } = require('../middleware/Firebase/VerifyToken')
 
 
 // TODO: get data from firebase
 // TODO: send response
 
-// router.get("/upcomingEvents",fetchDataFromFirebaseRealtimeDatabase, upcomingEvent);
-// router.route("/pastEvents").get(pastEvents);
+router.post("/addEvent", verifyToken,  addEvent.post);
 
 module.exports = router;

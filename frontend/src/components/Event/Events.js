@@ -12,8 +12,8 @@ export const Events = (props) => {
   const dispatch = useDispatch();
   const event = useSelector((state) => state.EventSlice);
   const [formVisible, setFormVisible] = useState(false);
-  let addEventForm;
-  if(formVisible) addEventForm = <AddEvent/>
+  // let addEventForm;
+  // if(formVisible) addEventForm = <AddEvent/>
 
   const toggleFormVisibility = ()=>{
     if(formVisible) setFormVisible(false);
@@ -41,7 +41,7 @@ export const Events = (props) => {
   return (
     <>
     
-    {addEventForm}
+      {formVisible && <AddEvent toggleFormVisibility={toggleFormVisibility}/>}
       <div className="floating-Add-Button fixed bottom-4 right-5 z-10">
       <button type="button" className= "rounded-full hover:bg-blue-900 text-6xl bg-blue-600" onClick={toggleFormVisibility}>
         {!formVisible && <AiOutlinePlusCircle color="#ffffff"/>}
