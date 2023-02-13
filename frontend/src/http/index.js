@@ -4,8 +4,9 @@ import '../config/firebase-config'
 
 
 const api = async (endpoint, data,method)=>{
-    var idToken = await getAuth().currentUser.getIdToken();
-    console.log(idToken);
+    var idToken =  getAuth().currentUser;
+    if(idToken) idToken = await idToken.getIdToken();
+    if(!idToken) idToken = "bearer"
         const instance = axios.create({
             baseURL: 'http://localhost:8000',
             headers: {
@@ -17,15 +18,16 @@ const api = async (endpoint, data,method)=>{
 
         try{
             if(method === 'post') {
+                if(idToken === 'bearer') return {
+                    success: false
+                }
                 const response = await instance.post(endpoint, data);
-                console.log(response);
                 return {
                     success : true
                 }
             }
             else if(method === 'get') {
                 const response = await instance.get(endpoint);
-                console.log(response);
                 return response;
             }
         }catch(err){

@@ -5,8 +5,10 @@ import { AiFillCloseCircle, AiOutlinePlusCircle } from 'react-icons/ai'
 import { AddCommittee } from './AddCommittee'
 import { CommitteesListCard } from './CommitteesListCard'
 import  { getCommittee } from '../../http/index'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 export const CommitteesList = () => {
+
     const [formVisible, setFormVisible] = useState(false);
     const toggleFormVisibility = ()=>{
         if(formVisible) setFormVisible(false);
@@ -17,7 +19,6 @@ export const CommitteesList = () => {
     useEffect(() => {
       getCommittee().then(response=>{
         setCommitteesList(response.data);
-        console.log(response.data);
       })
     }, [])
     

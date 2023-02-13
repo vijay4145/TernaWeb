@@ -7,6 +7,7 @@ export const AddTagInput = (props) => {
     e.preventDefault();
     if(tag)
     props.setHashTags([...props.hashTags, tag]);
+    setTag('');
   }
 
 
@@ -20,7 +21,9 @@ export const AddTagInput = (props) => {
           <input
             type="search"
             id="default-search"
+            value={tag}
             onChange={(e)=>{setTag(e.target.value)}}
+            onKeyDown={(e)=>{if(e.key === 'Enter') {addTag(e); }}}
             className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-white dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="e.g: #Coding"
             disabled={props.isLoading}

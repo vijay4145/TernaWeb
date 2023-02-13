@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 export const HastTagCards = (props) => {
@@ -10,9 +9,6 @@ export const HastTagCards = (props) => {
     props.setHashTags([...newArray]);
   };
 
-  useEffect(() => {
-    console.log("forDisplay: " + props.forDisplay);
-  }, [])
   
 
   return (

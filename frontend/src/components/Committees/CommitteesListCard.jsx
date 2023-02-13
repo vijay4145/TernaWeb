@@ -1,23 +1,21 @@
 import React, { useEffect } from 'react'
 import { HastTagCards } from '../Event/HastTagCards';
+import '../../css/ScrollbarHide.css'
 
 export const CommitteesListCard = (props) => {
-    useEffect(() => {
-        console.log(props.committee);
-    }, [])
     
   return (
     <>
     
-<div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 w-96">
+<div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 w-80 h-96 ">
     <a href="#">
-        <img className="rounded-t-lg min-w-full" src={props.committee.COMMITTEE_IMAGE_URL} alt="" />
+        <img className="rounded-t-lg w-[100%] h-[60%]" src={props.committee.COMMITTEE_IMAGE_URL} alt="" />
     </a>
     <div className="p-5">
         <a href="#">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{props.committee.COMMITTEE_NAME}</h5>
         </a>
-        <div id='HashTagCards' className='mb-3 flex flex-row flex-wrap gap-1 max-w-full'>
+        <div id='HashTagCards' className='mb-3 flex flex-row overflow-x-scroll whitespace-nowrap gap-1 max-w-full scrollbar-hide'>
             {props.committee.COMMITTEE_TAGS.map((tag, i)=>{
                 return <HastTagCards hashTag={tag} forDisplay={true} key={i}/>
             })}

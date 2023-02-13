@@ -5,5 +5,5 @@ const { addCommittee } = require('../controller/CommitteeController')
 
 
 router.post('/addCommittee', verifyToken, addCommittee.post);
-router.get('/getCommitteeList', verifyToken, addCommittee.get);
+router.get('/getCommitteeList', addCommittee.get);
 module.exports = router;
