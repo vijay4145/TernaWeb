@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 export const HastTagCards = (props) => {
@@ -9,12 +10,17 @@ export const HastTagCards = (props) => {
     props.setHashTags([...newArray]);
   };
 
+  useEffect(() => {
+    console.log("forDisplay: " + props.forDisplay);
+  }, [])
+  
+
   return (
     <>
       <div className="flex flex-row gap-1 bg-blue-900 text-white max-w-fit px-2 rounded-lg">
         <h1 className="break-all"> #{props.hashTag} </h1>
-        <button onClick={removeTag}>
-          <div className="flex flex-col content-center justify-center">
+        <button onClick={removeTag} className={`${props.forDisplay ? 'hidden':'block'}`}>
+          <div className={`flex flex-col content-center justify-center`}>
             <AiFillCloseCircle />
           </div>
         </button>
@@ -22,3 +28,7 @@ export const HastTagCards = (props) => {
     </>
   );
 };
+
+HastTagCards.defaultProps = {
+  forDisplay: false
+}

@@ -11,5 +11,16 @@ module.exports.addCommittee = {
                 failed: true
             })
         })
+    },
+
+    get: (req, res)=>{
+        committeDb.find({}).then(list=>{
+            res.status(200).json(list)
+        }).catch(err=>{
+            console.log(err);
+            res.status(400).json({
+                failed: true
+            })
+        });
     }
 }
