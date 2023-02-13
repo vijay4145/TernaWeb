@@ -8,6 +8,9 @@ import * as loading_animation from "../../lottie_animation/loading_animation.jso
 import * as success_animation from "../../lottie_animation/success_animation.json";
 import * as failed_animation from "../../lottie_animation/failed_task.json";
 import Lottie from "lottie-react";
+import { ref, getDownloadURL, getStorage, uploadBytesResumable } from 'firebase/storage';
+import { storage } from '../../config/firebase-config'
+import { async } from "@firebase/util";
 
 export const AddCommittee = (props) => {
   const [hashTags, setHashTags] = useState([]);
@@ -18,6 +21,34 @@ export const AddCommittee = (props) => {
   const [isFormSubmittedSuccessfully, setIsFormSubmittedSuccessfully] =
     useState(false);
   const [isFormSubmissionFailed, setIsFormSubmissionFailed] = useState(false);
+  const [image, setImage] = useState(null);
+  const [imagUrlstate, setImagUrlstate] = useState('');
+
+
+  const uploadImageToDb = async()=>{
+    var imageUrl = 'thehewi'
+    if(image){
+      const storageRef = ref(storage, `committeeImages/${image.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, image);
+       uploadTask.on(
+        'state_changed',
+        snapshot =>{
+
+        },
+        error =>{
+          console.log(error);
+        },
+        ()=> {
+          getDownloadURL(uploadTask.snapshot.ref).then((url)=>{
+            imageUrl = url;
+            console.log(imageUrl);
+          })
+        }
+      );
+    }
+
+    console.log("final image url is " + imageUrl);
+  }
 
   const addEvent = async (e) => {
     if (hashTags.length === 0) {
@@ -27,26 +58,44 @@ export const AddCommittee = (props) => {
     }
 
     setisLoading(true);
+    var imageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2tBnVQ1j0IsjK4pxGmLtGTkLIwvZTeT-Xf1EAxFgVWA&s';
+    if(image){
+      const storageRef = ref(storage, `committeeImages/${image.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, image);
+      uploadTask.on(
+        'state_changed',
+        snapshot =>{
 
-    let eventDetailJson = {
-      COMMITTEE_NAME : committeeName,
-      COMMITTEE_REGISTER_LINK: committeeRegistrationLink,
-      COMMITTEE_TAGS: hashTags,
-      COMMITTEE_DESCRIPTION: committeeDescription,
-      COMMITTEE_IMAGE_URL:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2tBnVQ1j0IsjK4pxGmLtGTkLIwvZTeT-Xf1EAxFgVWA&s",
-      COMMITTEE_ADMINS: "vijay-temporary-h",
-    };
+        },
+        error =>{
+          console.log(error);
+        },
+        ()=> {
+          getDownloadURL(uploadTask.snapshot.ref).then((url)=>{
+            imageUrl = url;
+            let eventDetailJson = {
+              COMMITTEE_NAME : committeeName,
+              COMMITTEE_REGISTER_LINK: committeeRegistrationLink,
+              COMMITTEE_TAGS: hashTags,
+              COMMITTEE_DESCRIPTION: committeeDescription,
+              COMMITTEE_IMAGE_URL: imageUrl,
+              COMMITTEE_ADMINS: "vijay-temporary-h",
+            };
+        
+            postCommittee(eventDetailJson).then((response) => {
+              setisLoading(false);
+              if (response.success) {
+                setIsFormSubmittedSuccessfully(response.success);
+              } else {
+                console.log("fail hua form submission");
+                setIsFormSubmissionFailed(true);
+              }
+            });
+          })
+        }
+      );
+    }
 
-    postCommittee(eventDetailJson).then((response) => {
-      setisLoading(false);
-      if (response.success) {
-        setIsFormSubmittedSuccessfully(response.success);
-      } else {
-        console.log("fail hua form submission");
-        setIsFormSubmissionFailed(true);
-      }
-    });
 
     e.preventDefault();
   };
@@ -157,6 +206,8 @@ export const AddCommittee = (props) => {
                       id="file_input"
                       type="file"
                       disabled={isLoading}
+                      onChange={(e)=>{setImage(e.target.files[0])}}
+                      required
                     />
                   </div>
 
@@ -214,6 +265,9 @@ export const AddCommittee = (props) => {
           </div>
         </div>
       </section>
+
+
+      <button onClick={uploadImageToDb}>uploadImage</button>
     </>
   );
 };
