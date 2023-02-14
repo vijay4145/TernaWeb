@@ -23,9 +23,8 @@ export const Events = (props) => {
   useEffect(() => {
     getEventDetails().then((response)=>{
       setEventsList(response.data)
-      console.log(response.data);
+      props.setProgress(100);
     })
-    props.setProgress(100);
   }, []);
 
   AOS.init();
@@ -44,7 +43,7 @@ export const Events = (props) => {
 
       <section id="upcomingEvents" className="mt-3 mx-4">
         <h1 className="text-blue-900 font-semibold text-3xl">
-          Upcoming Events :
+          Events :
         </h1>
         {eventsList.map((eve, i) => {
           return <EventCard event={eve} keys={i} key={i}/>;

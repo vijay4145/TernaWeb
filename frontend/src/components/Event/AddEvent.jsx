@@ -3,11 +3,13 @@ import { AddTagInput } from "./AddTagInput";
 import { HastTagCards } from "./HastTagCards";
 import { MdHttp } from "react-icons/md";
 import { BiHeading } from "react-icons/bi";
-import { postEventDetails } from "../../http/index";
 import * as loading_animation from "../../lottie_animation/loading_animation.json";
 import * as success_animation from "../../lottie_animation/success_animation.json";
 import * as failed_animation from "../../lottie_animation/failed_task.json";
 import Lottie from "lottie-react";
+import { ref, getDownloadURL, getStorage, uploadBytesResumable } from 'firebase/storage';
+import { storage } from '../../config/firebase-config'
+import { postEventDetails } from "../../http";
 
 export const AddEvent = (props) => {
   const [hashTags, setHashTags] = useState([]);
@@ -18,6 +20,10 @@ export const AddEvent = (props) => {
   const [isLoading, setisLoading] = useState(false);
   const [isFormSubmittedSuccessfully, setIsFormSubmittedSuccessfully] = useState(false);
   const [isFormSubmissionFailed, setIsFormSubmissionFailed] = useState(false);
+  const [image, setImage] = useState(null);
+
+
+
 
   const addEvent = async (e) => {
     if (hashTags.length === 0) {
@@ -27,31 +33,48 @@ export const AddEvent = (props) => {
     }
 
     setisLoading(true);
+    var imageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2tBnVQ1j0IsjK4pxGmLtGTkLIwvZTeT-Xf1EAxFgVWA&s';
+    if(image){
+      const storageRef = ref(storage, `eventImages/${image.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, image);
+      uploadTask.on(
+        'state_changed',
+        snapshot =>{
 
-    let eventDetailJson = {
-      EVENT_HEADING: eventHeading,
-      EVENT_SCHEDULE: eventSchedule,
-      EVENT_TAGS: hashTags,
-      EVENT_REGISTER_LINK: eventRegistrationLink,
-      EVENT_DESCRIPTION: eventDescription,
-      EVENT_IMAGE_URL:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2tBnVQ1j0IsjK4pxGmLtGTkLIwvZTeT-Xf1EAxFgVWA&s",
-      EVENT_POSTED_BY: "vijay-temporary-h",
-    };
+        },
+        error =>{
+          console.log(error);
+        },
+        ()=> {
+          getDownloadURL(uploadTask.snapshot.ref).then((url)=>{
+            imageUrl = url;
+            let eventDetailJson = {
+              EVENT_HEADING: eventHeading,
+              EVENT_SCHEDULE: eventSchedule,
+              EVENT_TAGS: hashTags,
+              EVENT_REGISTER_LINK: eventRegistrationLink,
+              EVENT_DESCRIPTION: eventDescription,
+              EVENT_IMAGE_URL: imageUrl,
+              EVENT_POSTED_BY: "vijay-temporary-h",
+            };
+        
+            postEventDetails(eventDetailJson).then((response) => {
+              setisLoading(false);
+              if (response.success) {
+                setIsFormSubmittedSuccessfully(response.success);
+              } else {
+                console.log("fail hua form submission");
+                setIsFormSubmissionFailed(true);
+              }
+            });
+          })
+        }
+      );
+    }
 
-    postEventDetails(eventDetailJson).then(response=>{
-      setisLoading(false);
-      if(response.success){
-        setIsFormSubmittedSuccessfully(response.success);
-      }else{
-        console.log("fail hua form submission");
-        setIsFormSubmissionFailed(true);
-      }
-    });
 
     e.preventDefault();
   };
-
 
   const hideSubmissionResult = ()=>{
     if(isFormSubmissionFailed){
@@ -138,7 +161,9 @@ export const AddEvent = (props) => {
                       className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                       id="file_input"
                       type="file"
+                      onChange={(e)=>{setImage(e.target.files[0])}}
                       disabled={isLoading}
+                      required
                     />
                   </div>
 

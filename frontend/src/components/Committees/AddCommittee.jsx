@@ -10,7 +10,6 @@ import * as failed_animation from "../../lottie_animation/failed_task.json";
 import Lottie from "lottie-react";
 import { ref, getDownloadURL, getStorage, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../config/firebase-config'
-import { async } from "@firebase/util";
 
 export const AddCommittee = (props) => {
   const [hashTags, setHashTags] = useState([]);
@@ -24,31 +23,6 @@ export const AddCommittee = (props) => {
   const [image, setImage] = useState(null);
   const [imagUrlstate, setImagUrlstate] = useState('');
 
-
-  const uploadImageToDb = async()=>{
-    var imageUrl = 'thehewi'
-    if(image){
-      const storageRef = ref(storage, `committeeImages/${image.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, image);
-       uploadTask.on(
-        'state_changed',
-        snapshot =>{
-
-        },
-        error =>{
-          console.log(error);
-        },
-        ()=> {
-          getDownloadURL(uploadTask.snapshot.ref).then((url)=>{
-            imageUrl = url;
-            console.log(imageUrl);
-          })
-        }
-      );
-    }
-
-    console.log("final image url is " + imageUrl);
-  }
 
   const addEvent = async (e) => {
     if (hashTags.length === 0) {

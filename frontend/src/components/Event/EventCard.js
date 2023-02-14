@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { AiOutlineSchedule } from 'react-icons/ai';
 
 export const EventCard = (props) => {
       const imgUrl = "https://cdn4.vectorstock.com/i/1000x1000/69/03/flat-icon-sport-events-vector-9456903.jpg";
@@ -22,17 +22,17 @@ export const EventCard = (props) => {
         />
         <div className="flex flex-col w-full md:w-[70vw] py-4 content-center">
           <h1 className="text-2xl font-semibold text-blue-600">
-            Interview for SPORTEC- Core Team
+            {props.event.EVENT_HEADING}
           </h1>
           <p>
             {" "}
-            The most Awaited EVENT of Terna Engineering college SPORTEC 2023 is
-            here. Students those who all are interested to be a part of our
-            sports core committee from Terna Engineering College, Nerul can fill
-            this google form for interviews rest of the details will be shared
-            soon.
+            {props.event.EVENT_DESCRIPTION}
           </p>
-          <span className="flex justify-center md:justify-start mt-1">
+          <div className="flex mt-1 items-center">
+            <AiOutlineSchedule className="min-h-full" color={'#3B82F6'}/>
+            <p >&nbsp;{props.event.EVENT_SCHEDULE.substring(0, props.event.EVENT_SCHEDULE.indexOf('T'))}</p>
+          </div>
+          <span className="flex justify-center md:justify-start mt-2">
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-sans py-2 px-3 rounded drop-shadow-sm">
               Explore More
             </button>
