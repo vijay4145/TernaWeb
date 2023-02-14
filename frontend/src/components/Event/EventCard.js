@@ -16,9 +16,9 @@ export const EventCard = (props) => {
         }}
       >
         <img
-          src={imgUrl}
+          src={props.event.EVENT_IMAGE_URL}
           alt=""
-          className="w-full md:w-[20vw] h-[30vh] object-contain min-h-[150px]"
+          className=" w-fit md:w-[20vw] h-[30vh] object-contain min-h-[150px]"
         />
         <div className="flex flex-col w-full md:w-[70vw] py-4 content-center">
           <h1 className="text-2xl font-semibold text-blue-600">

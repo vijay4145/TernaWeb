@@ -6,6 +6,7 @@ import { AccountDropDown } from './Navbar/AccountDropDown';
 import { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "../config/firebase-config";
+import { RxHamburgerMenu } from 'react-icons/rx'
 
 export const Navbar = (props) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -16,11 +17,11 @@ export const Navbar = (props) => {
     })
   }, [])
   
-  // console.log(getAuth());
   
 
   return (
     <>
+
         <div className='flex flex-row justify-between' style={{width: '97vw', overflowX: 'hidden'}}>
           <div name="title" className="flex flex-row item-center content-center m-1">
               <img src={university_icon} alt="" />
@@ -31,6 +32,7 @@ export const Navbar = (props) => {
                 <h6 className="text-xs text-blue-400">Terna For Students</h6>
               </div>
           </div>
+
 
           <ul className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>
             <Link className='nav' to='/'>Home</Link>
@@ -44,7 +46,15 @@ export const Navbar = (props) => {
             }
           </ul>
 
+
+
         </div>
+          <ul className='nav-mobile-items hidden flex-row justify-between content-center items-center gap-x-10 z-10 max-w-[100vw] overflow-scroll scrollbar-hide px-2 mb-2 shadow-md'>
+            <Link className='nav-mobile' to='/'>Home</Link>
+            <Link className='nav-mobile' to='/events'>Events</Link>
+            <Link className='nav-mobile' to='/committees' >Committees</Link>
+            <Link className='nav-mobile' to='/pastYearPapers'>Question Papers</Link>
+          </ul>
 
     </>
   )

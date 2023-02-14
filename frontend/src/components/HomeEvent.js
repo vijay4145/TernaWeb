@@ -25,6 +25,9 @@ export const HomeEvent = () => {
           </div>
         </div>
 
+        <br/>
+        <br/>
+
     </div>
   
     </>

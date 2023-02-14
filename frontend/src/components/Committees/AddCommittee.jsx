@@ -112,7 +112,7 @@ export const AddCommittee = (props) => {
     <>
       <section
         id="LoadingAnimation"
-        className={`min-w-[98vw] min-h-[80vh] flex justify-center absolute z-10 ${
+        className={` min-w-[98vw] min-h-[80vh] flex justify-center absolute z-10 ${
           isLoading || isFormSubmittedSuccessfully || isFormSubmissionFailed
             ? "block"
             : "hidden"
@@ -264,10 +264,12 @@ export const AddCommittee = (props) => {
             </form>
           </div>
         </div>
+        <br/>
+        <br/>
       </section>
 
 
-      <button onClick={uploadImageToDb}>uploadImage</button>
+
     </>
   );
 };

@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import axios from "axios"
 import { getAuth } from "firebase/auth";
 import '../config/firebase-config'
@@ -44,6 +45,7 @@ const api = async (endpoint, data,method)=>{
     
 export const getRoommateListRespone = (data) => api.get('/roommate', data);
 export const postEventDetails = async (data)=> await api('/events/addEvent', data, 'post')
+export const getEventDetails = async (data)=> await api('/events/getlist', '', 'get');
 
 export const postCommittee = async (data)=> await api('/committees/addCommittee', data, 'post')
 export const getCommittee = async ()=> await api('/committees/getCommitteeList', '', 'get')

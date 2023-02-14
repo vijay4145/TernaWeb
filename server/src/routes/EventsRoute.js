@@ -8,5 +8,6 @@ const { verifyToken } = require('../middleware/Firebase/VerifyToken')
 // TODO: send response
 
 router.post("/addEvent", verifyToken,  addEvent.post);
+router.get("/getlist",  addEvent.get);
 
 module.exports = router;

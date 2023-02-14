@@ -7,13 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiOutlinePlusCircle, AiFillCloseCircle } from 'react-icons/ai'
 import { useState } from "react";
 import { AddEvent } from "./AddEvent";
+import { getEventDetails } from '../../http/index';
 
 export const Events = (props) => {
   const dispatch = useDispatch();
-  const event = useSelector((state) => state.EventSlice);
+  const eventList = useSelector((state) => state.EventSlice);
   const [formVisible, setFormVisible] = useState(false);
-  // let addEventForm;
-  // if(formVisible) addEventForm = <AddEvent/>
+  const [eventsList, setEventsList] = useState([]);
 
   const toggleFormVisibility = ()=>{
     if(formVisible) setFormVisible(false);
@@ -21,18 +21,10 @@ export const Events = (props) => {
   }
 
   useEffect(() => {
-    // addEventSlice.
-    dispatch(
-      addEventSlice({
-        EVENT_HEADING: "rgegeruiy",
-        EVENT_SCHEDULE: "ggre",
-        EVENT_TAGS: [],
-        EVENT_REGISTER_LINK: "gdfg",
-        EVENT_DESCRIPTION: "vdfgd",
-        EVENT_IMAGE_URL: "yuhu",
-        EVENT_POSTED_BY: "uihihi",
-      })
-    );
+    getEventDetails().then((response)=>{
+      setEventsList(response.data)
+      console.log(response.data);
+    })
     props.setProgress(100);
   }, []);
 
@@ -54,8 +46,8 @@ export const Events = (props) => {
         <h1 className="text-blue-900 font-semibold text-3xl">
           Upcoming Events :
         </h1>
-        {event.map((eve, i) => {
-          return <EventCard keys={i} key={i}/>;
+        {eventsList.map((eve, i) => {
+          return <EventCard event={eve} keys={i} key={i}/>;
         })}
       </section>
 

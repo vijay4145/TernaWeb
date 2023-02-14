@@ -11,5 +11,15 @@ module.exports.addEvent = {
                 failed: true
             })
         })
+    },
+    get : (req, res)=>{
+        EventsDb.find({}).then(list=>{
+            res.status(200).json(list)
+        }).catch(err=>{
+            console.log(err);
+            res.status(400).json({
+                success: false
+            })
+        });
     }
 }
