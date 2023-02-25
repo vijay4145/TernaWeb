@@ -7,13 +7,27 @@ import { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "../config/firebase-config";
 import { RxHamburgerMenu } from 'react-icons/rx'
+import { useDispatch } from 'react-redux';
+import { setUserDetailsSlice } from '../store/UserDetailsSlice';
+import { getUserDetails } from '../http';
 
 export const Navbar = (props) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const dispatch = useDispatch();
   useEffect(() => {
     onAuthStateChanged(getAuth(), async(user)=>{
-      setCurrentUser(user);
-      console.log(user);
+      if(user !== null){
+        setCurrentUser(true);
+        const userDetail = {
+          USER_EMAIL : user.email,
+          USER_NAME : user.displayName
+        }
+        dispatch(setUserDetailsSlice(userDetail));
+        const serverResponse = await getUserDetails();
+        if(serverResponse.data){
+          dispatch(setUserDetailsSlice(serverResponse.data));
+        }
+      }else setCurrentUser(null);
     })
   }, [])
   
@@ -54,6 +68,7 @@ export const Navbar = (props) => {
             <Link className='nav-mobile' to='/events'>Events</Link>
             <Link className='nav-mobile' to='/committees' >Committees</Link>
             <Link className='nav-mobile' to='/pastYearPapers'>Question Papers</Link>
+            <Link className='nav-mobile' to='/my-profile'>My profile</Link>
           </ul>
 
     </>

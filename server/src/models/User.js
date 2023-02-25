@@ -8,14 +8,11 @@ const userSchema = new mongoose.Schema({
     },
     USER_NAME : {
         type : String,
+        unique: true,
         required: true
     },
-    TAGS : {
-        type : String
-    },
-    LINKS : {
-        type : String
-    },
+    TAGS : [],
+    LINKS : [],
     PROFILE_PIC_URL : {
         type : String
     }

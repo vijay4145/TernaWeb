@@ -1,6 +1,5 @@
 import React from 'react'
 import { Navbar } from "./Navbar";
-import { CommittesOverview } from "./CommittesOverview";
 import { PastYearPaper } from "./PastYearPaper";
 import { Events } from './Event/Events';
 import { Home } from "./Home";
@@ -11,7 +10,6 @@ import {
   } from "react-router-dom";
 import "../config/firebase-config";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
-import { useEffect } from 'react';
 import { CommitteesList } from './Committees/CommitteesList';
 
 
@@ -24,6 +22,7 @@ export const MainHomePage = (props) => {
 
 
     const signInWithGoogle = async ()=>{
+      console.log('sigin with google run');
       var currentUser =  getAuth().currentUser;
       var auth =  getAuth();
         if(currentUser !== null){
@@ -36,8 +35,6 @@ export const MainHomePage = (props) => {
             const token = credential.accessToken;
             // The signed-in user info.
             const user = result.user;
-            console.log("current user is " + user.displayName);
-            console.log("token is " + token);
             // ...
           }).catch((error) => {
             // Handle Errors here.
