@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const default_profile_pic_url = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp';
 const initialState = {
-    USER_EMAIL : 'guestUser@ternaweb.com',
+    USER_EMAIL : 'guestUser42@ternaweb.com',
     USER_NAME : 'guest User42',
     TAGS : [],
     LINKS : [],
-    PROFILE_PIC_URL : 'no-url'
+    PROFILE_PIC_URL : default_profile_pic_url,
+    CURRENT_YEAR : '-',
+    BRANCH : '-',
+    LINKS: []
 }
 
 
