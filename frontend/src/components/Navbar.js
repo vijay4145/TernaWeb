@@ -53,7 +53,7 @@ export const Navbar = (props) => {
             <Link className='nav' to='/'>Home</Link>
             <Link className='nav' to='/events'>Events</Link>
             <Link className='nav' to='/committees' >Committees</Link>
-            <Link className='nav' to='/pastYearPapers'>Question Papers</Link>
+            {/* <Link className='nav' to='/pastYearPapers'>Question Papers</Link> */}
             {
               (currentUser !== null) ? (<AccountDropDown/>)
               :
@@ -68,9 +68,9 @@ export const Navbar = (props) => {
             <Link className='nav-mobile' to='/'>Home</Link>
             <Link className='nav-mobile' to='/events'>Events</Link>
             <Link className='nav-mobile' to='/committees' >Committees</Link>
-            <Link className='nav-mobile' to='/pastYearPapers'>Question Papers</Link>
-            <Link className='nav-mobile' to='/my-profile'>My profile</Link>
-            <Link to='account-settings'>account settings</Link>
+            {/* <Link className='nav-mobile' to='/pastYearPapers'>Question Papers</Link> */}
+            {/* <Link className='nav-mobile' to='/my-profile'>My profile</Link> */}
+            {/* <Link to='account-settings'>account settings</Link> */}
           </ul>
 
     </>
