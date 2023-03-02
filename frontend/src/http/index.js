@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import axios from "axios"
 import { getAuth } from "firebase/auth";
 import '../config/firebase-config'

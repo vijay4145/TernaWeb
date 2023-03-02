@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     TAGS : [],
+    BRANCH : {
+        type : String
+    },
+    CURRENT_YEAR : {
+        type : String
+    },
     LINKS : [],
     PROFILE_PIC_URL : {
         type : String

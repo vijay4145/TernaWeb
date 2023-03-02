@@ -7,12 +7,16 @@ class UserDbService {
             USER_EMAIL : data.email,
             USER_NAME : data.USER_NAME,
         };
-        if(data.tags)
+        if(data.TAGS)
             user = {...user, TAGS: tags};
-        if(data.links)
-            user = {...user, LINKS: data.links};
+        if(data.LINKS)
+            user = {...user, LINKS: data.LINKS};
         if(data.profile_pic_url)
-            user = {...user, PROFILE_PIC_URL: data.profile_pic_url};
+            user = {...user, PROFILE_PIC_URL: data.PROFILE_PIC_URL};
+        if(data.BRANCH)
+            user = {...user, BRANCH: data.BRANCH}
+        if(data.CURRENT_YEAR)
+            user = {...user, CURRENT_YEAR: data.CURRENT_YEAR};
         if(result.length > 0){
             await User.updateOne(
                 { USER_EMAIL : data.email},

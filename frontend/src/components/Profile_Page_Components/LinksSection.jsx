@@ -18,10 +18,10 @@ export const LinksSection = () => {
     </section>
     <section id='links-display' className='flex gap-2 flex-col'>
         {
-          LINKS.length > 0 && LINKS.map((link)=>{
+          LINKS && LINKS.length > 0 && LINKS.map((link)=>{
           return <div className='flex gap-2 items-center'>
                   <FcLink/>
-                  <a href="https://www.google.com"  className='hover:text-blue-600 underline'> https://www.google.com</a>         
+                  <a href={link} target='_blank'  className='hover:text-blue-600 underline'> {link}</a>         
                 </div>
           })
         }

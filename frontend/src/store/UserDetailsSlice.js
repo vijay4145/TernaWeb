@@ -22,6 +22,8 @@ export const userDetailsSlice = createSlice({
         if(action.payload.USER_NAME !== null) state.USER_NAME = action.payload.USER_NAME;
         if(action.payload.TAGS !== null) state.TAGS = action.payload.TAGS;
         if(action.payload.LINKS !== null) state.LINKS = action.payload.LINKS;
+        if(action.payload.BRANCH !== null) state.BRANCH = action.payload.BRANCH;
+        if(action.payload.CURRENT_YEAR !== null) state.CURRENT_YEAR = action.payload.CURRENT_YEAR;
         if(action.payload.PROFILE_PIC_URL !== null) state.PROFILE_PIC_URL = action.payload.PROFILE_PIC_URL;
       }
     },

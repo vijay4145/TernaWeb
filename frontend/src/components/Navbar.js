@@ -25,6 +25,7 @@ export const Navbar = (props) => {
         dispatch(setUserDetailsSlice(userDetail));
         const serverResponse = await getUserDetails();
         if(serverResponse.data){
+          console.log(serverResponse);
           dispatch(setUserDetailsSlice(serverResponse.data));
         }
       }else setCurrentUser(null);

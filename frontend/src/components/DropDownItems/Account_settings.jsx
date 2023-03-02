@@ -11,11 +11,14 @@ import {
   OutlinedInput,
   TextField,
 } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Account_setting_tag_input } from "./Account_setting_tag_input";
 import { AccountLinkDisplay } from "./AccountLinkDisplay";
+import { postUser } from "../../http";
+import { setUserDetailsSlice } from "../../store/UserDetailsSlice";
 
 export const Account_settings = () => {
+  const dispatch = useDispatch();
   const optionsYears = [
     "-",
     "2020",
@@ -48,7 +51,9 @@ export const Account_settings = () => {
   const [current_year_state, setCurrent_year_state] = useState(CURRENT_YEAR);
   const [links, setLinks] = useState(LINKS);
 
-  const updateDetails = (e) => {
+  const updateDetails = async (e) => {
+    e.preventDefault();
+    console.log(branchState);
     let newDetails = {};
     if (userNamestate && userNamestate !== "-")
       newDetails = { USER_NAME: userNamestate };
@@ -56,14 +61,17 @@ export const Account_settings = () => {
       newDetails = { ...newDetails, BRANCH: branchState };
     if (current_year_state && current_year_state !== "-")
       newDetails = { ...newDetails, CURRENT_YEAR: current_year_state };
-    if (links.length > 0 && links[0] !== '-')
+    if (links && links.length > 0 && links[0] !== '-')
        newDetails = {...newDetails, LINKS: links}
+    else newDetails = {...newDetails, LINKS: []};
     console.log(newDetails);
 
-    
+    const res = await postUser(newDetails);
+    console.log(res);
+    if(res.success){
+      dispatch(setUserDetailsSlice(newDetails));
+    }
 
-
-    e.preventDefault();
   };
 
   return (
@@ -174,13 +182,15 @@ export const Account_settings = () => {
             />
 
 
-            <div className="flex flex-col gap-1">
+            {links && 
+              <div className="flex flex-col gap-1">
             <Account_setting_tag_input setLinks={setLinks} links={links}/>
             {links.length === 0 && <h4 className="text-blue-300 text-sm ml-2">No Links added</h4>}
             {links.length > 0 && links.map((link, i)=>{
               return <AccountLinkDisplay link= {link} key={i} index={i} links={links} setLinks={setLinks}/>
             })}
             </div>
+            }
 
 
             <button

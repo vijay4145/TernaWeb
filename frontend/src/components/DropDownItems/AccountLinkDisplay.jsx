@@ -3,9 +3,15 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 
 export const AccountLinkDisplay = (props) => {
     const removeLink = ()=>{
-        let newLinkArray = props.links;
-        newLinkArray.splice(props.index,1);
-        props.setLinks([...newLinkArray])
+      console.log(props.index);
+        var newLinkArray = props.links;
+        let indextoremove = props.links.indexOf(props.link);
+        console.log("indextoremove is ", indextoremove);
+        if(newLinkArray.length > 1){
+          newLinkArray.splice(indextoremove,1);
+          props.setLinks([...newLinkArray])
+        }
+        else props.setLinks(...[])
     }
   return (
     <>
