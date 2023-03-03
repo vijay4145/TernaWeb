@@ -10,7 +10,7 @@ export const LinksSection = () => {
     <>
     <h1 className='text-lg ml-3 text-blue-500 font-semibold mb-1'>Links:</h1>
     <section id='display-empty-box-animation-if-no-links'>
-      {LINKS.length === 0 && <div id="no-activity" className="flex items-center flex-col">
+      {LINKS && LINKS.length === 0 && <div id="no-activity" className="flex items-center flex-col">
           <Lottie animationData={empty_box} className='h-52'/>
           <h4 className="text-blue-500 font-bold text-lg">No Links</h4>
       </div>
