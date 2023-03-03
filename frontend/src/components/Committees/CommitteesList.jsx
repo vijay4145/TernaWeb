@@ -39,7 +39,7 @@ export const CommitteesList = (props) => {
     {!formVisible && <section id='CommitteesList' className='m-5 '>
         <h1 className='text-blue-900 font-semibold text-3xl'>Committees :</h1>
         <div className='flex flex-row gap-7 flex-wrap mt-5'>
-            {committeesList.map((committee, i)=>{
+            {committeesList && committeesList.length >0 && committeesList.map((committee, i)=>{
               return <CommitteesListCard committee={committee} key={i}/>
             })}
         </div>

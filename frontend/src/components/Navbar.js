@@ -6,7 +6,6 @@ import { AccountDropDown } from './Navbar/AccountDropDown';
 import { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "../config/firebase-config";
-import { RxHamburgerMenu } from 'react-icons/rx'
 import { useDispatch } from 'react-redux';
 import { setUserDetailsSlice } from '../store/UserDetailsSlice';
 import { getUserDetails } from '../http';

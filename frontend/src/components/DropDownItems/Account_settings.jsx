@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
 import { BiUserCircle } from "react-icons/bi";
-import { AiOutlineLink, AiOutlineMail } from "react-icons/ai";
+import { AiOutlineMail } from "react-icons/ai";
 import {
   Autocomplete,
-  Box,
   FormControl,
   InputAdornment,
   OutlinedInput,
   TextField,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { Account_setting_tag_input } from "./Account_setting_tag_input";
+import { AccountSettingTagInput } from "./AccountSettingTagInput";
 import { AccountLinkDisplay } from "./AccountLinkDisplay";
 import { postUser } from "../../http";
 import { setUserDetailsSlice } from "../../store/UserDetailsSlice";
@@ -184,7 +183,8 @@ export const Account_settings = () => {
 
             {links && 
               <div className="flex flex-col gap-1">
-            <Account_setting_tag_input setLinks={setLinks} links={links}/>
+            {/* <AccountSettingTagInput setLinks={setLinks} links={links}/> */}
+            {<AccountSettingTagInput setLinks={setLinks} links={links}/>}
             {links.length === 0 && <h4 className="text-blue-300 text-sm ml-2">No Links added</h4>}
             {links.length > 0 && links.map((link, i)=>{
               return <AccountLinkDisplay link= {link} key={i} index={i} links={links} setLinks={setLinks}/>

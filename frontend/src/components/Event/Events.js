@@ -45,7 +45,7 @@ export const Events = (props) => {
         <h1 className="text-blue-900 font-semibold text-3xl">
           Events :
         </h1>
-        {eventsList.map((eve, i) => {
+        {eventList && eventList.length > 0 && eventsList.map((eve, i) => {
           return <EventCard event={eve} keys={i} key={i}/>;
         })}
       </section>

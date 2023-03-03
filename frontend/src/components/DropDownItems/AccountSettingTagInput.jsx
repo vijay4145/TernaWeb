@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { BsHash } from "react-icons/bs";
 
-export const Account_setting_tag_input = (props) => {
+export const AccountSettingTagInput = (props) => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [tag, setTag] = useState("");
   const addTag = (e) => {
