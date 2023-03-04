@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 
 export const Profile1 = () => {
     const imgUrl = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp';
-    const { USER_EMAIL } = useSelector((state)=> state.UserDetailsSlice)
+    const { USER_EMAIL, PROFILE_PIC_URL } = useSelector((state)=> state.UserDetailsSlice)
     
   return (
     <>
     <section className='flex items-center flex-col w-[100%] h-[100%]'>
-        <img src={imgUrl} alt="" className='w-40 rounded-full'/>
+        <img src={PROFILE_PIC_URL} alt="" className='w-40 rounded-full'/>
         <h2 className='text-2xl mt-2'>
           {USER_EMAIL.split('@')[0]}
         </h2>

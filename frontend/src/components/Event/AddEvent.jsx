@@ -217,13 +217,13 @@ export const AddEvent = (props) => {
                 >
                   Add Event
                 </button>
-                <button
+                {/* <button
                   type="submit"
                   className="mt-5 rounded-md bg-blue-700 px-10 py-2 text-white"
                   disabled={isLoading}
                 >
                   Save As Draft
-                </button>
+                </button> */}
               </div>
             </form>
           </div>

@@ -11,7 +11,7 @@ class UserDbService {
             user = {...user, TAGS: tags};
         if(data.LINKS)
             user = {...user, LINKS: data.LINKS};
-        if(data.profile_pic_url)
+        if(data.PROFILE_PIC_URL)
             user = {...user, PROFILE_PIC_URL: data.PROFILE_PIC_URL};
         if(data.BRANCH)
             user = {...user, BRANCH: data.BRANCH}
