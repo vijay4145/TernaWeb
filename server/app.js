@@ -6,10 +6,11 @@ const committeeRoute = require('./src/routes/CommitteesRoute');
 const { verifyToken } = require('./src/middleware/Firebase/VerifyToken');
 const UserRoute = require('./src/routes/UserRoute');
 const connectToMongo = require('./src/services/Database/DbConnection');
+require('dotenv').config();
 
 const cors = require('cors');
 const corsOptions ={
-    origin:'http://localhost:3000', 
+    origin:process.env.ALLOW_ACCESS_TO_URL, 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
