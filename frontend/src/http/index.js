@@ -6,9 +6,11 @@ import '../config/firebase-config'
 const api = async (endpoint, data,method)=>{
     var idToken =  getAuth().currentUser;
     if(idToken) idToken = await idToken.getIdToken();
-    if(!idToken) idToken = "bearer"
+    if(!idToken) idToken = "bearer";
+const mainUrl = process.env.REACT_APP_BACKEND_URL;
+    console.log("main url is ", mainUrl);
         const instance = axios.create({
-            baseURL: 'http://localhost:8000',
+            baseURL: process.env.BACKEND_URL || 'http://localhost:8000',
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
