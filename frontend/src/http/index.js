@@ -7,10 +7,9 @@ const api = async (endpoint, data,method)=>{
     var idToken =  getAuth().currentUser;
     if(idToken) idToken = await idToken.getIdToken();
     if(!idToken) idToken = "bearer";
-const mainUrl = process.env.REACT_APP_BACKEND_URL;
-    console.log("main url is ", mainUrl);
+    const mainUrl = process.env.REACT_APP_BACKEND_URL;
         const instance = axios.create({
-            baseURL: process.env.BACKEND_URL || 'http://localhost:8000',
+            baseURL: mainUrl,
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
