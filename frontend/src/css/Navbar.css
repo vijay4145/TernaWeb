@@ -1,5 +1,5 @@
 .nav{
-    @apply relative text-gray-500 font-medium tracking-[1px] hover:text-blue-600 p-1  
+    @apply relative font-medium tracking-[1px] hover:text-blue-600 p-1  
 }
 .nav-mobile{
     @apply relative text-gray-500 text-sm tracking-[1px] hover:text-blue-600 p-1  
@@ -21,7 +21,7 @@
 }
 
 
-.nav:hover::after{
+.nav::after{
     box-shadow: 0px 0px 3px;
 }
 

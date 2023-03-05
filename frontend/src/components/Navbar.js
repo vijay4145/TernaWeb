@@ -11,6 +11,8 @@ import { setUserDetailsSlice } from '../store/UserDetailsSlice';
 import { getUserDetails } from '../http';
 
 export const Navbar = (props) => {
+  // home, event, committee, past year paper
+  const [selectedItem, setSelectedItem] = useState([true, false, false, false]);
   const [currentUser, setCurrentUser] = useState(null);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -29,6 +31,12 @@ export const Navbar = (props) => {
       }else setCurrentUser(null);
     })
   }, [])
+
+  const changeSelectedItem = (item_num)=>{
+    var temp = [false, false, false, false];
+    temp[item_num] = true;
+    setSelectedItem(temp);
+  }
   
   
 
@@ -48,10 +56,10 @@ export const Navbar = (props) => {
 
 
           <ul className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>
-            <Link className='nav' to='/'>Home</Link>
-            <Link className='nav' to='/events'>Events</Link>
-            <Link className='nav' to='/committees' >Committees</Link>
-            {/* <Link className='nav' to='/pastYearPapers'>Question Papers</Link> */}
+            <Link className={`nav ${selectedItem[0] ? 'text-blue-600': 'text-gray-500'}`} onClick={()=>{changeSelectedItem(0)}} to='/'>Home</Link>
+            <Link className={`nav ${selectedItem[1] ? 'text-blue-600': 'text-gray-500'}`} onClick={()=>{changeSelectedItem(1)}} to='/events'>Events</Link>
+            <Link className={`nav ${selectedItem[2] ? 'text-blue-600': 'text-gray-500'}`} onClick={()=>{changeSelectedItem(2)}} to='/committees' >Committees</Link>
+            <Link className={`nav ${selectedItem[3] ? 'text-blue-600': 'text-gray-500'}`} onClick={()=>{changeSelectedItem(3)}} to='/pastYearPapers'>Question Papers</Link>
             {
               (currentUser !== null) ? (<AccountDropDown/>)
               :
@@ -66,7 +74,7 @@ export const Navbar = (props) => {
             <Link className='nav-mobile' to='/'>Home</Link>
             <Link className='nav-mobile' to='/events'>Events</Link>
             <Link className='nav-mobile' to='/committees' >Committees</Link>
-            {/* <Link className='nav-mobile' to='/pastYearPapers'>Question Papers</Link> */}
+            <Link className='nav-mobile' to='/pastYearPapers'>Question Papers</Link>
             {/* <Link className='nav-mobile' to='/my-profile'>My profile</Link> */}
             {/* <Link to='account-settings'>account settings</Link> */}
           </ul>

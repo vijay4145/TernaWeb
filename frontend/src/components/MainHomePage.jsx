@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navbar } from "./Navbar";
-import { PastYearPaper } from "./PastYearPaper";
+import { PastYearPaper } from "./PastYearPapers/PastYearPaper";
 import { Events } from './Event/Events';
 import { Home } from "./Home";
 import {
