@@ -60,12 +60,14 @@ export const Navbar = (props) => {
             <Link className={`nav ${selectedItem[1] ? 'text-blue-600': 'text-gray-500'}`} onClick={()=>{changeSelectedItem(1)}} to='/events'>Events</Link>
             <Link className={`nav ${selectedItem[2] ? 'text-blue-600': 'text-gray-500'}`} onClick={()=>{changeSelectedItem(2)}} to='/committees' >Committees</Link>
             <Link className={`nav ${selectedItem[3] ? 'text-blue-600': 'text-gray-500'}`} onClick={()=>{changeSelectedItem(3)}} to='/pastYearPapers'>Question Papers</Link>
+          </ul>
+          <div className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>
             {
               (currentUser !== null) ? (<AccountDropDown/>)
               :
             <button onClick={props.signInWithGoogle} className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-2'>Login</button>
             }
-          </ul>
+          </div>
 
 
 

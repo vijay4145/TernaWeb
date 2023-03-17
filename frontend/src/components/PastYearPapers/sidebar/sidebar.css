@@ -1,0 +1,13 @@
+.branch-name-text:hover + .semester-dropdown{
+    max-height: 1000px;
+    transition: max-height 1s ease-in-out;
+}
+
+
+.semester-dropdown:hover{
+    max-height: 500px;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
