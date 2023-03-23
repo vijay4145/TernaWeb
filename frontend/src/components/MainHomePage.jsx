@@ -63,7 +63,7 @@ export const MainHomePage = (props) => {
               <Route exact path="/committees" element={<CommitteesList setProgress={props.setProgress}/>}/>
               <Route exact path="/" element={<Home setProgress={props.setProgress}/>} />
               <Route exact path="/pastYearPapers" element={<PastYearPaper setProgress={props.setProgress}/>} />
-              <Route exact path="/events" element={<Events setProgress={props.setProgress}/>} />
+              <Route exact path="events/*" element={<Events setProgress={props.setProgress}/>} />
             </Routes>
           </div>
     </>

@@ -1,0 +1,8 @@
+.sideNavbar-btn {
+    transition: all .1s ease-in-out;
+    @apply flex gap-1 items-center w-full text-left md:text-lg rounded-lg p-2 hover:bg-blue-300 hover:text-white mb-1
+}
+
+.selected-btn {
+    @apply bg-blue-400 text-white rounded-lg
+}

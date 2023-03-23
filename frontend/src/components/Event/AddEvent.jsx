@@ -87,10 +87,11 @@ export const AddEvent = (props) => {
 
   return (
     <>
+
       <section
         id="LoadingAnimation"
-        className={`min-w-[98vw] min-h-[80vh] flex justify-center absolute z-10 ${(isLoading || isFormSubmittedSuccessfully || isFormSubmissionFailed) ? 'block':'hidden'}`}
-        >
+        className={`flex justify-center fixed mx-auto z-10 ${(isLoading || isFormSubmittedSuccessfully || isFormSubmissionFailed) ? 'block':'hidden'}`}
+         style={{top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>
         <div className={`max-w-sm max-h-fit flex mx-auto flex-col rounded-3xl justify-center shadow-2xl bg-slate-50`}>
           { isLoading && <Lottie animationData={loading_animation}></Lottie>}
           { isFormSubmittedSuccessfully && <Lottie animationData={success_animation}></Lottie>}
@@ -102,7 +103,7 @@ export const AddEvent = (props) => {
       </section>
       
 
-      <section id="addEvent" className={`px-3 ${isLoading ? 'blur-sm':''}`}>
+      <section id="addEvent" className={`w-full px-3 ${isLoading ? 'blur-sm':''}`}>
         <div className="flex min-h-[80vh] items-center justify-start bg-white">
           <div className="mx-auto w-full max-w-lg">
             <h1 className="text-4xl font-medium">Add Event</h1>

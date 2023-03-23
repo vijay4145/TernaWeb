@@ -7,12 +7,9 @@ export const EventCard = (props) => {
     <>
       <br />
       <div
-        data-aos="fade-right"
-        className="upcomingEventCard mx-3 flex flex-col md:flex-row gap-6 content-center justify-center bg-white px-3"
+        className="upcomingEventCard mx-3 flex flex-col md:flex-row gap-6 content-center justify-center bg-white px-3 shadow-lg rounded-3xl hover:shadow-xl"
         style={{
           border: "1px solid #ddd",
-          boxShadow: "0 10px 50px -30px black",
-          borderRadius: "30px",
         }}
       >
         <img

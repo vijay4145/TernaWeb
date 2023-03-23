@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import university_icon from "../lottie_animation/university.png";
 import '../css/Navbar.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AccountDropDown } from './Navbar/AccountDropDown';
 import { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -15,6 +15,7 @@ export const Navbar = (props) => {
   const [selectedItem, setSelectedItem] = useState([true, false, false, false]);
   const [currentUser, setCurrentUser] = useState(null);
   const dispatch = useDispatch();
+  const location = useLocation();
   useEffect(() => {
     onAuthStateChanged(getAuth(), async(user)=>{
       if(user !== null){
@@ -32,12 +33,19 @@ export const Navbar = (props) => {
     })
   }, [])
 
-  const changeSelectedItem = (item_num)=>{
-    var temp = [false, false, false, false];
-    temp[item_num] = true;
-    setSelectedItem(temp);
-  }
+
+  useEffect(() => {
+    let path = location.pathname.split('/')[1];
+    let newItem = [false, false, false, false];
+
+    if(path === 'events') newItem[1] = true;
+    else if(path === '') newItem[0] = true;
+    else if(path === 'committees') newItem[2] = true;
+    else if(path === 'pastYearPapers') newItem[3] = true;
+    setSelectedItem(newItem);
+  }, [location])
   
+
   
 
   return (
@@ -56,10 +64,10 @@ export const Navbar = (props) => {
 
 
           <ul className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>
-            <Link className={`nav ${selectedItem[0] ? 'text-blue-600': 'text-gray-500'}`} onClick={()=>{changeSelectedItem(0)}} to='/'>Home</Link>
-            <Link className={`nav ${selectedItem[1] ? 'text-blue-600': 'text-gray-500'}`} onClick={()=>{changeSelectedItem(1)}} to='/events'>Events</Link>
-            <Link className={`nav ${selectedItem[2] ? 'text-blue-600': 'text-gray-500'}`} onClick={()=>{changeSelectedItem(2)}} to='/committees' >Committees</Link>
-            <Link className={`nav ${selectedItem[3] ? 'text-blue-600': 'text-gray-500'}`} onClick={()=>{changeSelectedItem(3)}} to='/pastYearPapers'>Question Papers</Link>
+            <Link className={`nav ${selectedItem[0] ? 'text-blue-600': 'text-gray-500'}`} to='/'>Home</Link>
+            <Link className={`nav ${selectedItem[1] ? 'text-blue-600': 'text-gray-500'}`} to='/events/all-events'>Events</Link>
+            <Link className={`nav ${selectedItem[2] ? 'text-blue-600': 'text-gray-500'}`} to='/committees' >Committees</Link>
+            <Link className={`nav ${selectedItem[3] ? 'text-blue-600': 'text-gray-500'}`} to='/pastYearPapers'>Question Papers</Link>
           </ul>
           <div className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>
             {
@@ -73,10 +81,10 @@ export const Navbar = (props) => {
 
         </div>
           <ul className='nav-mobile-items hidden flex-row justify-between content-center items-center gap-x-10 z-10 max-w-[100vw] overflow-scroll scrollbar-hide px-2 mb-2 shadow-md'>
-            <Link className='nav-mobile' to='/'>Home</Link>
-            <Link className='nav-mobile' to='/events'>Events</Link>
-            <Link className='nav-mobile' to='/committees' >Committees</Link>
-            <Link className='nav-mobile' to='/pastYearPapers'>Question Papers</Link>
+            <Link className={`nav-mobile ${selectedItem[0] ? 'text-blue-600': 'text-gray-500'}`} to='/'>Home</Link>
+            <Link className={`nav-mobile ${selectedItem[1] ? 'text-blue-600': 'text-gray-500'}`} to='/events/all-events'>Events</Link>
+            <Link className={`nav-mobile ${selectedItem[2] ? 'text-blue-600': 'text-gray-500'}`} to='/committees' >Committees</Link>
+            <Link className={`nav-mobile ${selectedItem[3] ? 'text-blue-600': 'text-gray-500'}`} to='/pastYearPapers'>Question Papers</Link>
             {/* <Link className='nav-mobile' to='/my-profile'>My profile</Link> */}
             {/* <Link to='account-settings'>account settings</Link> */}
           </ul>
