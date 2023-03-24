@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { MainHomePage } from "./components/MainHomePage";
 import { Account_settings } from "./components/DropDownItems/Account_settings";
 import { MyProfile } from "./components/DropDownItems/MyProfile";
+import { EventDetailPage } from "./components/Event/EventDetailPage/EventDetailPage";
 
 
 
@@ -29,6 +30,7 @@ function App() {
         <Route exact path="*" element={<MainHomePage setProgress={setProgress}/>}/>
         <Route exact path="account-settings" element={<Account_settings/>}/>
         <Route exact path="my-profile" element={<MyProfile/>}/>
+        <Route exact path="/events/:event_type/:id" element={<EventDetailPage/>}/>
       </Routes>
           
         

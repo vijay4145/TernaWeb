@@ -26,6 +26,9 @@ const eventSchema = new mongoose.Schema({
     EVENT_POSTED_BY : {
         type: String,
         // ref : USER.DATABASE_TABLE_NAME
+    },
+    EVENT_VENUE: {
+        type: String
     }
 })
 

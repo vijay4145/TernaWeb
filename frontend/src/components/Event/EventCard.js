@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AiOutlineSchedule } from 'react-icons/ai';
+import { Link } from "react-router-dom";
 
 export const EventCard = (props) => {
+  
       const imgUrl = "https://cdn4.vectorstock.com/i/1000x1000/69/03/flat-icon-sport-events-vector-9456903.jpg";
   return (
     <>
       <br />
-      <div
+      <Link to={props.event._id}
+      target='_blank' 
         className="upcomingEventCard mx-3 flex flex-col md:flex-row gap-6 content-center justify-center bg-white px-3 shadow-lg rounded-3xl hover:shadow-xl"
         style={{
           border: "1px solid #ddd",
@@ -35,7 +38,7 @@ export const EventCard = (props) => {
             </button>
           </span>
         </div>
-      </div>
+      </Link>
     </>
   );
 };
