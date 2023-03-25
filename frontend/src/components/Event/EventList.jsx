@@ -1,15 +1,17 @@
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { getEventDetails } from '../../http';
+import { useLocation } from 'react-router-dom';
+import { getEventDetails, getEventOverviewList } from '../../http';
 import { EventCard } from './EventCard';
 
-export const EventList = () => {
+export const EventList = (props) => {
     const [eventsList, setEventsList] = useState([]);
+    const location = useLocation();
     useEffect(() => {
-        getEventDetails().then((response)=>{
+        getEventOverviewList(location.pathname.split('/')[2]).then((response)=>{
           setEventsList(response.data)
-        //   props.setProgress(100);
+          props.setProgress(100);
         })
       }, []);
     

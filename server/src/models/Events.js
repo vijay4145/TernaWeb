@@ -7,10 +7,6 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    EVENT_SCHEDULE:{
-        type: Date,
-        default: Date.now
-    },
     EVENT_TAGS:[],
     EVENT_REGISTER_LINK :{
         type: String,
@@ -28,7 +24,32 @@ const eventSchema = new mongoose.Schema({
         // ref : USER.DATABASE_TABLE_NAME
     },
     EVENT_VENUE: {
-        type: String
+        type: String,
+        required: true
+    },
+    EVENT_REGISTER_BEFORE: {
+        type: Date,
+        required: true
+    },
+    EVENT_START: {
+        type: Date,
+        required: true
+    },
+    EVENT_END: {
+        type: Date,
+        required: true
+    },
+    LINKEDIN_LINK:{
+        type: String,
+    },
+    MAIL_LINK:{
+          type: String,
+    },
+    DISCORD_LINK:{
+          type: String,
+    },
+    WEBSITE_LINK:{
+        type: String,
     }
 })
 

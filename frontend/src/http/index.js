@@ -47,6 +47,7 @@ export const getRoommateListRespone = (data) => api.get('/roommate', data);
 
 export const postEventDetails = async (data)=> await api('/events/addEvent', data, 'post')
 export const getEventDetails = async (data)=> await api('/events/getlist', '', 'get');
+export const getEventOverviewList = async (event_type)=> await api('/events/' + event_type + '/getEventOverviewList', '', 'get');
 export const getEventDetailsUsingId = async (data, url1, url2)=> await api('/events/' + url1 + '/' + url2, '', 'get');
 
 export const postCommittee = async (data)=> await api('/committees/addCommittee', data, 'post')

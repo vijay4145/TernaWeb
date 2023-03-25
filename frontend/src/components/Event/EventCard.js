@@ -30,7 +30,7 @@ export const EventCard = (props) => {
           </p>
           <div className="flex mt-1 items-center">
             <AiOutlineSchedule className="min-h-full" color={'#3B82F6'}/>
-            <p >&nbsp;{props.event.EVENT_SCHEDULE.substring(0, props.event.EVENT_SCHEDULE.indexOf('T'))}</p>
+            <p >&nbsp;{props.event.EVENT_START ? props.event.EVENT_START.split('T')[0]:''}</p>
           </div>
           <span className="flex justify-center md:justify-start mt-2">
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-sans py-2 px-3 rounded drop-shadow-sm">

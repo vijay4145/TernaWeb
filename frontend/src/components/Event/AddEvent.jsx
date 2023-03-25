@@ -10,17 +10,30 @@ import Lottie from "lottie-react";
 import { ref, getDownloadURL, getStorage, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../config/firebase-config'
 import { postEventDetails } from "../../http";
+import { GoLocation } from "react-icons/go";
+import { AiFillLinkedin, AiOutlineMail} from "react-icons/ai";
+import { BsDiscord } from 'react-icons/bs'
+import { TbWorld } from 'react-icons/tb'
 
 export const AddEvent = (props) => {
   const [hashTags, setHashTags] = useState([]);
   const [eventHeading, setEventHeading] = useState("");
   const [eventRegistrationLink, seteventRegistrationLink] = useState("");
-  const [eventSchedule, setEventSchedule] = useState("");
+  const [eventRegisterBefore, setEventRegisterBefore] = useState("");
+  const [eventStart, setEventStart] = useState("");
+  const [eventEnd, setEventEnd] = useState("");
+  const [eventVenue, setEventVenue] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [isLoading, setisLoading] = useState(false);
   const [isFormSubmittedSuccessfully, setIsFormSubmittedSuccessfully] = useState(false);
   const [isFormSubmissionFailed, setIsFormSubmissionFailed] = useState(false);
   const [image, setImage] = useState(null);
+
+  // contacts
+  const [linkedinLink, setLinkedinLink] = useState(null);
+  const [mailLink, setMailLink] = useState(null);
+  const [discordLink, setDiscordLink] = useState(null);
+  const [websiteLink, setWebsiteLink] = useState(null);
 
 
 
@@ -50,13 +63,30 @@ export const AddEvent = (props) => {
             imageUrl = url;
             let eventDetailJson = {
               EVENT_HEADING: eventHeading,
-              EVENT_SCHEDULE: eventSchedule,
+              // EVENT_SCHEDULE: eventSchedule,
+              EVENT_REGISTER_BEFORE: eventRegisterBefore,
+              EVENT_START: eventStart,
+              EVENT_END: eventEnd,
               EVENT_TAGS: hashTags,
+              EVENT_VENUE: eventVenue,
               EVENT_REGISTER_LINK: eventRegistrationLink,
               EVENT_DESCRIPTION: eventDescription,
               EVENT_IMAGE_URL: imageUrl,
               EVENT_POSTED_BY: "vijay-temporary-h",
             };
+
+
+            if(linkedinLink !== null && linkedinLink !== '')
+              eventDetailJson = {...eventDetailJson, LINKEDIN_LINK: linkedinLink};
+            if(mailLink !== null && mailLink !== '')
+              eventDetailJson = {...eventDetailJson, MAIL_LINK: mailLink};
+            if(discordLink !== null && discordLink !== '')
+              eventDetailJson = {...eventDetailJson, DISCORD_LINK: discordLink};
+            if(websiteLink !== null && websiteLink !== '')
+              eventDetailJson = {...eventDetailJson, WEBSITE_LINK: websiteLink};
+            
+
+            console.log(eventDetailJson);
         
             postEventDetails(eventDetailJson).then((response) => {
               setisLoading(false);
@@ -150,6 +180,101 @@ export const AddEvent = (props) => {
                   </label>
                 </div>
 
+                <div id="event-venue" className="relative z-0">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <GoLocation />
+                  </div>
+                  <input
+                    disabled={isLoading}
+                    type="text"
+                    className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 p-4 pl-10"
+                    placeholder=" "
+                    onChange={(e) => {
+                      setEventVenue(e.target.value);
+                    }}
+                    required
+                  />
+                  <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 ml-10">
+                    Event Venue
+                  </label>
+                </div>
+                
+                <div id="event-website-link" className="relative z-0">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <TbWorld />
+                  </div>
+                  <input
+                    disabled={isLoading}
+                    type="url"
+                    className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 p-4 pl-10"
+                    placeholder=" "
+                    onChange={(e) => {
+                      setWebsiteLink(e.target.value);
+                    }}
+                    required
+                  />
+                  <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 ml-10">
+                    Event Website Link
+                  </label>
+                </div>
+
+                <div id="event-discord" className="relative z-0">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <BsDiscord />
+                  </div>
+                  <input
+                    disabled={isLoading}
+                    type="url"
+                    className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 p-4 pl-10"
+                    placeholder=" "
+                    onChange={(e) => {
+                      setDiscordLink(e.target.value);
+                    }}
+                    required
+                  />
+                  <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 ml-10">
+                    Event Discord Link
+                  </label>
+                </div>
+
+                <div id="event-linkedin" className="relative z-0">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <AiFillLinkedin />
+                  </div>
+                  <input
+                    disabled={isLoading}
+                    type="url"
+                    className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 p-4 pl-10"
+                    placeholder=" "
+                    onChange={(e) => {
+                      setLinkedinLink(e.target.value);
+                    }}
+                    required
+                  />
+                  <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 ml-10">
+                    Event Linkedin Link
+                  </label>
+                </div>
+
+                <div id="event-mail" className="relative z-0">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <GoLocation />
+                  </div>
+                  <input
+                    disabled={isLoading}
+                    type="url"
+                    className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 p-4 pl-10"
+                    placeholder=" "
+                    onChange={(e) => {
+                      setMailLink(e.target.value);
+                    }}
+                    required
+                  />
+                  <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 ml-10">
+                    Event Mail Link
+                  </label>
+                </div>
+
                 <div id="event+date-row" className="flex flex-col gap-3">
                   <div className="max-w-2xl">
                     <label
@@ -168,12 +293,39 @@ export const AddEvent = (props) => {
                     />
                   </div>
 
-                  <div className="eventDate">
+                  <div className="eventRegisterBefore flex flex-wrap gap-2">
+                    <h5>Register Before :</h5>
                     <input
-                      type="date"
+                      type="datetime-local"
                       placeholder="dd/mm/yyyy"
                       onChange={(e) => {
-                        setEventSchedule(e.target.value);
+                        setEventRegisterBefore(e.target.value);
+                      }}
+                      className="border rounded-lg px-2"
+                      required
+                      disabled={isLoading}
+                    />
+                  </div>
+                  <div className="eventStart flex flex-wrap gap-2">
+                    <h5>Event Start :</h5>
+                    <input
+                      type="datetime-local"
+                      placeholder="dd/mm/yyyy"
+                      onChange={(e) => {
+                        setEventStart(e.target.value);
+                      }}
+                      className="border rounded-lg px-2"
+                      required
+                      disabled={isLoading}
+                    />
+                  </div>
+                  <div className="eventEnd flex flex-wrap gap-2">
+                    <h5>Event End :</h5>
+                    <input
+                      type="datetime-local"
+                      placeholder="dd/mm/yyyy"
+                      onChange={(e) => {
+                        setEventEnd(e.target.value);
                       }}
                       className="border rounded-lg px-2"
                       required
@@ -200,6 +352,7 @@ export const AddEvent = (props) => {
                     rows="5"
                     className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
                     placeholder=" "
+                    required
                     onChange={(e) => {
                       setEventDescription(e.target.value);
                     }}

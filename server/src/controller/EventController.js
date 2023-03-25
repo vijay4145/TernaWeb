@@ -23,6 +23,33 @@ module.exports.eventController = {
             })
         });
     },
+    
+    getOverviewList : (req, res)=>{
+        const pipeline = [
+            {
+              $project: {
+                _id: 1,
+                EVENT_HEADING : 1,
+                EVENT_IMAGE_URL: 1,
+                EVENT_START : 1,
+                EVENT_DESCRIPTION : {
+                  $concat: [
+                    { $substr: ["$EVENT_DESCRIPTION", 0, 35] },
+                    { $cond: [{ $gte: [{ $strLenCP: "$EVENT_DESCRIPTION" }, 35] }, "...", ""] }
+                  ]
+                }
+              }
+            }
+          ];
+        EventsDb.aggregate(pipeline).then(list=>{
+            res.status(200).json(list)
+        }).catch(err=>{
+            console.log(err);
+            res.status(400).json({
+                success: false
+            })
+        })
+    },
 
     getUsingId : (req, res)=>{
         const id = req.params.id;
