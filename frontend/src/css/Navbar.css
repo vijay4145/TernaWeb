@@ -1,12 +1,12 @@
 .nav{
-    @apply relative font-medium tracking-[1px] hover:text-blue-600 p-1  
+    @apply relative max-w-fit font-medium tracking-[1px] hover:text-slate-200 p-1  
 }
 .nav-mobile{
     @apply relative  text-sm tracking-[1px] hover:text-blue-600 p-1  
 }
 
 .nav::after{
-    @apply content-[''] bg-blue-600 h-[2px] w-[0%] left-0 -bottom-[5px] rounded-2xl absolute duration-300
+    @apply content-[''] bg-white h-[2px] w-[0%] left-0 -bottom-[5px] rounded-2xl absolute duration-300
 }
 .nav-mobile::after{
     @apply content-[''] bg-blue-600 h-[2px] w-[0%] left-0 -bottom-[5px] rounded-2xl absolute duration-300
@@ -31,15 +31,41 @@
 
 
 
-@media only screen and (max-width: 1100px){
+/* @media only screen and (max-width: 1100px){
     .nav{
         display: none;
     }
     .nav-mobile-items{
         display: flex;
     }
-}
+} */
 
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
+}
+
+
+.ulist-item-expanded {
+    /* display: block; */
+    max-height: 500px;
+    /* background-image: linear-gradient(to right, #8e2de2, #4a00e0); */
+    transition: max-height .6s ease-in-out;
+    @apply md:gap-10 pb-3 block md:flex  md:bg-transparent max-md:bg-gradient-to-r max-md:from-[#8e2de2] max-md:to-[#4a00e0] md:mb-2
+}
+
+.bg-image{
+    background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+}
+
+.ulist-items{
+    /* display: none; */
+    /* max-height: 0px; */
+    transition: max-height .15s ease;
+    overflow: hidden;
+    @apply md:max-h-full max-h-0 max-md:absolute md:flex md:gap-10  md:bg-transparent md:mb-2
+}
+
+.ulist-subitem{
+    /* background-image:  */
+    @apply md:bg-transparent max-md:bg-gradient-to-r max-md:from-[#8e2de2] max-md:to-[#4a00e0];
 }

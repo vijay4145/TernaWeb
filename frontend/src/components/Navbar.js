@@ -1,94 +1,172 @@
-import React, { useState } from 'react'
-import university_icon from "../lottie_animation/university.png";
-import '../css/Navbar.css';
-import { Link, useLocation } from 'react-router-dom';
-import { AccountDropDown } from './Navbar/AccountDropDown';
-import { useEffect } from 'react';
+import React, { useState } from "react";
+import university_icon_white from "../lottie_animation/university_icon_dark_mode.png";
+import university_icon from "../lottie_animation/university_icon.png";
+import "../css/Navbar.css";
+import { Link, useLocation } from "react-router-dom";
+import { AccountDropDown } from "./Navbar/AccountDropDown";
+import { useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "../config/firebase-config";
-import { useDispatch } from 'react-redux';
-import { setUserDetailsSlice } from '../store/UserDetailsSlice';
-import { getUserDetails } from '../http';
+import { useDispatch } from "react-redux";
+import { setUserDetailsSlice } from "../store/UserDetailsSlice";
+import { getUserDetails } from "../http";
+import { AiFillHome, AiFillNotification } from "react-icons/ai";
+import { HiUserGroup } from "react-icons/hi";
+import { BsNewspaper } from "react-icons/bs";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export const Navbar = (props) => {
   // home, event, committee, past year paper
+  const [isExpanded, setIsExpanded] = useState(false);
   const [selectedItem, setSelectedItem] = useState([true, false, false, false]);
   const [currentUser, setCurrentUser] = useState(null);
   const dispatch = useDispatch();
   const location = useLocation();
   useEffect(() => {
-    onAuthStateChanged(getAuth(), async(user)=>{
-      if(user !== null){
+    onAuthStateChanged(getAuth(), async (user) => {
+      if (user !== null) {
         setCurrentUser(true);
         const userDetail = {
-          USER_EMAIL : user.email,
-          USER_NAME : user.displayName
-        }
+          USER_EMAIL: user.email,
+          USER_NAME: user.displayName,
+        };
         dispatch(setUserDetailsSlice(userDetail));
         const serverResponse = await getUserDetails();
-        if(serverResponse.data){
+        if (serverResponse.data) {
           dispatch(setUserDetailsSlice(serverResponse.data));
         }
-      }else setCurrentUser(null);
-    })
-  }, [])
-
+      } else setCurrentUser(null);
+    });
+  }, []);
 
   useEffect(() => {
-    let path = location.pathname.split('/')[1];
+    let path = location.pathname.split("/")[1];
     let newItem = [false, false, false, false];
 
-    if(path === 'events') newItem[1] = true;
-    else if(path === '') newItem[0] = true;
-    else if(path === 'committees') newItem[2] = true;
-    else if(path === 'pastYearPapers') newItem[3] = true;
+    if (path === "events") newItem[1] = true;
+    else if (path === "") newItem[0] = true;
+    else if (path === "committees") newItem[2] = true;
+    else if (path === "pastYearPapers") newItem[3] = true;
     setSelectedItem(newItem);
-  }, [location])
-  
-
-  
+  }, [location]);
 
   return (
     <>
-
-        <div className='flex flex-row justify-between' style={{width: '97vw', overflowX: 'hidden'}}>
-          <div name="title" className="flex flex-row item-center content-center m-1">
-              <img src={university_icon} alt="" />
-              <div className="flex flex-col">
-                <h1 className="flex content-center items-center text-blue-700 text-3xl">
-                  𝑻𝒆𝒓𝒏𝒂
-                </h1>
-                <h6 className="text-xs text-blue-400">Terna For Students</h6>
-              </div>
+      <div className="flex flex-col gap-1 sticky top-0">
+        <div className="flex flex-row items-center justify-between  w-full pr-3">
+          <div
+            name="title"
+            className="flex content-center items-center m-1 gap-2"
+          >
+            <img className="h-8 w-auto " src={university_icon_white} alt="" />
+            <div className="flex flex-col">
+              <h1 className="flex content-center items-center text-white text-3xl">
+                𝑻𝒆𝒓𝒏𝒂
+              </h1>
+              <h6 className="text-xs text-white">Terna For Students</h6>
+            </div>
           </div>
 
+          <div>
+            <GiHamburgerMenu
+              color="white"
+              className="h-10 w-10 md:hidden"
+              onClick={() => setIsExpanded(!isExpanded)}
+            />
+          </div>
+        </div>
+        <ul
+          className={`flex w-full flex-col content-center overflow-hidden text-xl px-2 md:h-full
+           ${isExpanded ? "ulist-item-expanded" : "ulist-items"}
+           md:gap-8
+          `}
+        >
+          <div className="flex gap-2 items-center pt-5 md:pt-8 ulist-subitem">
+            <div
+              className={`bg-white font-medium rounded-sm ${
+                selectedItem[0] ? "bg-white" : "hidden"
+              }`}
+            >
+              &nbsp;
+            </div>
+            <AiFillHome color={`${selectedItem[0] ? "white" : "#CBD5E1"}`} />
+            <Link
+              className={`nav ${
+                selectedItem[0] ? "text-white" : "text-slate-300"
+              }`}
+              to="/"
+            >
+              Home
+            </Link>
+          </div>
 
-          <ul className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>
-            <Link className={`nav ${selectedItem[0] ? 'text-blue-600': 'text-gray-500'}`} to='/'>Home</Link>
-            <Link className={`nav ${selectedItem[1] ? 'text-blue-600': 'text-gray-500'}`} to='/events/all-events'>Events</Link>
-            <Link className={`nav ${selectedItem[2] ? 'text-blue-600': 'text-gray-500'}`} to='/committees' >Committees</Link>
-            <Link className={`nav ${selectedItem[3] ? 'text-blue-600': 'text-gray-500'}`} to='/pastYearPapers'>Question Papers</Link>
-          </ul>
-          <div className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>
+          <div className="flex gap-2 items-center ulist-subitem max-md:pt-3">
+            <div
+              className={` bg-white font-medium rounded-sm ${
+                selectedItem[1] ? "bg-white" : "hidden"
+              }`}
+            >
+              &nbsp;
+            </div>
+            <AiFillNotification
+              color={`${selectedItem[1] ? "white" : "#CBD5E1"}`}
+            />
+            <Link
+              className={`nav ${
+                selectedItem[1] ? "text-white" : "text-slate-300"
+              }`}
+              to="/events/all-events"
+            >
+              Events
+            </Link>
+          </div>
+
+          <div className="flex gap-2 items-center ulist-subitem max-md:pt-3">
+            <div
+              className={`bg-white font-medium rounded-sm ${
+                selectedItem[2] ? "bg-white" : "hidden"
+              }`}
+            >
+              &nbsp;
+            </div>
+            <HiUserGroup color={`${selectedItem[2] ? "white" : "#CBD5E1"}`} />
+            <Link
+              className={`nav ${
+                selectedItem[2] ? "text-white" : "text-slate-300"
+              }`}
+              to="/committees"
+            >
+              Committees
+            </Link>
+          </div>
+
+          <div className="flex gap-2 items-center ulist-subitem max-md:pt-3">
+            <div
+              className={`bg-white font-medium rounded-sm ${
+                selectedItem[3] ? "bg-white" : "hidden"
+              }`}
+            >
+              &nbsp;
+            </div>
+            <BsNewspaper color={`${selectedItem[3] ? "white" : "#CBD5E1"}`} />
+            <Link
+              className={`nav ${
+                selectedItem[3] ? "text-white" : "text-slate-300"
+              }`}
+              to="/pastYearPapers"
+            >
+              Question Papers
+            </Link>
+          </div>
+        </ul>
+        {/* <div className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>
             {
               (currentUser !== null) ? (<AccountDropDown/>)
               :
-            <button onClick={props.signInWithGoogle} className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-2'>Login</button>
+              <button onClick={props.signInWithGoogle} className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-2'>Login</button>
             }
-          </div>
-
-
-
-        </div>
-          <ul className='nav-mobile-items hidden flex-row justify-between content-center items-center gap-x-10 z-10 max-w-[100vw] overflow-scroll scrollbar-hide px-2 mb-2 shadow-md'>
-            <Link className={`nav-mobile ${selectedItem[0] ? 'text-blue-600': 'text-gray-500'}`} to='/'>Home</Link>
-            <Link className={`nav-mobile ${selectedItem[1] ? 'text-blue-600': 'text-gray-500'}`} to='/events/all-events'>Events</Link>
-            <Link className={`nav-mobile ${selectedItem[2] ? 'text-blue-600': 'text-gray-500'}`} to='/committees' >Committees</Link>
-            <Link className={`nav-mobile ${selectedItem[3] ? 'text-blue-600': 'text-gray-500'}`} to='/pastYearPapers'>Question Papers</Link>
-            {/* <Link className='nav-mobile' to='/my-profile'>My profile</Link> */}
-            {/* <Link to='account-settings'>account settings</Link> */}
-          </ul>
-
+            </div> */}
+      </div>
     </>
-  )
-}
+  );
+};

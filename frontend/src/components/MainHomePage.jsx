@@ -11,6 +11,7 @@ import {
 import "../config/firebase-config";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { CommitteesList } from './Committees/CommitteesList';
+import '../css/ScrollbarHide.css'
 
 
 
@@ -54,17 +55,19 @@ export const MainHomePage = (props) => {
   return (
     <>
     {/* <button onclick={logou}>log out</button> */}
-    <div>
-            <div className="sticky top-0 bg-white z-10">
+    <div className='flex md:flex-row flex-col' style={{backgroundImage: 'linear-gradient(to right, #8e2de2, #4a00e0)'}}>
+            <div className="min-w-fit max-h-fit">
               <Navbar signInWithGoogle={signInWithGoogle}/>
             </div>
 
-            <Routes>
-              <Route exact path="/committees" element={<CommitteesList setProgress={props.setProgress}/>}/>
-              <Route exact path="/" element={<Home setProgress={props.setProgress}/>} />
-              <Route exact path="/pastYearPapers" element={<PastYearPaper setProgress={props.setProgress}/>} />
-              <Route exact path="events/*" element={<Events setProgress={props.setProgress}/>} />
-            </Routes>
+            <div className='rounded-3xl w-full bg-white mb-1'> 
+              <Routes>
+                <Route exact path="/committees" element={<CommitteesList setProgress={props.setProgress}/>}/>
+                <Route exact path="/" element={<Home setProgress={props.setProgress}/>} />
+                <Route exact path="/pastYearPapers" element={<PastYearPaper setProgress={props.setProgress}/>} />
+                <Route exact path="events/*" element={<Events setProgress={props.setProgress}/>} />
+              </Routes>
+            </div>
           </div>
     </>
   )

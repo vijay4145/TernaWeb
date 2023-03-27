@@ -1,9 +1,18 @@
 import React, { useEffect } from "react";
 import Lottie from "lottie-react";
-import * as welcome_animation from "../lottie_animation/welcome.json";
-import * as note_animation from '../lottie_animation/note_animation.json';
+import * as  book_animation from "../lottie_animation/book_animation.json";
 import '../css/Home.css'
-import {HomeEvent} from '../components/HomeEvent'
+import { AccountDropDown } from "./Navbar/AccountDropDown";
+import { Carousel } from "./Home/Carousel";
+import { HomeEvent } from './HomeEvent'
+import { AiFillLinkedin } from "react-icons/ai";
+import { AiOutlineMail } from 'react-icons/ai'
+import { BsDiscord } from 'react-icons/bs'
+import { TbWorld } from 'react-icons/tb'
+import  student from '../lottie_animation/student.png';
+import  rank_image from '../lottie_animation/rank_image.png';
+import  feedback from '../lottie_animation/feedback.png';
+import { TbSchool } from 'react-icons/tb'
 
 export const Home = (props) => {
   useEffect(()=>{
@@ -12,64 +21,75 @@ export const Home = (props) => {
 
   return (
     <>
-      <div className="flex content-center items-center p-4" style={{minHeight: '90vh', marginTop: '10px'}}>
-        <div className="flex flex-row justify-between" style={{width: '95vw'}}>
-          <div className="main-content">
+    <div className="flex flex-col gap-6 m-6 min-h-screen">
+      <div className="flex justify-between items-center">
+        <h1 className="text-lg md:text-xl font-bold text-blue-500">{'Welcome guestUser42'}</h1>
+        <AccountDropDown/>
+      </div>
 
-
-            <div name='mainContentAtCenter' className="flex flex-col justify-between items-center content-center break-words">
-
-
-              <div>
-                <h1 className="text-2xl font-semibold text-blue-900 break-words">Welcome to <br></br> <span className="font-extrabold text-4xl">Terna Engineering College</span> </h1>
-                <p><br/>Get past year IAT papers, <br></br> Get notification of upcoming Events <br></br>Explore every committees of terna at your fingerTip</p>
-                <br></br>
-                <a href="#Event"> <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Explore Terna</button></a>
-              </div>
-              
-              
-              
-              <div name="animation_at_bottom" className="flex flex-row flex-wrap max-sm:hidden">
-                <div style={{position: 'relative'}}>
-                  <Lottie animationData={note_animation} ></Lottie>
-                  <div style={{position: 'absolute', top: '0',width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                    <h1 className="text-white px-auto">Get updates <br/>of upcoming<br/> Events</h1>
-                  </div>
-                </div>
-                <div style={{position: 'relative'}}>
-                  <Lottie animationData={note_animation} ></Lottie>
-                  <div style={{position: 'absolute', top: '0',width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                    <h1 className="text-white px-auto">Get Past Year <br/> Question Paper</h1>
-                  </div>
-                </div>
-                <div style={{position: 'relative'}}>
-                  <Lottie animationData={note_animation} ></Lottie>
-                  <div style={{position: 'absolute', top: '0',width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                    <h1 className="text-white px-auto">Explore <br/>commitees<br/> to join</h1>
-                  </div>
-                </div>
-
-              </div>
+      <div className="md:grid grid-cols-2 text-center items-center">
+        <Lottie className="max-md:h-56" loop={1} animationData={book_animation}/>
+        <div className="flex flex-col">
+          <span className="text-lg text-blue-400">Welcome to</span>
+          <span className="text-3xl md:text-4xl font-bold text-blue-700">Terna Engineering College</span>
+          <br className="hidden md:block"/>
+          <span className="flex gap-4 items-center justify-center text-white bg-blue-200 max-w-fit p-2 rounded-xl max-md:hidden">
+            <div className="flex flex-col items-center">
+              <img src={rank_image} alt="" className="h-10"/>
+              <p>Ranked 40th by Time Ranking</p>
             </div>
-          </div>
+            
+            <div className="bg-white h-8" style={{border: '1px solid white'}}></div>
+            <div className="flex flex-col items-center">
+              <img src={student} alt="" className="h-10"/>
+              <p>Family Of 32k+ Students</p>
+            </div>
 
+            <div className="bg-white h-8" style={{border: '1px solid white'}}></div>
+            <div className="flex flex-col items-center">
+              <img src={feedback} alt="" className="h-10"/>
+              <p>32+ Years Of Presence</p>
+            </div>
+          </span>
+          <span className="hidden md:flex flex-col gap-1 mt-2">
+            <span>Expore Every Committee At Your Fingertips <br/></span> 
+            <span>Get Updates Of Upcoming Events <br/></span> 
+            <span> Get Past Year Papers <br/></span>
+          </span>
 
-
-
-
-
-          <div
-            className="flex flex-row justify-between content-center items-center animation-side"
-            style={{ height: "70vh", width: '45vw'}}
-          >
-            <Lottie
-              animationData={welcome_animation}
-              style={{ width: "45vw", height: '100vh', marginTop: "10px", marginRight: "25px" }}
-            ></Lottie>
-          </div>
+          <div id="share-button" className=" flex flex-col items-center gap-1 mt-2">
+                <div className="flex flex-row gap-4 flex-wrap">
+                  <a target="_blank">
+                    <AiOutlineMail color="#c71610" className="h-6 w-6 md:h-10 md:w-10"/>
+                  </a>
+                  <a target="_blank">
+                    <BsDiscord color="#3b5998" className="h-6 w-6 md:h-10 md:w-10"/>
+                  </a>
+                  <a target="_blank">
+                    <AiFillLinkedin color="#0072b1" className="h-6 w-6 md:h-10 md:w-10"/>
+                    </a>
+                  <a target="_blank">
+                    <TbWorld color="#0072b1" className="h-6 w-6 md:h-10 md:w-10"/>
+                  </a>
+                </div>
+              </div>
+              <a href="#explore-more-btn" className="flex items-center justify-center mt-3">
+                <div className="items-center flex gap-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 md:py-3 px-2  rounded">
+                  <TbSchool className="h-7 w-7"/>
+                  <span className="text-sm md:text-lg"> Explore Terna</span>
+                  </div>
+              </a>
         </div>
       </div>
-      <HomeEvent/>
+
+      <div className="flex flex-col gap-3">
+          <br/>
+          <br/>
+          {/* <Carousel/> */}
+          <HomeEvent/>
+    </div>
+      </div>
+
     </>
   );
 };

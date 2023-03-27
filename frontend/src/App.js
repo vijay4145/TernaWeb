@@ -20,8 +20,10 @@ function App() {
   return (
     <>
       <Router>
+        <div className="max-sm:max-w-[100vw] max-sm:overflow-hidden">
+
       <LoadingBar
-        color='#3F00FF'
+        color='white'
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
       />
@@ -34,7 +36,7 @@ function App() {
         <Route exact path="/events/:event_type/:id/:email" element={<MyProfile/>}/>
       </Routes>
           
-        
+      </div>
       </Router>
     </>
   );
