@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getEventDetails, getEventOverviewList } from '../../http';
+import { CommitteesList } from '../Committees/CommitteesList';
 import { EventCard } from './EventCard';
 
 export const EventList = (props) => {
@@ -17,7 +18,7 @@ export const EventList = (props) => {
     
   return (
     <>
-            <div id="EventList" data-aos="zoom-in" className="col-span-2 overflow-scroll md:h-[86vh] scrollbar-hide ">
+        <div id="EventList" data-aos="zoom-in" className="col-span-2 overflow-scroll md:h-[86vh] scrollbar-hide ">
             {eventsList && eventsList.length > 0 && eventsList.map((eve, i) => {
               return <EventCard event={eve} keys={i} key={i}/> ;
             })}

@@ -23,5 +23,19 @@ module.exports.user = {
         }catch(err){
 
         }
+    },
+
+    getUsingId : async (req, res)=>{
+        try{
+            const email = req.params.id + '@gmail.com';
+            const details = await User.findOne({USER_EMAIL: email});
+            res.status(200);
+            res.json(details);
+        }catch(err){
+            res.status(404);
+            res.json({
+                success: false
+            })
+        }
     }
 }
