@@ -1,12 +1,7 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { EventCard } from "./EventCard";
-import { useDispatch, useSelector } from "react-redux";
-import { AiOutlinePlusCircle, AiFillCloseCircle } from 'react-icons/ai'
-import { useState } from "react";
 import { AddEvent } from "./AddEvent";
-import { getEventDetails } from '../../http/index';
 import { SideNavbar } from "./SideNavbar/SideNavbar";
 import '../../css/ScrollbarHide.css'
 import { EventTimeLine } from "./EventTimeLine";
@@ -22,7 +17,7 @@ export const Events = (props) => {
 
   return (
     <>
-    <section id="eventListSection">
+    <section id="eventListSection" className="min-h-[97vh]">
 
       <section id="Events" className="mt-3 gap-2 mr-4 flex flex-col md:grid md:grid-cols-4">
         <div className=" max-w-fit md:max-w-full md:h-[86vh] md:overflow-scroll scrollbar-hide rounded-lg shadow-sm">

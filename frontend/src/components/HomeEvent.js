@@ -8,7 +8,7 @@ export const HomeEvent = () => {
     <div id="Event">
 
       <div className='flex justify-center content-center'>
-        <div className='flex max-sm:flex-col md:flex-row justify-evenly w-full'>
+        <div className='flex max-sm:flex-col md:flex-row justify-evenly'>
             <div className='flex flex-col content-center justify-center h-full md:w-[40vw] max-sm:w-[100vw] max-sm:px-5'>
               <h1 className='text-3xl text-blue-800 font-semibold text-center underline drop-shadow-md'>Explore Upcoming Events</h1>
               <p className='mt-6 max-sm:px-5' >
