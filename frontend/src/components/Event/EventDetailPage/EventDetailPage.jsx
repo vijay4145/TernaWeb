@@ -63,7 +63,7 @@ export const EventDetailPage = () => {
   return (
     <>
       {data && data !== null && (
-        <div className="flex flex-col gap-2">
+        <div className="break-all flex flex-col gap-2">
           <section id="top-heading" className="p-4 bg-gray-50 w-full">
             <div className="pt-4 pb-4 px-8 bg-white rounded-xl shadow-sm">
               <span className="text-blue-600"> Events {" > "} </span>{" "}

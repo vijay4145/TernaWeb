@@ -22,7 +22,7 @@ export const EventCard = ({event}) => {
           <img className="rounded-t-lg h-48 w-auto" src={event.EVENT_IMAGE_URL} alt=""/>
       </div>
       <div id="event_heading" className="px-3 mt-1">
-          <h5 className="text-xl font-semibold tracking-tight text-gray-800 dark:text-white">{getHeading()}</h5>
+          <h5 className="break-all text-xl font-semibold tracking-tight text-gray-800 dark:text-white">{getHeading()}</h5>
       </div>
       <div id="event_schedule" className="flex px-3 items-center gap-1">
         <AiOutlineSchedule color="blue" className="h-5 w-5"/>
