@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import university_icon_white from "../lottie_animation/university_icon_dark_mode.png";
-import university_icon from "../lottie_animation/university_icon.png";
 import "../css/Navbar.css";
 import { Link, useLocation } from "react-router-dom";
-import { AccountDropDown } from "./Navbar/AccountDropDown";
 import { useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "../config/firebase-config";
@@ -17,7 +15,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 export const Navbar = (props) => {
   // home, event, committee, past year paper
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
   const [selectedItem, setSelectedItem] = useState([true, false, false, false]);
   const [currentUser, setCurrentUser] = useState(null);
   const dispatch = useDispatch();
@@ -115,7 +113,7 @@ export const Navbar = (props) => {
               className={`nav ${
                 selectedItem[1] ? "text-white" : "text-slate-300"
               }`}
-              to="/events/all-events"
+              to="/events"
             >
               Events
             </Link>

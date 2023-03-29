@@ -10,6 +10,7 @@ import { MainHomePage } from "./components/MainHomePage";
 import { Account_settings } from "./components/DropDownItems/Account_settings";
 import { MyProfile } from "./components/DropDownItems/MyProfile";
 import { EventDetailPage } from "./components/Event/EventDetailPage/EventDetailPage";
+import { CommitteeDetailPage } from "./components/Committees/CommitteeDetailPage";
 
 
 
@@ -32,8 +33,9 @@ function App() {
         <Route exact path="*" element={<MainHomePage setProgress={setProgress}/>}/>
         <Route exact path="account-settings" element={<Account_settings/>}/>
         <Route exact path="my-profile" element={<MyProfile/>}/>
-        <Route exact path="/events/:event_type/:id" element={<EventDetailPage/>}/>
-        <Route exact path="/events/:event_type/:id/:email" element={<MyProfile/>}/>
+        <Route exact path="/events/:id" element={<EventDetailPage/>}/>
+        <Route exact path="/:section/:id/:email" element={<MyProfile/>}/>
+        <Route exact path="/committees/:id/" element={<CommitteeDetailPage/>}/>
       </Routes>
           
       </div>

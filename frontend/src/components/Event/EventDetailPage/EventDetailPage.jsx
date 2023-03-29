@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { getEventDetailsUsingId } from "../../../http";
-import { GoLocation } from "react-icons/go";
 import { AiOutlineClockCircle, AiFillLinkedin } from "react-icons/ai";
 import { AiOutlineMail } from 'react-icons/ai'
 import { BsDiscord } from 'react-icons/bs'
 import { TbWorld } from 'react-icons/tb'
+import { GoLocation } from 'react-icons/go'
 
 export const EventDetailPage = () => {
   const default_img_url =
@@ -18,12 +18,12 @@ export const EventDetailPage = () => {
   useEffect(() => {
     const pathname = location.pathname;
     getEventDetailsUsingId(
-      "",
-      pathname.split("/")[2],
-      pathname.split("/")[3]
+      pathname.split("/").at(-1)
     ).then((res) => {
       console.log(res.data);
       setData(res.data);
+    }).catch(err=>{
+      console.log(err);
     });
   }, []);
 

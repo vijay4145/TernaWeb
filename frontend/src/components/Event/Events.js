@@ -1,15 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { AddEvent } from "./AddEvent";
-import { SideNavbar } from "./SideNavbar/SideNavbar";
 import '../../css/ScrollbarHide.css'
-import { EventTimeLine } from "./EventTimeLine";
-import { SideNavbarMobile } from "./SideNavbar/SideNavbarMobile";
-import { Route, Routes } from "react-router-dom";
 import { EventList } from "./EventList";
+import { useLocation } from "react-router-dom";
 
 export const Events = (props) => {
+  const location = useLocation();
+  const [filter, setFilter] = useState('all');
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const filter = queryParams.get('filter') ;
+    setFilter(filter);
+    console.log(filter);
+  }, []);
 
   AOS.init({
     offset: 20
@@ -17,27 +21,15 @@ export const Events = (props) => {
 
   return (
     <>
-    <section id="eventListSection" className="min-h-[97vh]">
+    <section id="eventListSection" className="min-h-[97vh] flex gap-4 flex-col">
+      <form className="flex gap-5 items-center flex-wrap">
+        <h5 className="text-lg">Sort By: </h5>
+        <button type="submit" name="filter" value='popular_event' className={`p-2 rounded-xl  ${filter === 'popular_event' ? 'bg-gray-400 text-white':'bg-gray-100'}`}>Popular Events</button>
+        <button type="submit" name="filter" value='recommended_event'  className={`p-2 rounded-xl ${filter === 'recommended_event' ? 'bg-gray-400 text-white':'bg-gray-100'} `}>Recommended Events</button>
+        <button type="submit" name="filter" value='past_event' className={`p-2 rounded-xl  ${filter === 'past_event' ? 'bg-gray-400 text-white':'bg-gray-100'}`}>Past Events</button>
+      </form>
+      <EventList/>
 
-      <section id="Events" className="mt-3 gap-2 mr-4 flex flex-col md:grid md:grid-cols-4">
-        <div className=" max-w-fit md:max-w-full md:h-[86vh] md:overflow-scroll scrollbar-hide rounded-lg shadow-sm">
-          <span className="hidden md:block"><SideNavbar/></span>
-          <span className="md:hidden"><SideNavbarMobile/></span>
-        </div>
-        <div className="col-span-2">
-          <Routes>
-            <Route exact path="/add-event" element={<AddEvent/>}/>
-            <Route exact path="/all-events" element={<EventList/>}/>
-            <Route exact path="/upcoming-events" element={<EventList/>}/>
-            <Route exact path="/popular-events" element={<EventList/>}/>
-            <Route exact path="/recommended-events" element={<EventList/>}/>
-          </Routes>
-        </div>
-        <div id="UpcomingEventTimeLineChart" className="hidden md:block col-span-1 overflow-scroll h-[86vh] scrollbar-hide">
-          <EventTimeLine/>
-        </div>
-
-      </section>
     </section>
     </>
   );

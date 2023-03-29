@@ -25,25 +25,15 @@ export const CommitteesList = (props) => {
 
   return (
     <>
-    <section>
-        <div className="floating-Add-Button fixed bottom-4 right-5 z-10">
-        <button type="button" className= "rounded-full hover:bg-blue-900 text-6xl bg-blue-600" onClick={toggleFormVisibility}>
-            {!formVisible && <AiOutlinePlusCircle color="#ffffff"/>}
-            {formVisible && <AiFillCloseCircle color="#ffffff"/>}
-        </button>
-      </div>
-    </section>
 
-    {formVisible && <AddCommittee toggleFormVisibility={toggleFormVisibility}/>}
-
-    {!formVisible && <section id='CommitteesList' className='m-5 '>
+     <section id='CommitteesList' className='min-h-[82vh]'>
         <h1 className='text-blue-900 font-semibold text-3xl'>Committees :</h1>
         <div className='flex flex-row gap-7 flex-wrap mt-5'>
             {committeesList && committeesList.length >0 && committeesList.map((committee, i)=>{
               return <CommitteesListCard committee={committee} key={i}/>
             })}
         </div>
-    </section>}
+    </section>
     </>
   )
 }

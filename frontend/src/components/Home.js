@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 
 import '../css/Home.css'
 import { AccountDropDown } from "./Navbar/AccountDropDown";
-import { Carousel } from "./Home/Carousel";
-import { HomeEvent } from './HomeEvent'
+import { EventDetailPage } from './Event/EventDetailPage/EventDetailPage'
 
 import { Home2 } from "./Home/Home2";
 import { Route, Routes } from "react-router-dom";
@@ -32,7 +31,8 @@ export const Home = (props) => {
                 <Route exact path="/committees" element={<CommitteesList setProgress={props.setProgress}/>}/>
                 <Route exact path="/" element={<Home2  setProgress={props.setProgress}/>} />
                 <Route exact path="/pastYearPapers" element={<PastYearPaper  setProgress={props.setProgress}/>} />
-                <Route exact path="events/*" element={<Events  setProgress={props.setProgress}/>} />
+                <Route exact path="events" element={<Events  setProgress={props.setProgress}/>} />
+                <Route exact path="events/:id" element={<EventDetailPage setProgress={props.setProgress}/>} />
               </Routes>
         </div>
     </div>

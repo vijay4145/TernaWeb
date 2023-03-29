@@ -2,43 +2,43 @@ import React, { useEffect } from "react";
 import { AiOutlineSchedule } from 'react-icons/ai';
 import { Link } from "react-router-dom";
 
-export const EventCard = (props) => {
+
+export const EventCard = ({event}) => {
+  useEffect(() => {
+    console.log(event);
+  }, [])
+
+  const getHeading = ()=>{
+    let newHeading = event.EVENT_HEADING;
+    const limit = 30;
+    if(newHeading.length > limit){
+      newHeading = newHeading.substring(0,30);
+      newHeading = newHeading + '...';
+    }
+    console.log(newHeading);
+    return newHeading;
+  }
   
-      const imgUrl = "https://cdn4.vectorstock.com/i/1000x1000/69/03/flat-icon-sport-events-vector-9456903.jpg";
   return (
     <>
-      <br />
-      <Link to={props.event._id}
-      target='_blank' 
-        className="upcomingEventCard mx-3 flex flex-col md:flex-row gap-6 content-center justify-center bg-white px-3 shadow-lg rounded-3xl hover:shadow-xl"
-        style={{
-          border: "1px solid #ddd",
-        }}
-      >
-        <img
-          src={props.event.EVENT_IMAGE_URL}
-          alt=""
-          className=" w-fit md:w-[20vw] h-[30vh] object-contain min-h-[150px]"
-        />
-        <div className="flex flex-col w-full md:w-[70vw] py-4 content-center">
-          <h1 className="text-2xl font-semibold text-blue-600">
-            {props.event.EVENT_HEADING}
-          </h1>
-          <p>
-            {" "}
-            {props.event.EVENT_DESCRIPTION}
-          </p>
-          <div className="flex mt-1 items-center">
-            <AiOutlineSchedule className="min-h-full" color={'#3B82F6'}/>
-            <p >&nbsp;{props.event.EVENT_START ? props.event.EVENT_START.split('T')[0]:''}</p>
-          </div>
-          <span className="flex justify-center md:justify-start mt-2">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-sans py-2 px-3 rounded drop-shadow-sm">
-              Explore More
-            </button>
-          </span>
-        </div>
-      </Link>
+    <Link to={event._id} target='_blank' className="flex flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 gap-1 pb-3 cursor-pointer">
+      <div className="flex justify-center">
+          <img className="rounded-t-lg h-48 w-auto" src={event.EVENT_IMAGE_URL} alt=""/>
+      </div>
+      <div id="event_heading" className="px-3 mt-1">
+          <h5 className="text-xl font-semibold tracking-tight text-gray-800 dark:text-white">{getHeading()}</h5>
+      </div>
+      <div id="event_schedule" className="flex px-3 items-center gap-1">
+        <AiOutlineSchedule color="blue" className="h-5 w-5"/>
+        <p>{event.EVENT_START.split('T')[0]}</p>
+      </div>
+      <div className="px-3">
+        <p>{event.EVENT_DESCRIPTION}</p>
+      </div>
+      <div className="flex px-3">
+        <button className="items-center flex gap-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 md:py-2 px-3  rounded">Explore</button>
+      </div>
+    </Link>
     </>
   );
 };

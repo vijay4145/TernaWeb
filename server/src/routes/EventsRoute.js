@@ -10,6 +10,6 @@ const { verifyToken } = require('../middleware/Firebase/VerifyToken')
 router.post("/addEvent", verifyToken,  eventController.post);
 router.get("/getlist",  eventController.get);
 router.get('/:event_type/getEventOverviewList', eventController.getOverviewList);
-router.get('/:event_type/:id', eventController.getUsingId)
+router.get('/:id', eventController.getUsingId)
 
 module.exports = router;
