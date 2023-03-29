@@ -1,10 +1,9 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { AiFillCloseCircle, AiOutlinePlusCircle } from 'react-icons/ai'
-import { AddCommittee } from './AddCommittee'
 import { CommitteesListCard } from './CommitteesListCard'
 import  { getCommittee } from '../../http/index'
+import "aos/dist/aos.css";
 
 export const CommitteesList = (props) => {
 
@@ -26,7 +25,7 @@ export const CommitteesList = (props) => {
   return (
     <>
 
-     <section id='CommitteesList' className='min-h-[82vh]'>
+     <section data-aos="zoom-in" id='CommitteesList' className='min-h-[82vh]'>
         <h1 className='text-blue-900 font-semibold text-3xl'>Committees :</h1>
         <div className='flex flex-row gap-7 flex-wrap mt-5'>
             {committeesList && committeesList.length >0 && committeesList.map((committee, i)=>{

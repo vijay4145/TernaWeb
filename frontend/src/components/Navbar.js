@@ -3,11 +3,7 @@ import university_icon_white from "../lottie_animation/university_icon_dark_mode
 import "../css/Navbar.css";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "../config/firebase-config";
-import { useDispatch } from "react-redux";
-import { setUserDetailsSlice } from "../store/UserDetailsSlice";
-import { getUserDetails } from "../http";
 import { AiFillHome, AiFillNotification } from "react-icons/ai";
 import { HiUserGroup } from "react-icons/hi";
 import { BsNewspaper } from "react-icons/bs";
@@ -17,25 +13,8 @@ export const Navbar = (props) => {
   // home, event, committee, past year paper
   const [isExpanded, setIsExpanded] = useState(true);
   const [selectedItem, setSelectedItem] = useState([true, false, false, false]);
-  const [currentUser, setCurrentUser] = useState(null);
-  const dispatch = useDispatch();
   const location = useLocation();
-  useEffect(() => {
-    onAuthStateChanged(getAuth(), async (user) => {
-      if (user !== null) {
-        setCurrentUser(true);
-        const userDetail = {
-          USER_EMAIL: user.email,
-          USER_NAME: user.displayName,
-        };
-        dispatch(setUserDetailsSlice(userDetail));
-        const serverResponse = await getUserDetails();
-        if (serverResponse.data) {
-          dispatch(setUserDetailsSlice(serverResponse.data));
-        }
-      } else setCurrentUser(null);
-    });
-  }, []);
+
 
   useEffect(() => {
     let path = location.pathname.split("/")[1];

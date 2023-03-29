@@ -61,7 +61,7 @@ export const MainHomePage = (props) => {
             </div>
 
             <div className='rounded-3xl w-full bg-white mb-1'> 
-              <Home setProgress={props.setProgress}/>
+              <Home setProgress={props.setProgress} signInWithGoogle={signInWithGoogle}/>
             </div>
           </div>
     </>

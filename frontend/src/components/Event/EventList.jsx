@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getEventDetails, getEventOverviewList } from '../../http';
+import { getEventOverviewList } from '../../http';
 import { EventCard } from './EventCard';
 
 export const EventList = (props) => {

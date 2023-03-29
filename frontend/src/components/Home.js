@@ -10,18 +10,51 @@ import { MainHomePage } from "./MainHomePage";
 import { CommitteesList } from "./Committees/CommitteesList";
 import { PastYearPaper } from "./PastYearPapers/PastYearPaper";
 import { Events } from "./Event/Events";
+import { setUserDetailsSlice } from "../store/UserDetailsSlice";
+import { getUserDetails } from "../http";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 export const Home = (props) => {
-  useEffect(()=>{
+  const [currentUser, setCurrentUser] = useState(false);
+  const [loginButtonStateDisabled, setLoginButtonStateDisabled] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    onAuthStateChanged(getAuth(), async (user) => {
+      if (user !== null) {
+        setLoginButtonStateDisabled(true);
+        setCurrentUser(true);
+        const userDetail = {
+          USER_EMAIL: user.email,
+          USER_NAME: user.displayName,
+        };
+        dispatch(setUserDetailsSlice(userDetail));
+        const serverResponse = await getUserDetails();
+        if (serverResponse.data) {
+          dispatch(setUserDetailsSlice(serverResponse.data));
+        }
+      } else {
+        setLoginButtonStateDisabled(false);
+        setCurrentUser(null);
+      }
+    });
     props.setProgress(100);
-  },[])
+  }, []);
 
   return (
     <>
     <div className="flex flex-col gap-6 m-6" >
       <div className="flex justify-between items-center">
         <h1 className="text-lg md:text-xl font-bold text-blue-500">{'Welcome guestUser42'}</h1>
-        <AccountDropDown/>
+        {/* <AccountDropDown/> */}
+          <div className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>
+            {
+              (currentUser) ? (<AccountDropDown setLoginButtonStateDisabled={setLoginButtonStateDisabled}/>)
+              :
+              <button disabled={loginButtonStateDisabled} onClick={props.signInWithGoogle} className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-2'>Login</button>
+            }
+            </div>
       </div>
 
 

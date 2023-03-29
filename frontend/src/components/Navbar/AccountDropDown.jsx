@@ -11,8 +11,9 @@ import { getAuth } from "firebase/auth";
 
 
 
-export const AccountDropDown = () => {
+export const AccountDropDown = ({setLoginButtonStateDisabled}) => {
   const logout = ()=>{
+    setLoginButtonStateDisabled(false);
     getAuth().signOut();
   }
 

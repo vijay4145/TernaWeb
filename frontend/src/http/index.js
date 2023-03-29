@@ -43,7 +43,6 @@ const api = async (endpoint, data,method)=>{
 
       
     
-export const getRoommateListRespone = (data) => api.get('/roommate', data);
 
 export const postEventDetails = async (data)=> await api('/events/addEvent', data, 'post')
 export const getEventDetails = async (data)=> await api('/events/getlist', '', 'get');
