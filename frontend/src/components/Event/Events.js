@@ -14,7 +14,6 @@ export const Events = (props) => {
     const queryParams = new URLSearchParams(location.search);
     const filter = queryParams.get('filter') ;
     setFilter(filter);
-    console.log(filter);
   }, []);
 
   AOS.init({

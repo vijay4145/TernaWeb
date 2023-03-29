@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 
 
 export const EventCard = ({event}) => {
-  useEffect(() => {
-    console.log(event);
-  }, [])
 
   const getHeading = ()=>{
     let newHeading = event.EVENT_HEADING;
@@ -15,13 +12,12 @@ export const EventCard = ({event}) => {
       newHeading = newHeading.substring(0,30);
       newHeading = newHeading + '...';
     }
-    console.log(newHeading);
     return newHeading;
   }
   
   return (
     <>
-    <Link to={'eventdetail/'+event._id} target='_blank' className="flex flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 gap-1 pb-3 cursor-pointer">
+    <Link to={'eventdetail/'+event._id} className="flex flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 gap-1 pb-3 cursor-pointer">
       <div className="flex justify-center">
           <img className="rounded-t-lg h-48 w-auto" src={event.EVENT_IMAGE_URL} alt=""/>
       </div>

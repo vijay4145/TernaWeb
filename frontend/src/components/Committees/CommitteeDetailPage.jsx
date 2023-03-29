@@ -10,7 +10,6 @@ export const CommitteeDetailPage = () => {
     useEffect(() => {
         const id = location.pathname.split('/').at(-1);
         getCommitteeUsingId(id).then(res=>{
-            console.log(res);
             setData(res.data);
         }).catch(err=>{
             console.log(err);

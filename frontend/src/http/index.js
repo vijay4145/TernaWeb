@@ -4,7 +4,6 @@ import '../config/firebase-config'
 
 
 const api = async (endpoint, data,method)=>{
-    console.log('endpoint is ', endpoint);
     var idToken =  getAuth().currentUser;
     if(idToken) idToken = await idToken.getIdToken();
     if(!idToken) idToken = "bearer";

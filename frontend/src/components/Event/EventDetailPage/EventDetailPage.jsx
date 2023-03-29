@@ -20,7 +20,6 @@ export const EventDetailPage = () => {
     getEventDetailsUsingId(
       pathname.split("/").at(-1)
     ).then((res) => {
-      console.log(res.data);
       setData(res.data);
     }).catch(err=>{
       console.log(err);
@@ -30,9 +29,7 @@ export const EventDetailPage = () => {
   const [timeLeft, setTimeLeft] = useState({});
 
   useEffect(() => {
-    console.log(location.pathname);
     if(data && data !== null){
-      console.log(data);
     const targetDateTime = data.EVENT_REGISTER_BEFORE;
     const intervalId = setInterval(() => {
       const now = new Date().getTime();
