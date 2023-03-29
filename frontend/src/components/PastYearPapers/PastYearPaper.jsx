@@ -1,27 +1,34 @@
-import { Autocomplete, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react'
-import {Sidebar} from './sidebar/Sidebar';
+import { SubjectBar } from './SubjectBar/SubjectBar';
 import '../../css/ScrollbarHide.css'
 import { QuestionPaperDisplay } from './QuestionPaperDisplay';
-import { SidebarForSubjects } from './sidebar/SideBarForSubjects';
+import { useLocation } from 'react-router-dom';
 
 export const PastYearPaper = (props) => {
+  const location = useLocation();
+  const [branch, setBranch] = useState(null);
+  const [semester, setSemester] = useState(null);
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const url_branch = searchParams.get('branch');
+    const url_semester = searchParams.get('semester');
+    if(url_branch && url_branch !== '-') setBranch(url_branch);
+    if(url_semester && url_semester !== '-') setSemester(url_semester);
+  }, [location])
+  
+
   useEffect(()=>{
     props.setProgress(100);
   },[]);
   return (
     <>
-    <div className='grid grid-cols-4 gap-3'>
-      <div className=' shadow-lg hover:shadow-2xl rounded-3xl h-[88vh] overflow-scroll scrollbar-hide'>
-        <Sidebar/>
-      </div>
-      <div className=' rounded-3xl p-3 col-span-2  h-[88vh] overflow-scroll' style={{backgroundColor: '#FFFFFD'}}>
+    <div className='flex flex-col gap-2 min-h-[82vh]'>
+        <SubjectBar/>
+      {branch !== null && semester !== null &&
+        <div className=' rounded-3xl p-3' style={{backgroundColor: '#FFFFFD'}}>
         <QuestionPaperDisplay/>
-      </div>
-      <div className=' shadow-lg hover:shadow-2xl rounded-3xl h-[88vh] overflow-scroll scrollbar-hide'>
-        <SidebarForSubjects/>
-      </div>
-
+        </div>
+      }
     </div>
     </>
   )

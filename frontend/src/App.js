@@ -33,9 +33,9 @@ function App() {
         <Route exact path="*" element={<MainHomePage setProgress={setProgress}/>}/>
         <Route exact path="account-settings" element={<Account_settings/>}/>
         <Route exact path="my-profile" element={<MyProfile/>}/>
-        <Route exact path="/events/:id" element={<EventDetailPage/>}/>
-        <Route exact path="/:section/:id/:email" element={<MyProfile/>}/>
-        <Route exact path="/committees/:id/" element={<CommitteeDetailPage/>}/>
+        <Route exact path="/events/eventdetail/:id" element={<EventDetailPage/>}/>
+        <Route exact path="/:section/:subsection/:id/:email" element={<MyProfile/>}/>
+        <Route exact path="/committees/committedetail/:id" element={<CommitteeDetailPage/>}/>
       </Routes>
           
       </div>

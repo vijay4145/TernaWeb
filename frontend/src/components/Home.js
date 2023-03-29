@@ -6,7 +6,6 @@ import { EventDetailPage } from './Event/EventDetailPage/EventDetailPage'
 
 import { Home2 } from "./Home/Home2";
 import { Route, Routes } from "react-router-dom";
-import { MainHomePage } from "./MainHomePage";
 import { CommitteesList } from "./Committees/CommitteesList";
 import { PastYearPaper } from "./PastYearPapers/PastYearPaper";
 import { Events } from "./Event/Events";
@@ -15,6 +14,8 @@ import { getUserDetails } from "../http";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { AddEvent } from './Event/AddEvent'
+import { AddCommittee } from './Committees/AddCommittee'
 
 export const Home = (props) => {
   const [currentUser, setCurrentUser] = useState(false);
@@ -64,8 +65,10 @@ export const Home = (props) => {
                 <Route exact path="/committees" element={<CommitteesList setProgress={props.setProgress}/>}/>
                 <Route exact path="/" element={<Home2  setProgress={props.setProgress}/>} />
                 <Route exact path="/pastYearPapers" element={<PastYearPaper  setProgress={props.setProgress}/>} />
-                <Route exact path="events" element={<Events  setProgress={props.setProgress}/>} />
-                <Route exact path="events/:id" element={<EventDetailPage setProgress={props.setProgress}/>} />
+                <Route exact path="/events" element={<Events  setProgress={props.setProgress}/>} />
+                <Route exact path="/events/add-event" element={<AddEvent setProgress={props.setProgress}/>} />
+                <Route exact path="/committees/add-committee" element={<AddCommittee setProgress={props.setProgress}/>} />
+                {/* <Route exact path="/events/:id" element={<EventDetailPage setProgress={props.setProgress}/>} /> */}
               </Routes>
         </div>
     </div>

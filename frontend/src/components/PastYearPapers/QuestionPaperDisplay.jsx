@@ -1,64 +1,60 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import google_drive_icon from '../../lottie_animation/google_drive.png';
+import book_icon from '../../lottie_animation/student.png';
 
 export const QuestionPaperDisplay = () => {
-  const [currBranch, setCurrBranch] = useState(null);
-  const [currSemester, setCurrSemester] = useState(null);
-  const [CurrSubjectSelected, setCurrSubjectSelected] = useState(null);
-  useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const qp = searchParams.get('questionPaper');
-    if(qp !== null){
-      setCurrBranch(qp.split('/')[0]);
-      setCurrSemester(qp.split('/')[1]); 
-      setCurrSubjectSelected(qp.split('/')[2]);
-      console.log(qp.split('/')[2]); 
-    }
-  }, [])
+  const location = useLocation();
+
+  const generatePYPLink = ()=>{
+    const searchParams = new URLSearchParams(location.search);
+    const url_branch = searchParams.get('branch');
+    const url_semester = searchParams.get('semester');
+    if(url_branch && url_branch !== '-' && url_semester && url_semester !== '-'){
+      if(url_semester === '1' || url_semester === '2' )
+        return 'https://muquestionpapers.com/be/first-year-engineering/semester-' + url_semester
+      else 
+       return 'https://muquestionpapers.com/be/' + url_branch + '/semester-' + url_semester;
+      }
+    return '#';
+  }
+
+  const generateResourceLink = ()=>{
+    const searchParams = new URLSearchParams(location.search);
+    const url_branch = searchParams.get('branch');
+    const url_semester = searchParams.get('semester');
+    if(Resources[url_branch] && Resources[url_branch][url_semester])
+      return Resources[url_branch][url_semester];
+    return 'https://drive.google.com/drive/folders/1Bitfm_kBwes3N9UrWUzinJMoFLZH2Tjx';
+  }
 
   return (
     <>
-      <section className="flex flex-col gap-4 m-2">
-        <h1 className="text-sm text-gray-500">
-          {" "}
-          {currBranch +" > Semester " + currSemester + ' > ' + CurrSubjectSelected}
-        </h1>
-        {
-          questionPaper.map((name, i)=>{
-            return (
-        <div className="p-6 rounded-2xl flex flex-wrap justify-between bg-slate-50 shadow hover:shadow-md">
-          <h2 className="text-xl font-semibold">{name}</h2>
-          <div className="flex gap-2">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white rounded-lg drop-shadow-sm px-2 py-1">
-              Question Paper
-            </button>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white rounded-lg drop-shadow-sm px-2 py-1">
-              Answer key
-            </button>
-          </div>
+      <section className="flex gap-6 m-2 flex-wrap max-sm:flex-col items-center">
+          <a target='_blank' href={generatePYPLink()}>
+        <div className="flex flex-col bg-blue-50 p-3 max-w-fit rounded-xl items-center shadow-lg">
+          <img src={google_drive_icon} className="h-40 w-auto bg-white rounded-xl" alt="" />
+          <h2 className="text-xl text-center">Past Year  Question <br/> Paper</h2>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-1 mt-1">Open</button>
         </div>
-
-            );
-          })
-        }
-
-        <p className="text-xs text-red-500">Note: KT papers occurs in June</p>
+          </a>
+        
+          <a href={generateResourceLink()} target="_blank">
+        <div className="flex flex-col bg-blue-50 p-3 rounded-xl items-center shadow-lg">
+          <img src={book_icon} className="h-40 w-auto bg-white rounded-xl" alt="" />
+            <h2 className="text-xl text-center">Books and<br/> Resources</h2>
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-1 mt-1">Open</button>
+          </div>
+          </a>
       </section>
     </>
   );
 };
 
 
-const questionPaper = [
-  'May -2020',
-  'December -2020',
-  'May -2019',
-  'December -2019',
-  'May -2018',
-  'December -2018',
-  'May -2017',
-  'December -2017',
-  'May -2016',
-  'December -2016',
-  'May -2015',
-  'December -2015',
-]
+const Resources = {
+  'computer-engineering':{
+    '5':'https://drive.google.com/drive/folders/1gKm4FeTlmMegdseiysYPTh16xVsI_1Zm',
+    '6':'https://drive.google.com/drive/folders/1Joh4VqI0ZScdFuhAkZ9i62oceBb0nAHy'
+  }
+}

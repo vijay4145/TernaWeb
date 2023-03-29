@@ -19,7 +19,7 @@ export const EventList = (props) => {
     
   return (
     <>
-        <div id="EventList" data-aos="zoom-in" className="flex gap-4 grid-cols-3 overflow-scroll  scrollbar-hide ">
+        <div id="EventList" data-aos="zoom-in" className="flex flex-wrap gap-4 grid-cols-3 overflow-scroll  scrollbar-hide ">
             {eventsList && eventsList.length > 0 && eventsList.map((eve, i) => {
               return <EventCard event={eve} keys={i} key={i}/> ;
             })}

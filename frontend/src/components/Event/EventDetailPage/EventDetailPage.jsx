@@ -30,6 +30,7 @@ export const EventDetailPage = () => {
   const [timeLeft, setTimeLeft] = useState({});
 
   useEffect(() => {
+    console.log(location.pathname);
     if(data && data !== null){
       console.log(data);
     const targetDateTime = data.EVENT_REGISTER_BEFORE;
