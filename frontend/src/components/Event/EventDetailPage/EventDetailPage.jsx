@@ -54,11 +54,6 @@ export const EventDetailPage = () => {
   }, [data]);
 
 
-  const sendLinkToSocialMedia = ()=>{
-    const message = window.location.href;
-    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
-  }
 
   return (
     <>

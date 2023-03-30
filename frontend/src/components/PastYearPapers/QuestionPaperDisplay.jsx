@@ -5,6 +5,15 @@ import book_icon from '../../lottie_animation/student.png';
 
 export const QuestionPaperDisplay = () => {
   const location = useLocation();
+  const [branch, setBranch] = useState(null);
+  const [semester, setSemester] = useState(null);
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const url_branch = searchParams.get('branch');
+    const url_semester = searchParams.get('semester');
+    setBranch(url_branch); setSemester(url_semester);    
+  }, [])
+  
 
   const generatePYPLink = ()=>{
     const searchParams = new URLSearchParams(location.search);
@@ -30,6 +39,9 @@ export const QuestionPaperDisplay = () => {
 
   return (
     <>
+    <h1 className="flex break-words text-lg text-blue-800 font-serif mb-3">
+      {`Resources > ${branch} > semester ${semester}`}
+    </h1>
       <section className="flex gap-6 m-2 flex-wrap max-sm:flex-col items-center">
           <a target='_blank' href={generatePYPLink()}>
         <div className="flex flex-col bg-blue-50 p-3 max-w-fit rounded-xl items-center shadow-lg">

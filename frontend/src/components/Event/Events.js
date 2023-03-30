@@ -22,7 +22,7 @@ export const Events = (props) => {
 
   return (
     <>
-    <section id="eventListSection" className="min-h-[97vh] flex gap-4 flex-col">
+    <section data-aos="zoom-in" id="eventListSection" className="min-h-[97vh] flex gap-4 flex-col">
       <form className="flex gap-5 items-center flex-wrap">
         <h5 className="text-lg">Sort By: </h5>
         <button type="submit" name="filter" value='popular_event' className={`p-2 rounded-xl  ${filter === 'popular_event' ? 'bg-gray-400 text-white':'bg-gray-100'}`}>Popular Events</button>

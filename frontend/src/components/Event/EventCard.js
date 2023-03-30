@@ -17,7 +17,7 @@ export const EventCard = ({event}) => {
   
   return (
     <>
-    <Link to={'eventdetail/'+event._id} className="flex flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 gap-1 pb-3 cursor-pointer">
+    <Link to={'eventdetail/'+event._id} target="_blank" className="flex flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 gap-1 pb-3 cursor-pointer">
       <div className="flex justify-center">
           <img className="rounded-t-lg h-48 w-auto" src={event.EVENT_IMAGE_URL} alt=""/>
       </div>
