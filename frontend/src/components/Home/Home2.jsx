@@ -1,7 +1,7 @@
 import React from 'react'
 import { AiFillLinkedin } from "react-icons/ai";
 import { AiOutlineMail } from 'react-icons/ai'
-import { BsDiscord } from 'react-icons/bs';
+import { BsInstagram } from 'react-icons/bs';
 import { TbWorld } from 'react-icons/tb';
 import  student from '../../lottie_animation/student.png';
 import  rank_image from '../../lottie_animation/rank_image.png';
@@ -46,16 +46,16 @@ export const Home2 = () => {
 
           <div id="share-button" className=" flex flex-col items-center gap-1 mt-2">
                 <div className="flex flex-row gap-4 flex-wrap">
-                  <a target="_blank">
+                  <a href='info@ternaengg.ac.in' target="_blank">
                     <AiOutlineMail color="#c71610" className="h-7 w-7 md:h-10 md:w-10"/>
                   </a>
-                  <a target="_blank">
-                    <BsDiscord color="#3b5998" className="h-7 w-7 md:h-10 md:w-10"/>
+                  <a href='https://www.instagram.com/ternaengg/' target="_blank">
+                    <BsInstagram color='#AA336A' className="h-6 w-6 md:h-9 md:w-9"/>
                   </a>
-                  <a target="_blank">
+                  <a href='https://www.linkedin.com/school/terna-engineering-college/' target="_blank">
                     <AiFillLinkedin color="#0072b1" className="h-7 w-7 md:h-10 md:w-10"/>
                     </a>
-                  <a target="_blank">
+                  <a href='https://ternaengg.ac.in/' target="_blank">
                     <TbWorld color="#0072b1" className="h-7 w-7 md:h-10 md:w-10"/>
                   </a>
                 </div>
