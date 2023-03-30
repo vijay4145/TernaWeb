@@ -3,9 +3,15 @@ const GcrLinkDb = require('../models/GcrLink');
 
 module.exports.resourceController = {
     getGCRLink : (req, res)=>{
-        const branch = req.param.branch;
-        const semester = req.param.semester;
+        const branch = req.params.branch;
+        const semester = req.params.semester;
         const pipeline = [
+            {
+                $match: {
+                  SEMESTER: semester,
+                  BRANCH : branch
+                }
+            },
             {
               $project: {
                 _id : 0,
