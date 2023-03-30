@@ -72,7 +72,7 @@ export const EventDetailPage = () => {
             >
               <div className="w-full flex flex-col justify-between md:flex-row-reverse gap-5 md:gap-12 bg-blue-400 shadow-lg p-5 rounded-xl text-white items-center">
                 <img
-                  className="w-80 border-spacing-1 h-auto rounded-xl shadow-lg"
+                  className="w-80 bg-white border-spacing-1 h-auto rounded-xl shadow-lg"
                   style={{ border: "1px solid wheat" }}
                   src={data.EVENT_IMAGE_URL || default_img_url}
                   alt="Event_icon" 
