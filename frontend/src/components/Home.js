@@ -16,6 +16,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { AddEvent } from './Event/AddEvent'
 import { AddCommittee } from './Committees/AddCommittee'
+import { Gcr } from "./PastYearPapers/SubjectBar/Gcr";
 
 export const Home = (props) => {
   const [currentUser, setCurrentUser] = useState(false);
@@ -68,7 +69,7 @@ export const Home = (props) => {
                 <Route exact path="/events" element={<Events  setProgress={props.setProgress}/>} />
                 <Route exact path="/events/add-event" element={<AddEvent setProgress={props.setProgress}/>} />
                 <Route exact path="/committees/add-committee" element={<AddCommittee setProgress={props.setProgress}/>} />
-                {/* <Route exact path="/events/:id" element={<EventDetailPage setProgress={props.setProgress}/>} /> */}
+                <Route exact path="/events/:id" element={<EventDetailPage setProgress={props.setProgress}/>} />
               </Routes>
         </div>
     </div>

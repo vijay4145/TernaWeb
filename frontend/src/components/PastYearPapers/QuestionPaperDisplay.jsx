@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import google_drive_icon from '../../lottie_animation/google_drive.png';
 import book_icon from '../../lottie_animation/student.png';
+import gcr_icon from '../../lottie_animation/google_classroom_icon.png';
 
 export const QuestionPaperDisplay = () => {
   const location = useLocation();
@@ -37,11 +38,20 @@ export const QuestionPaperDisplay = () => {
     return 'https://drive.google.com/drive/folders/1Bitfm_kBwes3N9UrWUzinJMoFLZH2Tjx';
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const searchParams = new URLSearchParams();
+
+    // // Create the URL with the parameters
+    console.log(window.location.href);
+    const url = `${window.location.href}&${searchParams.toString()}&gcr=true`;
+
+    window.location.href = url;
+  };
+
   return (
     <>
-    <h1 className="flex break-words text-lg text-blue-800 font-serif mb-3">
-      {`Resources > ${branch} > semester ${semester}`}
-    </h1>
+
       <section className="flex gap-6 m-2 flex-wrap max-sm:flex-col items-center">
           <a target='_blank' href={generatePYPLink()}>
         <div className="flex flex-col bg-blue-50 p-3 max-w-fit rounded-xl items-center shadow-lg">
@@ -58,6 +68,12 @@ export const QuestionPaperDisplay = () => {
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-1 mt-1">Open</button>
           </div>
           </a>
+
+          <form onSubmit={handleSubmit} className="flex flex-col bg-blue-50 p-3 rounded-xl items-center shadow-lg">
+          <img src={gcr_icon} className="h-40 w-auto bg-white rounded-xl" alt="" />
+            <h2 className="text-xl text-center">Google Classroom <br/> Links</h2>
+              <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-1 mt-1">Open</button>
+          </form>
       </section>
     </>
   );

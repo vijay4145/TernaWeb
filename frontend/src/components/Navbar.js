@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import "../config/firebase-config";
 import { AiFillHome, AiFillNotification } from "react-icons/ai";
 import { HiUserGroup } from "react-icons/hi";
-import { BsNewspaper } from "react-icons/bs";
+import { ImBooks } from "react-icons/im";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 export const Navbar = (props) => {
@@ -125,14 +125,14 @@ export const Navbar = (props) => {
             >
               &nbsp;
             </div>
-            <BsNewspaper color={`${selectedItem[3] ? "white" : "#CBD5E1"}`} />
+            <ImBooks color={`${selectedItem[3] ? "white" : "#CBD5E1"}`} />
             <Link
               className={`nav ${
                 selectedItem[3] ? "text-white" : "text-slate-300"
               }`}
               to="/pastYearPapers"
             >
-              Question Papers
+              Resources
             </Link>
           </div>
         </ul>

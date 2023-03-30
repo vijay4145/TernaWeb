@@ -57,6 +57,9 @@ export const postUser = async (data)=> await api('/user/addUser', data, 'post');
 export const getUserDetails = async ()=> await api('/user/userDetail', '', 'get');
 export const getUserDetailsUsingid = async (id)=> await api('/user/userDetail/' + id, "", 'get');
 
+
+export const getGCRLink = async (branch, semester)=> await api('/resources/gcr/' + branch+ '/' + semester, "" , 'get');
+
 export default api;
 
 

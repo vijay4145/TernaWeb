@@ -5,6 +5,7 @@ const eventsRoute = require('./src/routes/EventsRoute');
 const committeeRoute = require('./src/routes/CommitteesRoute');
 const { verifyToken } = require('./src/middleware/Firebase/VerifyToken');
 const UserRoute = require('./src/routes/UserRoute');
+const ResourceRouter = require('./src/routes/ResourcesRoute')
 const connectToMongo = require('./src/services/Database/DbConnection');
 require('dotenv').config();
 
@@ -22,6 +23,7 @@ app.use('/', homeRouter);
 app.use('/events', eventsRoute);
 app.use('/committees', committeeRoute);
 app.use('/user', UserRoute);
+app.use('/resources', ResourceRouter)
 
 app.get('/auth', verifyToken ,(req, res)=>{
     console.log(req.headers);
