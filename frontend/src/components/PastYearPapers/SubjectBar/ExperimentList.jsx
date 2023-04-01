@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ExperimentDownloadDialog } from './ExperimentDownloadDialog'
 import { AiFillCrown } from "react-icons/ai";
 import { getAiExperimentUrlNormal } from '../../../http';
@@ -6,6 +6,8 @@ import { getAiExperimentUrlNormal } from '../../../http';
 export const ExperimentList = (props) => {
     const [experimentDownloadDialogVisible, setExperimentDownloadDialogVisible] = useState(false);
     const [isDocxDownloading, setIsDocxDownloading] = useState(false);
+    const [isAiButtonDisabled, setIsAiButtonDisabled] = useState(false);
+
     const downloadNormal = ()=>{
       setIsDocxDownloading(true);
       console.log("started");
@@ -20,6 +22,13 @@ export const ExperimentList = (props) => {
         console.log(err);
       })
     }
+
+    useEffect(() => {
+      if(props.currSubject && props.currSubject === 'MC'){
+        setIsAiButtonDisabled(true);
+      }
+    }, [props.currSubject])
+    
   return (
     <>
     {experimentDownloadDialogVisible && <section id='ExperimentDowloadDialog' className='absolute top-6'>
@@ -31,7 +40,7 @@ export const ExperimentList = (props) => {
         <div className='flex gap-2 flex-wrap'>
           <div className='bg-white text-gray-500 p-2 items-center rounded-lg flex max-sm:w-full justify-center shadow-lg'>
             <AiFillCrown color='red' className='h-4 w-4'/>
-            <button onClick={()=>setExperimentDownloadDialogVisible(!experimentDownloadDialogVisible)} className=''>Download AI completed</button>
+            <button onClick={()=>setExperimentDownloadDialogVisible(!experimentDownloadDialogVisible)} className={`${isAiButtonDisabled ? 'disabled:true cursor-not-allowed':''}`}>Download AI completed</button>
           </div>
           <button className='bg-white text-gray-500 p-2 rounded-lg max-sm:w-full shadow-lg' onClick={downloadNormal}>{isDocxDownloading ? 'Please Wait...':'Download docx'}</button>
         </div>

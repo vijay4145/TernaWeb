@@ -86,6 +86,9 @@ export const Experiment = ({branch, semester}) => {
         <section id='loading' className={`${isLoading ? '':'hidden'} top-0 max-w-md`}>
           <Lottie animationData={loading_animation} />
         </section>
+        {experimentList && 
+          <h1 className='text-lg text-gray-500 mt-2'>{experimentList.length} experiments found</h1>
+        }
         <div className='mt-4'>
             {
               experimentList && experimentList.length > 0 && experimentList.map(exp=>{
