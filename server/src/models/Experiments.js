@@ -21,6 +21,10 @@ const experimentSchema = new mongoose.Schema({
     LINK : {
         type: String,
         required: true
+    },
+    DOCX_URL: {
+        type: String,
+        required: true
     }
 })
 

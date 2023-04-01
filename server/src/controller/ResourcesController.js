@@ -133,10 +133,10 @@ module.exports.resourceController = {
   getExperimentUrlNormal : (req, res)=>{
     id = req.body._id;
     const query = { id };
-    const projection = { _id: 0, URL: 1 };
+    const projection = { _id: 0, DOCX_URL: 1 };
     ExperimentDb.findOne(query, projection)
       .then((dbUrl) => {
-        res.status(200).json(dbUrl._doc.URL);
+        res.status(200).json(dbUrl.DOCX_URL);
     }).catch(err=>{
       res.status(400).json({
         success: false

@@ -14,9 +14,9 @@ import Lottie from 'lottie-react';
 
 
 export const ExperimentDownloadDialog = (props) => {
-  const [user_name, setUser_name] = useState(null);
-  const [roll_no, setRoll_no] = useState(null);
-  const [batch, setBatch] = useState(null);
+  const [user_name, setUser_name] = useState('');
+  const [roll_no, setRoll_no] = useState('');
+  const [batch, setBatch] = useState('');
   const [isFormFilled, setIsFormFilled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -143,7 +143,7 @@ export const ExperimentDownloadDialog = (props) => {
           </div>
           <div className="flex flex-wrap justify-center">
             <button onClick={getDownloadLink} className={`${isFormFilled ? 'bg-blue-500':'bg-blue-300'} px-3 py-2 text-white rounded-lg`}>
-              Download
+              {isLoading ? 'Please Wait...':'Download'}
             </button>
           </div>
         </div>}
