@@ -77,7 +77,7 @@ module.exports.resourceController = {
             searchStrings: ["{name}", "{roll_no}", "{batch}"],
             replaceStrings: [name, roll_no, batch],
             caseSensitive: false,
-            pages: "",
+            pages: "1",
             password: "",
             name: `${roll_no}_${SUBJECT}_${EXPERIMENT_NO}`,
         };
