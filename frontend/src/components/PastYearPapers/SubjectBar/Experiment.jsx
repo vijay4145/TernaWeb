@@ -9,6 +9,7 @@ import { getExperimentList } from '../../../http';
 import loading_animation from '../../../lottie_animation/loading_animation_2.json'
 import Lottie from 'lottie-react';
 import { ExperimentList } from './ExperimentList';
+import { useLocation } from 'react-router-dom';
 
 
 export const Experiment = ({branch, semester}) => {
@@ -16,6 +17,15 @@ export const Experiment = ({branch, semester}) => {
     const [currSubject, setCurrSubject] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [experimentList, setExperimentList] = useState([]);
+
+    const location = useLocation();
+    useEffect(()=>{
+      const queryParams = new URLSearchParams(location.search);
+      const subject = queryParams.get('subject');
+      if(subject && subjectAvailable.includes(subject)){
+        setCurrSubject(subject);
+      }
+    }, [subjectAvailable])
 
     useEffect(() => {
         if(semester === '6'){
