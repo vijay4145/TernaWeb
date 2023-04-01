@@ -18,7 +18,11 @@ const api = async (endpoint, data,method)=>{
         })
 
         try{
-            if(method === 'post') {
+            if(method === 'npost'){
+                const response = await instance.post(endpoint, data);
+                return response;
+            }
+            else if(method === 'post') {
                 if(idToken === 'bearer') return {
                     success: false
                 }
@@ -60,6 +64,9 @@ export const getUserDetailsUsingid = async (id)=> await api('/user/userDetail/' 
 
 export const getGCRLink = async (branch, semester)=> await api('/resources/gcr/' + branch+ '/' + semester, "" , 'get');
 
+export const getExperimentList = async (branch, semester, subject)=> await api('/resources/get_experiment_list/' + branch+ '/' + semester + '/' + subject, "" , 'get');
+export const getAiExperimentUrl = async (data)=> await api('/resources/get_experiment_url', data , 'npost');
+export const getAiExperimentUrlNormal = async (data)=> await api('/resources/get_experiment_url_normal', data , 'npost');
 export default api;
 
 

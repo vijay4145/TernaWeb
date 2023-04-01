@@ -57,8 +57,7 @@ module.exports.resourceController = {
   },
 
   getExperimentUrl: async (req, res) => {
-    const BRANCH = req.body.BRANCH;
-    const SEMESTER = req.body.SEMESTER;
+    const id = req.body._id;
     const SUBJECT = req.body.SUBJECT;
     const EXPERIMENT_NO = req.body.EXPERIMENT_NO;
 
@@ -67,7 +66,7 @@ module.exports.resourceController = {
     const roll_no = req.body.ROLL_NO;
 
 
-    const query = { SEMESTER, BRANCH, SUBJECT, EXPERIMENT_NO };
+    const query = { id };
     const projection = { _id: 0, URL: 1 };
 
     ExperimentDb.findOne(query, projection)
@@ -98,4 +97,51 @@ module.exports.resourceController = {
         console.log(err);
       });
   },
+
+  getExperimentList : async (req, res)=>{
+    const BRANCH = req.params.branch;
+    const SEMESTER = req.params.semester;
+    const SUBJECT = req.params.subject;
+
+    const pipeline = [
+      {
+        $match : {SUBJECT, SEMESTER, BRANCH}
+      },
+      {
+        $project : {
+          _id: 1,
+          EXPERIMENT_NO: 1
+        }
+      },
+      {
+        $sort: { EXPERIMENT_NO: 1 } 
+      }
+    ]
+
+    ExperimentDb.aggregate(pipeline).then(list=>{
+      res.status(200).json(list);
+    }).catch(err=>{
+      console.log(err);
+      res.status(400).json({
+        success: false
+      });
+    })
+  },
+
+
+
+  getExperimentUrlNormal : (req, res)=>{
+    id = req.body._id;
+    const query = { id };
+    const projection = { _id: 0, URL: 1 };
+    ExperimentDb.findOne(query, projection)
+      .then((dbUrl) => {
+        res.status(200).json(dbUrl._doc.URL);
+    }).catch(err=>{
+      res.status(400).json({
+        success: false
+      })
+      console.log(err);
+    })
+  }
 };

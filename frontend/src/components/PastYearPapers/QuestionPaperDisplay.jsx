@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import google_drive_icon from '../../lottie_animation/google_drive.png';
 import book_icon from '../../lottie_animation/student.png';
 import gcr_icon from '../../lottie_animation/google_classroom_icon.png';
+import computer_icon from '../../lottie_animation/computer.png';
 
 export const QuestionPaperDisplay = () => {
   const location = useLocation();
@@ -44,15 +45,32 @@ export const QuestionPaperDisplay = () => {
 
     // // Create the URL with the parameters
     console.log(window.location.href);
-    const url = `${window.location.href}&${searchParams.toString()}&gcr=true`;
+    const url = `${window.location.href}&${searchParams.toString()}gcr=true`;
 
     window.location.href = url;
   };
+
+  const handleSubmitExperiment = (event) =>{
+    event.preventDefault();
+    const searchParams = new URLSearchParams();
+
+    // // Create the URL with the parameters
+    console.log(window.location.href);
+    const url = `${window.location.href}&${searchParams.toString()}experiment=true`;
+
+    window.location.href = url;
+  }
 
   return (
     <>
 
       <section className="flex gap-6 m-2 flex-wrap max-sm:flex-col items-center">
+          <form onSubmit={handleSubmitExperiment} className="flex flex-col bg-blue-50 p-3 rounded-xl items-center shadow-lg">
+          <img src={computer_icon} className="h-40 w-auto bg-white rounded-xl" alt="" />
+            <h2 className="text-xl text-center">Download <br/> Experiments</h2>
+              <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-1 mt-1">Open</button>
+          </form>
+
           <a target='_blank' href={generatePYPLink()}>
         <div className="flex flex-col bg-blue-50 p-3 max-w-fit rounded-xl items-center shadow-lg">
           <img src={google_drive_icon} className="h-40 w-auto bg-white rounded-xl" alt="" />
@@ -74,6 +92,7 @@ export const QuestionPaperDisplay = () => {
             <h2 className="text-xl text-center">Google Classroom <br/> Links</h2>
               <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-1 mt-1">Open</button>
           </form>
+          
       </section>
     </>
   );
