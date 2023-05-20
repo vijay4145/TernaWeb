@@ -16,3 +16,10 @@
 .dropdown-subitems:hover{
     background-color: #FAF9F6;
 }
+
+
+.transition-max-h{
+    transition-property: max-height;
+  transition-duration: 0.6s;
+  transition-timing-function: ease-in-out;
+}

@@ -16,16 +16,17 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AddEvent } from './Event/AddEvent'
 import { AddCommittee } from './Committees/AddCommittee'
+import spinner from '../lottie_animation/loader.gif';
+import Lottie from 'lottie-react'
 
 export const Home = (props) => {
   const { USER_NAME } = useSelector(state=> state.UserDetailsSlice);
   const [currentUser, setCurrentUser] = useState(false);
-  const [loginButtonStateDisabled, setLoginButtonStateDisabled] = useState(false);
+  const [isloginButtonLoading, setIsLoginButtonLoading] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
     onAuthStateChanged(getAuth(), async (user) => {
       if (user !== null) {
-        setLoginButtonStateDisabled(true);
         setCurrentUser(true);
         const userDetail = {
           USER_EMAIL: user.email,
@@ -36,10 +37,10 @@ export const Home = (props) => {
         if (serverResponse.data) {
           dispatch(setUserDetailsSlice(serverResponse.data));
         }
-      } else {
-        setLoginButtonStateDisabled(false);
+      }else {
         setCurrentUser(null);
       }
+      setIsLoginButtonLoading(false);
     });
     props.setProgress(100);
   }, []);
@@ -49,12 +50,14 @@ export const Home = (props) => {
     <div className="flex flex-col gap-6 m-6" >
       <div className="flex justify-between items-center">
         <h1 className="text-lg md:text-xl font-bold text-blue-500">Welcome {USER_NAME}</h1>
-        {/* <AccountDropDown/> */}
           <div className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>
-            {
-              (currentUser) ? (<AccountDropDown setLoginButtonStateDisabled={setLoginButtonStateDisabled}/>)
+            {!isloginButtonLoading &&
+              (currentUser) ? (<AccountDropDown setCurrentUser={setCurrentUser}/>)
               :
-              <button disabled={loginButtonStateDisabled} onClick={props.signInWithGoogle} className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-2'>Login</button>
+              <button onClick={props.signInWithGoogle} className={`${isloginButtonLoading ? 'hidden':''} bg-blue-500 hover:bg-blue-700 text-white font-bold rounded drop-shadow-sm px-3 py-2`}>Login</button>
+            }
+            {
+              isloginButtonLoading && <img className="h-12 w-16" src={spinner}/>
             }
             </div>
       </div>

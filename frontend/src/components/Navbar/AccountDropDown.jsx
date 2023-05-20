@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import userIcon from '../../lottie_animation/user_icon.png';
 import accountSettingsIcon from '../../lottie_animation/account-settings.png';
 import "../../css/Navbar/AccountDropDown.css";
@@ -11,18 +11,19 @@ import { getAuth } from "firebase/auth";
 
 
 
-export const AccountDropDown = ({setLoginButtonStateDisabled}) => {
+export const AccountDropDown = ({setCurrentUser}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
   const logout = ()=>{
-    setLoginButtonStateDisabled(false);
+    setCurrentUser(false);
     getAuth().signOut();
   }
 
 
   return (
     <>
-        <div className="account-drop-down cursor-pointer">
-            <img src={userIcon} className="account-icon h-10"/>
-            <ul className="dropdown-items absolute z-10 right-[20px] bg-white">
+        <div className="account-drop-down cursor-pointer relative">
+            <img onClick={()=>setIsExpanded(!isExpanded)} src={userIcon} className="account-icon h-10"/>
+            <ul className={`overflow-hidden transition-max-h  absolute z-10 ${isExpanded ? 'max-h-[1000px]':'max-h-0'} right-[20px] bg-white`}>
                 <Link to='my-profile' className="dropdown-subitems p-4 flex flex-row">
                   <img src={userIcon2} className="h-6"/>
                   <h3>&nbsp;My Profile</h3>
