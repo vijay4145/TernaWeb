@@ -70,7 +70,6 @@ export const Home2 = () => {
         </div>
         <div className="flex flex-col gap-3">
           <br/>
-          <br/>
           {/* <Carousel/> */}
           <HomeEvent/>
       </div>

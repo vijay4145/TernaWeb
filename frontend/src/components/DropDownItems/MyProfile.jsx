@@ -6,24 +6,28 @@ import { Profile1 } from '../Profile_Page_Components/Profile1'
 import { UserDetails } from '../Profile_Page_Components/UserDetails'
 import { getUserDetails, getUserDetailsUsingid } from "../../http/index";
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import Lottie from 'lottie-react';
+import loading_animation from '../../lottie_animation/loading_animation_2.json'
 
 export const MyProfile = () => {
   const location = useLocation();
   const [profiledata, setProfiledata] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const path = location.pathname.split('/').slice(-1);
     if(location.pathname.split('/')[1] === 'my-profile'){
       onAuthStateChanged(getAuth(), async(user)=>{
         if(user !== null && location.pathname.split('/')[1] === 'my-profile'){
           getUserDetails().then(res=>{
+            setIsLoading(false);
             setProfiledata(res.data);
           })
         }
       })
     }else{
       getUserDetailsUsingid(path).then(res=>{
+        setIsLoading(false);
         setProfiledata(res.data);
       })
     }
@@ -39,8 +43,12 @@ export const MyProfile = () => {
             <Link to='/'>Home /</Link>  </span> User Profile
         </div>
       </section>
+        
+      <div className='flex justify-center '>
+        {isLoading && <Lottie animationData={loading_animation} className='w-48 h-auto'/>}
 
-      <section id='information-section' className='grid sm:grid-cols-1 md:grid-cols-3 gap-6 p-4'>
+      </div>
+      {!isLoading && <section id='information-section' className='grid sm:grid-cols-1 md:grid-cols-3 gap-6 p-4'>
         <div id='profile' className='flex bg-white rounded-lg p-3 shadow-lg'>
           <Profile1 data={profiledata}/>
         </div>
@@ -53,7 +61,7 @@ export const MyProfile = () => {
         <div id='user-activity' className='bg-white rounded-lg p-3 md:col-span-2'>
           <Activities data={profiledata}/>
         </div>
-      </section>
+      </section>}
 
       <br/>
       <br/>

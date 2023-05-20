@@ -17,7 +17,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddEvent } from './Event/AddEvent'
 import { AddCommittee } from './Committees/AddCommittee'
 import spinner from '../lottie_animation/loader.gif';
-import Lottie from 'lottie-react'
 
 export const Home = (props) => {
   const { USER_NAME } = useSelector(state=> state.UserDetailsSlice);
