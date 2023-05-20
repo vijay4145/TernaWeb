@@ -11,6 +11,7 @@ import { Account_settings } from "./components/DropDownItems/Account_settings";
 import { MyProfile } from "./components/DropDownItems/MyProfile";
 import { EventDetailPage } from "./components/Event/EventDetailPage/EventDetailPage";
 import { CommitteeDetailPage } from "./components/Committees/CommitteeDetailPage";
+import { GoogleAdHead } from "./components/GoogleAdHead";
 
 
 
@@ -27,8 +28,9 @@ function App() {
         color='white'
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
-      />
+        />
 
+        <GoogleAdHead/>
       <Routes>
         <Route exact path="*" element={<MainHomePage setProgress={setProgress}/>}/>
         <Route exact path="account-settings" element={<Account_settings/>}/>

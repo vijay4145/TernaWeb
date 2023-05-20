@@ -45,7 +45,7 @@ export const Home2 = () => {
           </span>
 
           <div id="share-button" className=" flex flex-col items-center gap-1 mt-2">
-                <div className="flex flex-row gap-4 flex-wrap">
+                <div className="flex flex-row gap-4 ">
                   <a href='info@ternaengg.ac.in' target="_blank">
                     <AiOutlineMail color="#c71610" className="h-7 w-7 md:h-10 md:w-10"/>
                   </a>

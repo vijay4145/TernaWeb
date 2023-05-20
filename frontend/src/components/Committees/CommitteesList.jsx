@@ -7,6 +7,7 @@ import "aos/dist/aos.css";
 import {AiOutlinePlusSquare } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import Lottie from 'lottie-react';
+import AOS from "aos";
 import loading_animation from '../../lottie_animation/loading_animation_2.json'
 
 export const CommitteesList = (props) => {
@@ -26,6 +27,10 @@ export const CommitteesList = (props) => {
         setIsLoading(false);
       })
     }, [])
+
+    AOS.init({
+      offset: 20
+    });
     
 
   return (

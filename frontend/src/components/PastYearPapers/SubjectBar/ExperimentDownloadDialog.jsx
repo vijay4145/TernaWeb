@@ -68,18 +68,19 @@ export const ExperimentDownloadDialog = (props) => {
     <>
 
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center">
-        {isLoading === true && <section id='loading' className={`${isLoading ? '':'hidden'} top-0 max-w-md`}>
-          <Lottie animationData={loading_animation} />
-        </section>}
-        {isLoading === false && <div className="bg-white p-4  rounded-xl shadow-lg gap-4 flex flex-col">
+        <div className="bg-white p-4  rounded-xl shadow-lg gap-4 flex flex-col">
           <div className="flex justify-end w-full" onClick={closeForm}>
             <AiOutlineCloseSquare className="h-5 w-5 text-red-400" />
           </div>
           <h1 className="text-lg text-green-600">
-            Please Fill the form to get AI completed experiment
+            {`${isLoading ? 'Please Wait it will hardly take 1minute to complete':'Please Fill the form to get AI completed experiment'}`}
           </h1>
 
-          <div id="userName" className="">
+          {isLoading === true && <section id='loading' className={`${isLoading ? '':'hidden'} top-0 max-w-md`}>
+            <Lottie animationData={loading_animation} />
+          </section>}
+          {isLoading === false &&
+           <div id="userName" className="">
             <FormControl variant="outlined" fullWidth>
               <InputLabel htmlFor="outlined-adornment-password">
                 Name
@@ -98,9 +99,9 @@ export const ExperimentDownloadDialog = (props) => {
                 label="Email"
               />
             </FormControl>
-          </div>
+          </div>}
 
-          <div id="roll_no" className="">
+          {isLoading === false && <div id="roll_no" className="">
             <FormControl variant="outlined" fullWidth>
               <InputLabel htmlFor="outlined-adornment-password">
                 Roll No
@@ -119,9 +120,9 @@ export const ExperimentDownloadDialog = (props) => {
                 label="Roll No"
               />
             </FormControl>
-          </div>
+          </div>}
 
-          <div id="Batch" className="">
+          {isLoading === false && <div id="Batch" className="">
             <FormControl variant="outlined" fullWidth>
               <InputLabel htmlFor="outlined-adornment-password">
                 Batch
@@ -140,13 +141,13 @@ export const ExperimentDownloadDialog = (props) => {
                 label="Batch"
               />
             </FormControl>
-          </div>
+          </div>}
           <div className="flex flex-wrap justify-center">
             <button onClick={getDownloadLink} className={`${isFormFilled ? 'bg-blue-500':'bg-blue-300'} px-3 py-2 text-white rounded-lg`}>
               {isLoading ? 'Please Wait...':'Download'}
             </button>
           </div>
-        </div>}
+        </div>
       </div>
     </>
   );
