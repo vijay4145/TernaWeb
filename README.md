@@ -57,4 +57,4 @@ Start the server
 ```bash
   npm run start
 ```
-same process for frontend remember to add evnironment variable
+same process for frontend remember to add environment variables in .env folder for frontend and server.
