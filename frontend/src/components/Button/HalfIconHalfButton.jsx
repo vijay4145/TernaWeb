@@ -2,7 +2,7 @@ import React from "react";
 
 const HalfIconHalfButton = ({buttonIcon, buttonName}) => {
   return (
-    <div className="flex gap-2 items-center bg-blue-500 text-base px-0.5 text-white shadow-lg hover:shadow-2xl rounded-sm hover:underline">
+    <div className="flex gap-3 items-center bg-blue-500 text-base px-0.5 text-white shadow-lg hover:shadow-2xl rounded-sm hover:underline">
       <span className="bg-white min-h-full text-black px-3 py-3">
         {buttonIcon}
       </span>
