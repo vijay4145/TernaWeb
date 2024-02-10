@@ -5,18 +5,11 @@ import "aos/dist/aos.css";
 import AOS from "aos";
 
 
-const DownloadAssignmentInfo = () => {
+const DownloadAssignmentInfo = ({showNote, setShowNote}) => {
   AOS.init({
     offset: 20,
   });
-  const [showNote, setShowNote] = useState(false);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowNote(true);
-    }, 1100); // 10 seconds delay
 
-    return () => clearTimeout(timer); // Cleanup the timer on component unmount
-  }, []);
 
   return (
     <>

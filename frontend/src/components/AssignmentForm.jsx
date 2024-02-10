@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { FaRegWindowClose } from "react-icons/fa";
 import { getbranchList } from '../http/index.js';
 
-export const AssignmentForm = (props) => {
+export const AssignmentForm = ({isAssignmentDialogboxOpen, setIsAssignmentDialogboxOpen}) => {
   const [branch, setBranch] = useState(null);
   const [semester, setSemester] = useState(null);
   const [subject, setSubject] = useState(null);
@@ -18,9 +18,7 @@ export const AssignmentForm = (props) => {
   ];
   const availableSubject = ["-","spcc"];
   const availableSemester = ["-","1", "2", "3", "4", "5", "6", "7", "8"];
-  useEffect(() => {
-    props.setProgress(100);
-  }, []);
+
 
   // useEffect(async ()=>{
   //   // const branchList = await getbranchList();
@@ -34,16 +32,16 @@ export const AssignmentForm = (props) => {
   });
   return (
     <>
-      {props.isAssignmentDialogboxOpen && (
+      {isAssignmentDialogboxOpen && (
         <div
           data-aos="fade-down"
-          className={`w-[100%] max-w-xl absolute flex bg-white z-10 px-5 py-3 rounded-xl flex-col gap-5 transition-all ease-in-out shadow-lg `}
+          className={`w-[90%] max-w-xl absolute md:right-3 flex bg-white z-10 px-5 py-3 rounded-xl flex-col gap-5 transition-all ease-in-out shadow-lg `}
         >
           <div className="flex flex-row items-center w-full justify-between">
             <h5 className="text-xl">Download Assignment & Experiments</h5>
             <span>
               <FaRegWindowClose
-                onClick={() => props.setIsAssignmentDialogboxOpen(false)}
+                onClick={() => setIsAssignmentDialogboxOpen(false)}
                 className="text-red-600 hover:text-white hover:bg-red-600 h-5 w-5"
               />
             </span>

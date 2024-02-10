@@ -20,11 +20,15 @@ import spinner from '../lottie_animation/loader.gif';
 import { FaDownload } from "react-icons/fa";
 import HalfIconHalfButton from "./Button/HalfIconHalfButton";
 import DownloadAssignmentInfo from "./Home/DownloadAssignmentInfo";
+import { AssignmentForm } from "./AssignmentForm";
 
 export const Home = (props) => {
   const { USER_NAME } = useSelector(state=> state.UserDetailsSlice);
   const [currentUser, setCurrentUser] = useState(false);
   const [isloginButtonLoading, setIsLoginButtonLoading] = useState(true);
+  const [isAssignmentDialogboxOpen, setIsAssignmentDialogboxOpen] = useState(false);
+  const [showNote, setShowNote] = useState(false);
+  const [timeId, setTimeId] = useState(null);
   const dispatch = useDispatch();
   useEffect(() => {
     onAuthStateChanged(getAuth(), async (user) => {
@@ -45,8 +49,29 @@ export const Home = (props) => {
       setIsLoginButtonLoading(false);
     });
     props.setProgress(100);
+
+    const timer = setTimeout(() => {
+      setShowNote(true);
+    }, 1100); // 1.1 seconds delay
+    setTimeId(timer);
+
+    return () => {
+      setTimeId(null);
+      clearTimeout(timer); // Cleanup the timer on component unmount
+    }
+
   }, []);
 
+  const downloadAssignmentButtonClicked = ()=>{
+    if(isAssignmentDialogboxOpen == true){
+      setIsAssignmentDialogboxOpen(false)
+    }else{
+      setIsAssignmentDialogboxOpen(true);
+      if(timeId !== null)
+        clearTimeout(timeId);
+      setShowNote(false);
+    }
+  }
   return (
     <>
     <div className="flex flex-col gap-3 m-6 max-sm:m-4" >
@@ -54,8 +79,8 @@ export const Home = (props) => {
           <h1 className="text-lg md:text-xl font-bold text-blue-500 truncate">Welcome {USER_NAME}</h1>
           <div className='flex flex-row justify-between content-center items-center gap-x-10 z-10'>
             <div className="max-sm:hidden relative">
-              <span className="z-20"><HalfIconHalfButton buttonIcon={<FaDownload/>} buttonName={"Download Assignment"}/></span>
-              <span className="absolute z-10"><DownloadAssignmentInfo/></span>
+              <span className="z-20" onClick={downloadAssignmentButtonClicked}><HalfIconHalfButton buttonIcon={<FaDownload/>} buttonName={"Download Assignment"}/></span>
+              <span className="absolute z-10"><DownloadAssignmentInfo setShowNote={setShowNote} showNote={showNote}/></span>
             </div>
             {!isloginButtonLoading &&
               (currentUser) ? (<AccountDropDown setCurrentUser={setCurrentUser}/>)
@@ -68,10 +93,12 @@ export const Home = (props) => {
             </div>
       </div>
           <span className="max-sm:block hidden">
-            <span className="z-20"><HalfIconHalfButton buttonIcon={<FaDownload/>} buttonName={"Download Assignment"}/></span>
-            <span className="absolute z-10"><DownloadAssignmentInfo/></span>
-
+            <span className="z-20" onClick={downloadAssignmentButtonClicked}><HalfIconHalfButton buttonIcon={<FaDownload/>} buttonName={"Download Assignment"}/></span>
+            <span className="absolute z-10"><DownloadAssignmentInfo setShowNote={setShowNote} showNote={showNote}/></span>
           </span>  
+          {isAssignmentDialogboxOpen && <div id="assignmentform">
+                  <AssignmentForm isAssignmentDialogboxOpen={isAssignmentDialogboxOpen} setIsAssignmentDialogboxOpen={setIsAssignmentDialogboxOpen}/>
+                </div>}
 
 
 

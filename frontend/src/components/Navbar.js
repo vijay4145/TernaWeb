@@ -12,7 +12,7 @@ import SignInWithGoogle from "./Button/SignInWithGoogle";
 
 export const Navbar = (props) => {
   // home, event, committee, past year paper
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [selectedItem, setSelectedItem] = useState([true, false, false, false]);
   const location = useLocation();
 
