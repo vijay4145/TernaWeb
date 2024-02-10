@@ -4,6 +4,8 @@ import '../../css/ScrollbarHide.css'
 import { QuestionPaperDisplay } from './QuestionPaperDisplay';
 import { Route, useLocation, Routes } from 'react-router-dom';
 import { Gcr } from "./SubjectBar/Gcr";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { Experiment } from './SubjectBar/Experiment';
 
 export const PastYearPaper = (props) => {
@@ -28,9 +30,13 @@ export const PastYearPaper = (props) => {
   useEffect(()=>{
     props.setProgress(100);
   },[]);
+
+  AOS.init({
+    offset: 20
+  });
   return (
     <>
-    <div className='flex flex-col gap-2 min-h-[82vh]'>
+    <div data-aos="flip-right" className='flex flex-col gap-2 min-h-[82vh]'>
         <SubjectBar/>
       {branch !== null && semester !== null &&
         <div className=' rounded-3xl p-3' style={{backgroundColor: '#FFFFFD'}}>

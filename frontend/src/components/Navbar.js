@@ -8,6 +8,7 @@ import { AiFillHome, AiFillNotification } from "react-icons/ai";
 import { HiUserGroup } from "react-icons/hi";
 import { ImBooks } from "react-icons/im";
 import { GiHamburgerMenu } from "react-icons/gi";
+import SignInWithGoogle from "./Button/SignInWithGoogle";
 
 export const Navbar = (props) => {
   // home, event, committee, past year paper
@@ -134,6 +135,11 @@ export const Navbar = (props) => {
             >
               Resources
             </Link>
+          </div>
+          
+          {/* -------------------------------------------------------- */}
+          <div id="login-btn-for-mobile" className=" gap-2 items-center ulist-subitem max-md:pt-3 hidden max-sm:flex ">
+            <SignInWithGoogle/>
           </div>
         </ul>
         {/* <div className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>

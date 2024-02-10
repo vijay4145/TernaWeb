@@ -17,6 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddEvent } from './Event/AddEvent'
 import { AddCommittee } from './Committees/AddCommittee'
 import spinner from '../lottie_animation/loader.gif';
+import { FaDownload } from "react-icons/fa";
+import HalfIconHalfButton from "./Button/HalfIconHalfButton";
 
 export const Home = (props) => {
   const { USER_NAME } = useSelector(state=> state.UserDetailsSlice);
@@ -46,10 +48,13 @@ export const Home = (props) => {
 
   return (
     <>
-    <div className="flex flex-col gap-6 m-6" >
-      <div className="flex justify-between items-center">
-        <h1 className="text-lg md:text-xl font-bold text-blue-500">Welcome {USER_NAME}</h1>
-          <div className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>
+    <div className="flex flex-col gap-3 m-6 max-sm:m-4" >
+      <div className="flex justify-between items-center gap-x-10 max-sm:hidden">
+          <h1 className="text-lg md:text-xl font-bold text-blue-500 truncate">Welcome {USER_NAME}</h1>
+          <div className='flex flex-row justify-between content-center items-center gap-x-10 z-10'>
+            <div className="max-sm:hidden">
+              <HalfIconHalfButton buttonIcon={<FaDownload/>} buttonName={"Download Assignment"}/>
+            </div>
             {!isloginButtonLoading &&
               (currentUser) ? (<AccountDropDown setCurrentUser={setCurrentUser}/>)
               :
@@ -60,6 +65,7 @@ export const Home = (props) => {
             }
             </div>
       </div>
+          <span className="max-sm:block hidden"><HalfIconHalfButton buttonIcon={<FaDownload/>} buttonName={"Download Assignment"}/></span>  
 
 
 
