@@ -16,22 +16,18 @@ export const ExperimentList = ({list}) => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [expList, setExpList] = useState(null);
+    const [experimentIdClicked, setExperimentIdClicked] = useState(null);
 
 
 
-    const downloadNormal = ()=>{
-    //   setIsDocxDownloading(true);
-    //   console.log("started");
-    //   let data = {
-    //     _id : expList._id
-    //   }
-    //   getAiExperimentUrlNormal(data).then(res=>{
-    //     setIsDocxDownloading(false);
-    //     window.open(res.data, '_blank');
-    //   }).catch(err=>{
-    //     setIsDocxDownloading(false);
-    //     console.log(err);
-    //   })
+
+    const openDialogBox = (clickedExp)=>{
+      setExperimentIdClicked(clickedExp);
+      setExperimentDownloadDialogVisible(true);
+    }
+
+    const openUrl = (url)=>{
+      window.open(url, '_blank');
     }
 
     useEffect(()=>{
@@ -46,22 +42,11 @@ export const ExperimentList = ({list}) => {
     
   return (
     <>
-    {/* {experimentDownloadDialogVisible && <section id='ExperimentDowloadDialog' className='absolute top-6'>
-        <ExperimentDownloadDialog exp={expList.EXPERIMENT_NO} currSubject={expList.} setExperimentDownloadDialogVisible={setExperimentDownloadDialogVisible}/>
-    </section>} */}
+    {experimentDownloadDialogVisible && <section id='ExperimentDowloadDialog' className='absolute top-6 z-20'>
+        <ExperimentDownloadDialog experiment={experimentIdClicked} setExperimentDownloadDialogVisible={setExperimentDownloadDialogVisible}/>
+    </section>}
 
 
-
-    <section className=' flex max-sm:flex-col gap-3 bg-purple-700 items-center text-white p-2 rounded-lg m-2 justify-between '>
-        {/* <h1>Experiment No {expList.EXPERIMENT_NO} </h1> */}
-        {/* <div className='flex gap-2 flex-wrap'>
-          <div className='bg-white text-gray-500 p-2 items-center rounded-lg flex max-sm:w-full justify-center shadow-lg'>
-            <AiFillCrown color='red' className='h-4 w-4'/>
-            <button onClick={()=>setExperimentDownloadDialogVisible(!experimentDownloadDialogVisible)} className={`${isAiButtonDisabled ? 'disabled:true cursor-not-allowed':''}`}>Download AI completed</button>
-          </div>
-          <button className='bg-white text-gray-500 p-2 rounded-lg max-sm:w-full shadow-lg' onClick={downloadNormal}>{isDocxDownloading ? 'Please Wait...':'Download docx'}</button>
-        </div> */}
-    </section>
 
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -114,13 +99,15 @@ export const ExperimentList = ({list}) => {
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                        <OutlineButton name={"Download"} icon={<FaDownload/>}/>
+                        <span onClick={()=>openUrl(ele.URL)}><OutlineButton name={"Download"} icon={<FaDownload/>}/></span>
                     </th>
                     <th
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                        <OutlineButton name={"Download Ai Completed"} icon={<FaDownload/>}/>
+                        <span onClick={()=>openDialogBox(ele)}>
+                          <OutlineButton name={"Download Ai Completed"} icon={<FaDownload/>}/>
+                        </span>
                     </th>
                     
 

@@ -77,9 +77,11 @@ module.exports.resourceController = {
             searchStrings: ["{name}", "{roll_no}", "{batch}"],
             replaceStrings: [name, roll_no, batch],
             caseSensitive: false,
-            pages: "1",
+            replacementLimit: 1,
+            pages: "0",
             password: "",
             name: `${roll_no}_${SUBJECT}_${EXPERIMENT_NO}`,
+            async : false
         };
         axios.post("https://api.pdf.co/v1/pdf/edit/replace-text", data, {
             headers: {
@@ -111,7 +113,10 @@ module.exports.resourceController = {
         $project : {
           _id: 1,
           EXPERIMENT_NO: 1,
-          ASSIGNMENT_NO : 1
+          ASSIGNMENT_NO : 1,
+          SUBJECT : 1,
+          BRANCH : 1,
+          URL : 1,
         }
       },
       {
@@ -120,7 +125,6 @@ module.exports.resourceController = {
     ]
 
     ExperimentDb.aggregate(pipeline).then(list=>{
-      console.log(list);
       res.status(200).json(list);
     }).catch(err=>{
       console.log(err);
@@ -153,7 +157,6 @@ module.exports.resourceController = {
       { $project: { _id: 0, SEMESTER: 1, BRANCH: 1, SUBJECT : 1 } }
     ]);
     let resjson = {};
-    console.log(uniqueValues);
     for(let ele of uniqueValues){
       if(!resjson.hasOwnProperty(ele.BRANCH))
         resjson[`${ele.BRANCH}`] = {};

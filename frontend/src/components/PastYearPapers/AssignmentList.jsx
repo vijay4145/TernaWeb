@@ -15,6 +15,10 @@ const AssignmentList = ({list}) => {
           setIsLoading(false);
         }
       }, [list])
+
+      const openUrl = (url)=>{
+        window.open(url, '_blank');
+      }
   return (
     <div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -63,7 +67,7 @@ const AssignmentList = ({list}) => {
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                        <OutlineButton name={"Download"} icon={<FaDownload/>}/>
+                        <span onClick={()=>openUrl(ele.URL)}><OutlineButton name={"Download"} icon={<FaDownload/>}/></span>
                     </th>
                     
 

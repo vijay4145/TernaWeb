@@ -13,7 +13,7 @@ import loading_animation from '../../../lottie_animation/loading_animation_2.jso
 import Lottie from 'lottie-react';
 
 
-export const ExperimentDownloadDialog = (props) => {
+export const ExperimentDownloadDialog = ({experiment, setExperimentDownloadDialogVisible}) => {
   const [user_name, setUser_name] = useState('');
   const [roll_no, setRoll_no] = useState('');
   const [batch, setBatch] = useState('');
@@ -40,9 +40,9 @@ export const ExperimentDownloadDialog = (props) => {
     if(isFormFilled){
       setIsLoading(true);
       let detail = {
-        _id: props.exp._id,
-        SUBJECT: props.currSubject,
-        EXPERIMENT_NO: props.exp.EXPERIMENT_NO,
+        _id: experiment._id,
+        SUBJECT: experiment.SUBJECT,
+        EXPERIMENT_NO: experiment.EXPERIMENT_NO,
         NAME: user_name,
         BATCH: batch,
         ROLL_NO: roll_no
@@ -59,7 +59,7 @@ export const ExperimentDownloadDialog = (props) => {
 
 
   const closeForm = ()=>{
-    props.setExperimentDownloadDialogVisible(false);
+    setExperimentDownloadDialogVisible(false);
   }
   
   
