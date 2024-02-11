@@ -110,7 +110,8 @@ module.exports.resourceController = {
       {
         $project : {
           _id: 1,
-          EXPERIMENT_NO: 1
+          EXPERIMENT_NO: 1,
+          ASSIGNMENT_NO : 1
         }
       },
       {
@@ -119,6 +120,7 @@ module.exports.resourceController = {
     ]
 
     ExperimentDb.aggregate(pipeline).then(list=>{
+      console.log(list);
       res.status(200).json(list);
     }).catch(err=>{
       console.log(err);
@@ -154,7 +156,7 @@ module.exports.resourceController = {
     let resjson = {}
     uniqueValues.map(ele=>{
       if(!resjson.hasOwnProperty(ele.BRANCH))
-        resjson[`${ele.BRANCH}`] = {};
+        resjson[assign][`${ele.BRANCH}`] = {};
       if(!resjson[`${ele.BRANCH}`].hasOwnProperty(ele.SEMESTER))
         resjson[`${ele.BRANCH}`][`${ele.SEMESTER}`] = [];
       if(!resjson[`${ele.BRANCH}`][`${ele.SEMESTER}`].includes(ele.SUBJECT))

@@ -5,15 +5,18 @@ import { getAiExperimentUrlNormal } from '../../http';
 import { Skeleton, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import LoadingDataForTable from './SubjectBar/LoadingDataForTable';
 import OutlineButton from '../Button/OutlineButton';
-import { FaDownload } from "react-icons/fa";
+import { FaCrown, FaDownload } from "react-icons/fa";
 
 
-export const ExperimentList = ({expList}) => {
+export const ExperimentList = ({list}) => {
     const [experimentDownloadDialogVisible, setExperimentDownloadDialogVisible] = useState(false);
     const [isDocxDownloading, setIsDocxDownloading] = useState(false);
     const [isAiButtonDisabled, setIsAiButtonDisabled] = useState(false);
 
+
     const [isLoading, setIsLoading] = useState(true);
+    const [expList, setExpList] = useState(null);
+
 
 
     const downloadNormal = ()=>{
@@ -32,9 +35,12 @@ export const ExperimentList = ({expList}) => {
     }
 
     useEffect(()=>{
-      console.log(expList);
-      if(expList !== null) setIsLoading(false);
-    }, [expList])
+      if(list !== null) {
+        let explist = list.filter(obj => obj.hasOwnProperty('EXPERIMENT_NO'));
+        setExpList(explist);
+        setIsLoading(false);
+      }
+    }, [list])
 
    
     
@@ -77,7 +83,9 @@ export const ExperimentList = ({expList}) => {
                 Download
               </th>
               <th scope="col" className="px-6 py-3">
-                Ai Completed
+                <span className='flex gap-0.5 items-center'>
+                  <span className='text-red-500'><FaCrown/></span> Ai Completed
+                </span>
               </th>
             </tr>
           </thead>
@@ -87,7 +95,7 @@ export const ExperimentList = ({expList}) => {
             {isLoading && <LoadingDataForTable column={4}/>}
             {!isLoading && expList !== null && expList.map((ele, index) => {
               return (
-                <>
+                ele.hasOwnProperty('EXPERIMENT_NO') && <>
                   <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     
                     <th

@@ -103,7 +103,7 @@ export const Home = (props) => {
 
 
 
-       <div> 
+       <div className="min-h-[85vh]"> 
               <Routes>
                 <Route exact path="/committees" element={<CommitteesList setProgress={props.setProgress}/>}/>
                 <Route exact path="/" element={<Home2  setProgress={props.setProgress}/>} />
