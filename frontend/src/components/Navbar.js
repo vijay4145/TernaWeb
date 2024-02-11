@@ -131,7 +131,7 @@ export const Navbar = (props) => {
               className={`nav ${
                 selectedItem[3] ? "text-white" : "text-slate-300"
               }`}
-              to="/pastYearPapers"
+              to="/resource"
             >
               Resources
             </Link>

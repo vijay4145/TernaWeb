@@ -18,7 +18,6 @@ import { GoogleAdHead } from "./components/GoogleAdHead";
 function App() {
   const [progress, setProgress] = useState(0);
 
-
   return (
     <>
       <Router>

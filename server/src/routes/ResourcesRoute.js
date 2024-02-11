@@ -10,5 +10,6 @@ router.post('/addgcr/:branch/:semester', resourceController.addGCRLink);
 router.post('/get_experiment_url', resourceController.getExperimentUrl);
 router.post('/get_experiment_url_normal', resourceController.getExperimentUrlNormal)
 router.get('/get_experiment_list/:branch/:semester/:subject', resourceController.getExperimentList);
+router.get('/get_assignment_experiment_list', resourceController.getExperimentAssignmentList);
 
 module.exports = router

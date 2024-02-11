@@ -21,6 +21,7 @@ import { FaDownload } from "react-icons/fa";
 import HalfIconHalfButton from "./Button/HalfIconHalfButton";
 import DownloadAssignmentInfo from "./Home/DownloadAssignmentInfo";
 import { AssignmentForm } from "./AssignmentForm";
+import { ExpAssignPage } from './PastYearPapers/ExpAssignPage';
 
 export const Home = (props) => {
   const { USER_NAME } = useSelector(state=> state.UserDetailsSlice);
@@ -106,7 +107,8 @@ export const Home = (props) => {
               <Routes>
                 <Route exact path="/committees" element={<CommitteesList setProgress={props.setProgress}/>}/>
                 <Route exact path="/" element={<Home2  setProgress={props.setProgress}/>} />
-                <Route exact path="/pastYearPapers" element={<PastYearPaper  setProgress={props.setProgress}/>} />
+                <Route exact path="/resource" element={<PastYearPaper  setProgress={props.setProgress}/>} />
+                <Route exact path="/resource/download-experiment" element={<ExpAssignPage  setProgress={props.setProgress}/>} />
                 <Route exact path="/events" element={<Events  setProgress={props.setProgress}/>} />
                 <Route exact path="/events/add-event" element={<AddEvent setProgress={props.setProgress}/>} />
                 <Route exact path="/committees/add-committee" element={<AddCommittee setProgress={props.setProgress}/>} />

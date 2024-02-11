@@ -5,27 +5,65 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { FaRegWindowClose } from "react-icons/fa";
-import { getbranchList } from '../http/index.js';
+import { getAvailableAssignment } from '../http/index.js';
 
 export const AssignmentForm = ({isAssignmentDialogboxOpen, setIsAssignmentDialogboxOpen}) => {
   const [branch, setBranch] = useState(null);
   const [semester, setSemester] = useState(null);
   const [subject, setSubject] = useState(null);
 
-  const availableBranches = [
-    "-",
-    "computer-engineering",
-  ];
-  const availableSubject = ["-","spcc"];
-  const availableSemester = ["-","1", "2", "3", "4", "5", "6", "7", "8"];
+  const [optionsFromApi, setoptionsFromApi] = useState(null);
+  const [availableBranches, setavailableBranches] = useState(['-']);
+  const [availableSemester, setavailableSemester] = useState(['-']);
+  const [availableSubject, setavailableSubject] = useState(['-']);
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    // Perform any validation if needed
+    // For now, just logging form data
+    // console.log(formData);
 
-  // useEffect(async ()=>{
-  //   // const branchList = await getbranchList();
-  //   // console.log(branchList);
-  //   // setBranch(branchList);
+    // Redirect to a specific route with parameters
+    const url = `/resource/download-experiment?branch=${branch}&semester=${semester}&subject=${subject}`;
+    window.location.href = url;
+  };
+
+  useEffect(()=>{
+    if(optionsFromApi !== null && branch !== null){
+      let newoptions = ['-'];
+      for(let sem in optionsFromApi[branch])
+        newoptions.push(sem);
+      setavailableSemester(newoptions)
+    }
+  }, [branch]);
+
+  useEffect(()=>{
+    if(optionsFromApi !== null && branch !== null && semester !== null){
+      let newoptions = ['-'];
+      optionsFromApi[branch][semester].forEach(element => {
+        newoptions.push(element);
+      })
+      setavailableSubject(newoptions);
+    }
+  }, [semester]);
+
+  useEffect(()=>{
+    getAvailableAssignment().then((res)=>{
+      setoptionsFromApi(res.data);
+      if(res.status == 200){
+        let brancht = ["-"];
+        for(let branch in res.data){
+          brancht.push(branch);
+        }
+        setavailableBranches(brancht);
+      }else{
+        // TODO : ADD SNACKDOWN OF INTERNAL SERVER ERROR
+      }
+    }).catch(err=>{
+
+    })
     
-  // }, [])
+  }, [])
 
   AOS.init({
     offset: 20,
@@ -46,7 +84,7 @@ export const AssignmentForm = ({isAssignmentDialogboxOpen, setIsAssignmentDialog
               />
             </span>
           </div>
-          <form className="flex flex-col gap-4 w-full">
+          <form className="flex flex-col gap-4 w-full" onSubmit={handleFormSubmit}>
             <div id="branch" className="relative z-0">
               <Autocomplete
                 fullWidth

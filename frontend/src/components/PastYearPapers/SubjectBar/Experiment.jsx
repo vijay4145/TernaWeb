@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { getExperimentList } from '../../../http';
 import loading_animation from '../../../lottie_animation/loading_animation_2.json'
 import Lottie from 'lottie-react';
-import { ExperimentList } from './ExperimentList';
+import { ExperimentList } from '../ExperimentList';
 import { useLocation } from 'react-router-dom';
 
 

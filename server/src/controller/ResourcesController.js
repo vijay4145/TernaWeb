@@ -143,5 +143,30 @@ module.exports.resourceController = {
       })
       console.log(err);
     })
+  },
+
+  getExperimentAssignmentList : async (req, res)=>{
+    try{
+
+    const uniqueValues = await ExperimentDb.aggregate([
+      { $project: { _id: 0, SEMESTER: 1, BRANCH: 1, SUBJECT : 1 } }
+    ]);
+    let resjson = {}
+    uniqueValues.map(ele=>{
+      if(!resjson.hasOwnProperty(ele.BRANCH))
+        resjson[`${ele.BRANCH}`] = {};
+      if(!resjson[`${ele.BRANCH}`].hasOwnProperty(ele.SEMESTER))
+        resjson[`${ele.BRANCH}`][`${ele.SEMESTER}`] = [];
+      if(!resjson[`${ele.BRANCH}`][`${ele.SEMESTER}`].includes(ele.SUBJECT))
+        resjson[`${ele.BRANCH}`][`${ele.SEMESTER}`].push(ele.SUBJECT);
+      // console.log(resjson);
+    })
+    console.log(resjson);
+    console.log();
+    res.status(200).json(resjson);
+  }catch (e){
+    res.status(500).json("INTERNAL SERVER ERROR");
+  }
+
   }
 };

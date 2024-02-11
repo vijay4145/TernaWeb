@@ -63,6 +63,7 @@ export const getUserDetailsUsingid = async (id)=> await api('/user/userDetail/' 
 
 
 export const getGCRLink = async (branch, semester)=> await api('/resources/gcr/' + branch+ '/' + semester, "" , 'get');
+export const getAvailableAssignment = async ()=> await api('/resources/get_assignment_experiment_list', "" , 'get');
 
 export const getExperimentList = async (branch, semester, subject)=> await api('/resources/get_experiment_list/' + branch+ '/' + semester + '/' + subject, "" , 'get');
 export const getAiExperimentUrl = async (data)=> await api('/resources/get_experiment_url', data , 'npost');
