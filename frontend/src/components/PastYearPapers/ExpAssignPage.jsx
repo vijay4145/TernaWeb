@@ -16,7 +16,7 @@ export const ExpAssignPage = ({setProgress}) => {
     const semester = searchParams.get('semester');
     const subject = searchParams.get('subject');
     getExperimentList(branch, semester, subject).then(res=>{
-      if(res.status == 200){
+      if(res.status === 200){
         setlist(res.data);
       }
     }).catch(err=>{

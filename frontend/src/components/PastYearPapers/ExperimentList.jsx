@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { ExperimentDownloadDialog } from './SubjectBar/ExperimentDownloadDialog'
-import { AiFillCrown } from "react-icons/ai";
-import { getAiExperimentUrlNormal } from '../../http';
-import { Skeleton, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import LoadingDataForTable from './SubjectBar/LoadingDataForTable';
 import OutlineButton from '../Button/OutlineButton';
 import { FaCrown, FaDownload } from "react-icons/fa";
@@ -10,8 +7,6 @@ import { FaCrown, FaDownload } from "react-icons/fa";
 
 export const ExperimentList = ({list}) => {
     const [experimentDownloadDialogVisible, setExperimentDownloadDialogVisible] = useState(false);
-    const [isDocxDownloading, setIsDocxDownloading] = useState(false);
-    const [isAiButtonDisabled, setIsAiButtonDisabled] = useState(false);
 
 
     const [isLoading, setIsLoading] = useState(true);

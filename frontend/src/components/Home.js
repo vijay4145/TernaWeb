@@ -68,7 +68,7 @@ export const Home = (props) => {
   }, []);
 
   const downloadAssignmentButtonClicked = ()=>{
-    if(isAssignmentDialogboxOpen == true){
+    if(isAssignmentDialogboxOpen === true){
       setIsAssignmentDialogboxOpen(false)
     }else{
       setIsAssignmentDialogboxOpen(true);

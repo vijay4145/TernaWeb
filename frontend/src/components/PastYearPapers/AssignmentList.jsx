@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FaCrown, FaDownload } from "react-icons/fa";
+import { FaDownload } from "react-icons/fa";
 import OutlineButton from '../Button/OutlineButton';
 import LoadingDataForTable from './SubjectBar/LoadingDataForTable';
 
