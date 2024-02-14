@@ -1,4 +1,4 @@
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, Snackbar, TextField } from "@mui/material";
 import React from "react";
 import { useState } from "react";
 import AOS from "aos";
@@ -6,6 +6,8 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { FaRegWindowClose } from "react-icons/fa";
 import { getAvailableAssignment } from '../http/index.js';
+import Loading from "./Home/Loading.jsx";
+import { MySnackbar } from "./Home/MySnackbar.jsx";
 
 export const AssignmentForm = ({isAssignmentDialogboxOpen, setIsAssignmentDialogboxOpen}) => {
   const [branch, setBranch] = useState(null);
@@ -16,12 +18,32 @@ export const AssignmentForm = ({isAssignmentDialogboxOpen, setIsAssignmentDialog
   const [availableBranches, setavailableBranches] = useState(['-']);
   const [availableSemester, setavailableSemester] = useState(['-']);
   const [availableSubject, setavailableSubject] = useState(['-']);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // for snackbar
+  const [isOpen, setOpen] = useState(false);
+  const [snackbarMessage, setsnackbarMessage] = useState('');
+
+
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     // Perform any validation if needed
     // For now, just logging form data
     // console.log(formData);
+    if(!branch || branch === null || branch === '-'){
+      setsnackbarMessage('The field Branch is required');
+      setOpen(true);
+      return false;
+    }else if(semester === null || !semester || semester === "-"){
+      setsnackbarMessage("The field Semester is Required");
+      setOpen(true);
+      return false;
+    }else if(subject === null || !subject || subject === '-'){
+      setsnackbarMessage("The field subject is required");
+      setOpen(true);
+      return false;
+    }
 
     // Redirect to a specific route with parameters
     const url = `/resource/download-experiment?branch=${branch}&semester=${semester}&subject=${subject}`;
@@ -56,6 +78,7 @@ export const AssignmentForm = ({isAssignmentDialogboxOpen, setIsAssignmentDialog
           brancht.push(branch);
         }
         setavailableBranches(brancht);
+        setIsLoading(false);
       }else{
         // TODO : ADD SNACKDOWN OF INTERNAL SERVER ERROR
       }
@@ -70,11 +93,13 @@ export const AssignmentForm = ({isAssignmentDialogboxOpen, setIsAssignmentDialog
   });
   return (
     <>
+      <MySnackbar isOpen={isOpen} setOpen={setOpen} msg={snackbarMessage} severity={'error'}/>
       {isAssignmentDialogboxOpen && (
         <div
-          data-aos="fade-down"
-          className={`w-[90%] max-w-xl absolute md:right-3 flex bg-white z-10 px-5 py-3 rounded-xl flex-col gap-5 transition-all ease-in-out shadow-lg `}
+        data-aos="fade-down"
+        className={`w-[90%] max-w-xl absolute md:right-3 flex bg-white z-10 px-5 py-3 rounded-xl flex-col gap-5 transition-all ease-in-out shadow-lg `}
         >
+          {isLoading && <Loading/> }
           <div className="flex flex-row items-center w-full justify-between">
             <h5 className="text-xl">Download Assignment & Experiments</h5>
             <span>
@@ -84,7 +109,7 @@ export const AssignmentForm = ({isAssignmentDialogboxOpen, setIsAssignmentDialog
               />
             </span>
           </div>
-          <form className="flex flex-col gap-4 w-full" onSubmit={handleFormSubmit}>
+          <form className={`flex flex-col gap-4 w-full ${isLoading ? 'blur-sm':''}`} onSubmit={handleFormSubmit}>
             <div id="branch" className="relative z-0">
               <Autocomplete
                 fullWidth
@@ -92,6 +117,7 @@ export const AssignmentForm = ({isAssignmentDialogboxOpen, setIsAssignmentDialog
                 onChange={(_, v) => setBranch(v)}
                 options={availableBranches}
                 clearOnEscape
+                disabled={isLoading}
                 renderInput={(params) => (
                   <div>
                     <TextField
@@ -100,6 +126,7 @@ export const AssignmentForm = ({isAssignmentDialogboxOpen, setIsAssignmentDialog
                       required
                       {...params}
                       label="Branch"
+                      disabled = {isLoading}
                       fullWidth
                     />
                   </div>
@@ -109,6 +136,7 @@ export const AssignmentForm = ({isAssignmentDialogboxOpen, setIsAssignmentDialog
             <div id="semester" className="relative z-0">
               <Autocomplete
                 fullWidth
+                disabled={isLoading}
                 value={semester === null ? "-" : semester}
                 onChange={(_, v) => setSemester(v)}
                 options={availableSemester}
@@ -120,6 +148,7 @@ export const AssignmentForm = ({isAssignmentDialogboxOpen, setIsAssignmentDialog
                       value={semester}
                       required
                       {...params}
+                      disabled={isLoading}
                       label="Semester"
                       fullWidth
                     />
@@ -135,12 +164,14 @@ export const AssignmentForm = ({isAssignmentDialogboxOpen, setIsAssignmentDialog
                 onChange={(_, v) => setSubject(v)}
                 options={availableSubject}
                 clearOnEscape
+                disabled={isLoading}
                 renderInput={(params) => (
                   <div>
                     <TextField
                       name="subject"
                       value={subject}
                       required
+                      disabled={isLoading}
                       {...params}
                       label="Subject"
                       fullWidth
