@@ -24,7 +24,7 @@ export const Navbar = (props) => {
     if (path === "events") newItem[1] = true;
     else if (path === "") newItem[0] = true;
     else if (path === "committees") newItem[2] = true;
-    else if (path === "pastYearPapers") newItem[3] = true;
+    else if (path === "resource") newItem[3] = true;
     setSelectedItem(newItem);
   }, [location]);
 
@@ -98,8 +98,9 @@ export const Navbar = (props) => {
               Events
             </Link>
           </div>
-
-          <div className="flex gap-2 items-center ulist-subitem max-md:pt-3">
+            
+            
+          {/* <div className="flex gap-2 items-center ulist-subitem max-md:pt-3">
             <div
               className={`bg-white font-medium rounded-sm ${
                 selectedItem[2] ? "bg-white" : "hidden"
@@ -116,7 +117,7 @@ export const Navbar = (props) => {
             >
               Committees
             </Link>
-          </div>
+          </div> */}
 
           <div className="flex gap-2 items-center ulist-subitem max-md:pt-3">
             <div

@@ -1,5 +1,5 @@
 const GcrLinkDb = require("../models/GcrLink");
-const ExperimentDb = require("../models/Experiments");
+const ExperimentDb = require("../models/Resources");
 const { default: axios } = require("axios");
 require('dotenv').config();
 
@@ -100,7 +100,7 @@ module.exports.resourceController = {
       });
   },
 
-  getExperimentList : async (req, res)=>{
+  getResourceListForThatBranchSemSub : async (req, res)=>{
     const BRANCH = req.params.branch;
     const SEMESTER = req.params.semester;
     const SUBJECT = req.params.subject;
@@ -110,17 +110,9 @@ module.exports.resourceController = {
         $match : {SUBJECT, SEMESTER, BRANCH}
       },
       {
-        $project : {
-          _id: 1,
-          EXPERIMENT_NO: 1,
-          ASSIGNMENT_NO : 1,
-          SUBJECT : 1,
-          BRANCH : 1,
-          URL : 1,
-        }
-      },
-      {
-        $sort: { EXPERIMENT_NO: 1 } 
+        $sort: { 
+          NAME : 1
+        } 
       }
     ]
 
@@ -151,7 +143,7 @@ module.exports.resourceController = {
     })
   },
 
-  getExperimentAssignmentList : async (req, res)=>{
+  getBranchSemesterSubjectListAvailable : async (req, res)=>{
     try{
     const uniqueValues = await ExperimentDb.aggregate([
       { $project: { _id: 0, SEMESTER: 1, BRANCH: 1, SUBJECT : 1 } }

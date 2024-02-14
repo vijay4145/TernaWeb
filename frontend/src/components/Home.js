@@ -5,7 +5,7 @@ import { AccountDropDown } from "./Navbar/AccountDropDown";
 import { EventDetailPage } from './Event/EventDetailPage/EventDetailPage'
 
 import { Home2 } from "./Home/Home2";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { CommitteesList } from "./Committees/CommitteesList";
 import { PastYearPaper } from "./PastYearPapers/PastYearPaper";
 import { Events } from "./Event/Events";
@@ -31,6 +31,8 @@ export const Home = (props) => {
   const [showNote, setShowNote] = useState(false);
   const [timeId, setTimeId] = useState(null);
   const dispatch = useDispatch();
+  const location = useLocation();
+
   useEffect(() => {
     onAuthStateChanged(getAuth(), async (user) => {
       if (user !== null) {
@@ -51,14 +53,16 @@ export const Home = (props) => {
     });
     props.setProgress(100);
 
-    const timer = setTimeout(() => {
-      setShowNote(true);
-    }, 1100); // 1.1 seconds delay
-    setTimeId(timer);
-
-    return () => {
-      setTimeId(null);
-      clearTimeout(timer); // Cleanup the timer on component unmount
+    if(location.pathname === '/'){
+      const timer = setTimeout(() => {
+        setShowNote(true);
+      }, 1100); // 1.1 seconds delay
+      setTimeId(timer);
+      
+      return () => {
+        setTimeId(null);
+        clearTimeout(timer); // Cleanup the timer on component unmount
+      }
     }
 
   }, []);

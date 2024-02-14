@@ -4,13 +4,13 @@ import OutlineButton from '../Button/OutlineButton';
 import LoadingDataForTable from './SubjectBar/LoadingDataForTable';
 
 
-const AssignmentList = ({list}) => {
+const AssignmentList = ({list, type}) => {
     const [isLoading, setIsLoading] = useState(true);
     const [assignmentList, setAssignmentList] = useState(null);
     
     useEffect(()=>{
         if(list !== null) {
-          let assignlist = list.filter(obj => obj.hasOwnProperty('ASSIGNMENT_NO'));
+          let assignlist = list.filter(obj => obj.TYPE===type);
           setAssignmentList(assignlist);
           setIsLoading(false);
         }
@@ -61,7 +61,7 @@ const AssignmentList = ({list}) => {
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                        {`Assignment No. ${ele.ASSIGNMENT_NO}`}
+                        {`${ele.NAME}`}
                     </th>
                     <th
                       scope="row"

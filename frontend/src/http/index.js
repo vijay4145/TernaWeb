@@ -23,9 +23,9 @@ const api = async (endpoint, data,method)=>{
                 return response;
             }
             else if(method === 'post') {
-                if(idToken === 'bearer') return {
-                    success: false
-                }
+                // if(idToken === 'bearer') return {
+                //     success: false
+                // }
                 const response = await instance.post(endpoint, data);
                 return {
                     success : true

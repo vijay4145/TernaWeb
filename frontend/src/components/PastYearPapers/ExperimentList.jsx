@@ -32,7 +32,7 @@ export const ExperimentList = ({list}) => {
 
     useEffect(()=>{
       if(list !== null) {
-        let explist = list.filter(obj => obj.hasOwnProperty('EXPERIMENT_NO'));
+        let explist = list.filter(obj => obj.TYPE === 'experiment');
         setExpList(explist);
         setIsLoading(false);
       }
@@ -80,7 +80,7 @@ export const ExperimentList = ({list}) => {
             {isLoading && <LoadingDataForTable column={4}/>}
             {!isLoading && expList !== null && expList.map((ele, index) => {
               return (
-                ele.hasOwnProperty('EXPERIMENT_NO') && <>
+                ele.TYPE === 'experiment' && <>
                   <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     
                     <th
@@ -93,7 +93,7 @@ export const ExperimentList = ({list}) => {
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                        {`Experiment No. ${ele.EXPERIMENT_NO}`}
+                        {`${ele.NAME}`}
                     </th>
                     <th
                       scope="row"

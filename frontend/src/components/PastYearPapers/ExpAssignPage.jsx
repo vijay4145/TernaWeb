@@ -7,6 +7,8 @@ export const ExpAssignPage = ({setProgress}) => {
   const [list, setlist] = useState(null);
   const searchParams = new URLSearchParams(window.location.search);
   const [isAssignmentPresent, setIsAssignmentPresent] = useState(false);
+  const [isIATpaperPresent, setIsIATpaperPresent] = useState(false);
+  const [isPYPpresent, setIsPYPpresent] = useState(false);
 
   useEffect(() => {
     // TODO : fetch experiments and assignment list from backend
@@ -24,10 +26,9 @@ export const ExpAssignPage = ({setProgress}) => {
   useEffect(()=>{
     if(list !== null){
       for(let ele of list){
-        if(ele.hasOwnProperty('ASSIGNMENT_NO')){
-          setIsAssignmentPresent(true);
-          break;
-        }
+        if(ele.TYPE === 'assignment') setIsAssignmentPresent(true);
+        if(ele.TYPE === 'pyp') setIsPYPpresent(true);
+        if(ele.TYPE === 'iat') setIsIATpaperPresent(true);
       }
     }
   }, [list]);
@@ -37,7 +38,13 @@ export const ExpAssignPage = ({setProgress}) => {
       <ExperimentList list={list}/>
       <br/>
       {isAssignmentPresent && <h1 className='text-xl font-bold underline'>Assignments :</h1>}
-      {isAssignmentPresent && <AssignmentList list={list}/>}
+      {isAssignmentPresent && <AssignmentList list={list} type={"assignment"}/>}
+      <br/>
+      {isIATpaperPresent && <h1 className='text-xl font-bold underline'>Internal Assessment Test(IAT) Paper :</h1>}
+      {isIATpaperPresent && <AssignmentList list={list} type={"iat"}/>}
+      <br/>
+      {isPYPpresent && <h1 className='text-xl font-bold underline'>Past Year Semester Paper :</h1>}
+      {isPYPpresent && <AssignmentList list={list} type={"pyp"}/>}
     </div>
   )
 }

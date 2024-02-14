@@ -7,7 +7,7 @@ const { verifyToken } = require('../middleware/Firebase/VerifyToken')
 // TODO: get data from firebase
 // TODO: send response
 
-router.post("/addEvent", verifyToken,  eventController.post);
+router.post("/addEvent",  eventController.post);
 router.get("/getlist",  eventController.get);
 router.get('/:event_type/getEventOverviewList', eventController.getOverviewList);
 router.get('/:id', eventController.getUsingId)

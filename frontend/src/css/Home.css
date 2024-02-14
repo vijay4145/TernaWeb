@@ -24,9 +24,9 @@
     width: 30px;
     height: 30px;
     transform: rotate(-135deg) ;
-    @apply bg-blue-500 rounded-lg z-0 text-white relative p-2 mt-1 ml-2;
+    @apply bg-purple-600 rounded-lg z-0 text-white relative p-2 mt-1 ml-2;
 }
 
 .comment-box-square {
-    @apply bg-blue-500 absolute top-[40%] md:-left-[60%] -left-[20%] p-2 rounded-lg text-white w-72 z-10;
+    @apply bg-purple-600 absolute top-[40%] md:-left-[60%] -left-[20%] p-2 rounded-lg text-white w-72 z-10;
 }
