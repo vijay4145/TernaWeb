@@ -1,5 +1,5 @@
 const { mongoose } = require("mongoose");
-const DATABASE_TABLE_NAME = 'experiments'
+const DATABASE_TABLE_NAME = 'resources'
 
 const experimentSchema = new mongoose.Schema({
     SEMESTER:{
@@ -14,15 +14,15 @@ const experimentSchema = new mongoose.Schema({
         type: String, 
         required: true
     },
-    EXPERIMENT_NO: {
-        type: String,
-        required: true
+    TYPE : {  // pyp, iat, assignment, experiment
+        type : String,
+        required : true,
     },
-    LINK : {
-        type: String,
-        required: true
+    NAME : { //assignment_no in case of assignment
+        type : String,
+        required : true
     },
-    DOCX_URL: {
+    URL: {
         type: String,
         required: true
     }

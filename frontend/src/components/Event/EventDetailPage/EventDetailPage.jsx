@@ -130,7 +130,7 @@ export const EventDetailPage = () => {
               <h5 className="font-semibold text-lg">Event Posted By</h5>
                 <div className="flex items-center flex-wrap">
                   <img src={default_profile_pic_url} alt="" className="h-9 bg-slate-50 rounded-full shadow-lg" />
-                  <Link to={data.EVENT_POSTED_BY.split('@')[0]} target='_blank' className="underline text-lg hover:text-blue-500 cursor-pointer">{data.EVENT_POSTED_BY}</Link>
+                  {/* <Link to={data.EVENT_POSTED_BY.split('@')[0]} target='_blank' className="underline text-lg hover:text-blue-500 cursor-pointer">{data.EVENT_POSTED_BY}</Link> */}
                 </div>
               </div>
 

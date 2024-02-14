@@ -2,6 +2,7 @@ const EventsDb = require('../models/Events');
 
 module.exports.eventController = {
     post : (req, res) =>{
+        console.log('req came');
         const body = req.body;
         body.EVENT_POSTED_BY = req.body.email;
         const event = new EventsDb(body)

@@ -1,5 +1,5 @@
 const GcrLinkDb = require("../models/GcrLink");
-const ExperimentDb = require("../models/Experiments");
+const ExperimentDb = require("../models/Resources");
 const { default: axios } = require("axios");
 require('dotenv').config();
 
@@ -77,9 +77,11 @@ module.exports.resourceController = {
             searchStrings: ["{name}", "{roll_no}", "{batch}"],
             replaceStrings: [name, roll_no, batch],
             caseSensitive: false,
-            pages: "1",
+            replacementLimit: 1,
+            pages: "0",
             password: "",
             name: `${roll_no}_${SUBJECT}_${EXPERIMENT_NO}`,
+            async : false
         };
         axios.post("https://api.pdf.co/v1/pdf/edit/replace-text", data, {
             headers: {
@@ -98,7 +100,7 @@ module.exports.resourceController = {
       });
   },
 
-  getExperimentList : async (req, res)=>{
+  getResourceListForThatBranchSemSub : async (req, res)=>{
     const BRANCH = req.params.branch;
     const SEMESTER = req.params.semester;
     const SUBJECT = req.params.subject;
@@ -108,13 +110,9 @@ module.exports.resourceController = {
         $match : {SUBJECT, SEMESTER, BRANCH}
       },
       {
-        $project : {
-          _id: 1,
-          EXPERIMENT_NO: 1
-        }
-      },
-      {
-        $sort: { EXPERIMENT_NO: 1 } 
+        $sort: { 
+          NAME : 1
+        } 
       }
     ]
 
@@ -143,5 +141,26 @@ module.exports.resourceController = {
       })
       console.log(err);
     })
+  },
+
+  getBranchSemesterSubjectListAvailable : async (req, res)=>{
+    try{
+    const uniqueValues = await ExperimentDb.aggregate([
+      { $project: { _id: 0, SEMESTER: 1, BRANCH: 1, SUBJECT : 1 } }
+    ]);
+    let resjson = {};
+    for(let ele of uniqueValues){
+      if(!resjson.hasOwnProperty(ele.BRANCH))
+        resjson[`${ele.BRANCH}`] = {};
+      if(!resjson[`${ele.BRANCH}`].hasOwnProperty(ele.SEMESTER))
+        resjson[`${ele.BRANCH}`][`${ele.SEMESTER}`] = [];
+      if(!resjson[`${ele.BRANCH}`][`${ele.SEMESTER}`].includes(ele.SUBJECT))
+        resjson[`${ele.BRANCH}`][`${ele.SEMESTER}`].push(ele.SUBJECT);
+    }
+    res.status(200).json(resjson);
+  }catch (e){
+    res.status(500).json("INTERNAL SERVER ERROR");
+  }
+
   }
 };

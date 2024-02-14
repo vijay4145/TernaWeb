@@ -8,10 +8,11 @@ import { AiFillHome, AiFillNotification } from "react-icons/ai";
 import { HiUserGroup } from "react-icons/hi";
 import { ImBooks } from "react-icons/im";
 import { GiHamburgerMenu } from "react-icons/gi";
+import SignInWithGoogle from "./Button/SignInWithGoogle";
 
 export const Navbar = (props) => {
   // home, event, committee, past year paper
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [selectedItem, setSelectedItem] = useState([true, false, false, false]);
   const location = useLocation();
 
@@ -23,7 +24,7 @@ export const Navbar = (props) => {
     if (path === "events") newItem[1] = true;
     else if (path === "") newItem[0] = true;
     else if (path === "committees") newItem[2] = true;
-    else if (path === "pastYearPapers") newItem[3] = true;
+    else if (path === "resource") newItem[3] = true;
     setSelectedItem(newItem);
   }, [location]);
 
@@ -97,8 +98,9 @@ export const Navbar = (props) => {
               Events
             </Link>
           </div>
-
-          <div className="flex gap-2 items-center ulist-subitem max-md:pt-3">
+            
+            
+          {/* <div className="flex gap-2 items-center ulist-subitem max-md:pt-3">
             <div
               className={`bg-white font-medium rounded-sm ${
                 selectedItem[2] ? "bg-white" : "hidden"
@@ -115,7 +117,7 @@ export const Navbar = (props) => {
             >
               Committees
             </Link>
-          </div>
+          </div> */}
 
           <div className="flex gap-2 items-center ulist-subitem max-md:pt-3">
             <div
@@ -130,10 +132,15 @@ export const Navbar = (props) => {
               className={`nav ${
                 selectedItem[3] ? "text-white" : "text-slate-300"
               }`}
-              to="/pastYearPapers"
+              to="/resource"
             >
               Resources
             </Link>
+          </div>
+          
+          {/* -------------------------------------------------------- */}
+          <div id="login-btn-for-mobile" className=" gap-2 items-center ulist-subitem max-md:pt-3 hidden max-sm:flex ">
+            <SignInWithGoogle/>
           </div>
         </ul>
         {/* <div className='flex flex-row justify-between content-center items-center gap-x-20 z-10'>

@@ -1,16 +1,8 @@
 import React from 'react'
 import { Navbar } from "./Navbar";
-import { PastYearPaper } from "./PastYearPapers/PastYearPaper";
-import { Events } from './Event/Events';
 import { Home } from "./Home";
-import {
-    BrowserRouter as Router,
-    Route,
-    Routes,
-  } from "react-router-dom";
 import "../config/firebase-config";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
-import { CommitteesList } from './Committees/CommitteesList';
+import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import '../css/ScrollbarHide.css'
 
 
@@ -24,7 +16,6 @@ export const MainHomePage = (props) => {
 
 
     const signInWithGoogle = async ()=>{
-      console.log('sigin with google run');
       var currentUser =  getAuth().currentUser;
       var auth =  getAuth();
         if(currentUser !== null){
