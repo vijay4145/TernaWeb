@@ -67,20 +67,22 @@ module.exports.resourceController = {
 
 
     const query = { id };
-    const projection = { _id: 0, URL: 1 };
+    const projection = { _id: 0, URL: 1, Page_no : 1, NAME : 1 };
 
     ExperimentDb.findOne(query, projection)
       .then((dbUrl) => {
         const my_url = dbUrl._doc.URL;
+        let page_no = 0;
+        if(dbUrl.hasOwnProperty('Page_no')) page_no = dbUrl.Page_no;
         const data = {
             url: my_url,
             searchStrings: ["{name}", "{roll_no}", "{batch}"],
             replaceStrings: [name, roll_no, batch],
             caseSensitive: false,
             replacementLimit: 1,
-            pages: "0",
+            pages: page_no,
             password: "",
-            name: `${roll_no}_${SUBJECT}_${EXPERIMENT_NO}`,
+            name: `${roll_no}_${projection.NAME}`,
             async : false
         };
         axios.post("https://api.pdf.co/v1/pdf/edit/replace-text", data, {
