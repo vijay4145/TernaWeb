@@ -8,6 +8,7 @@ const router = express.Router(); // New router instance from express library
 // router.get("/gcr/:branch/:semester", resourceController.getGCRLink);
 // router.post('/addgcr/:branch/:semester', resourceController.addGCRLink);
 router.post('/get_experiment_url', resourceController.getExperimentUrl);
+router.post('/', resourceController.postResourceData);
 // router.post('/get_experiment_url_normal', resourceController.getExperimentUrlNormal);
 
 router.get('/get_assignment_experiment_list', resourceController.getBranchSemesterSubjectListAvailable);

@@ -4,6 +4,18 @@ const { default: axios } = require("axios");
 require('dotenv').config();
 
 module.exports.resourceController = {
+  postResourceData: async (req, res)=>{
+    try{
+      // console.log(req.body);
+      // for(const data of req.body){
+      //   console.log(data);
+      // }
+      await ExperimentDb.insertMany(req.body);
+      res.status(201).json("success");
+    }catch(err){
+      res.status(500);
+    }
+  },
   getGCRLink: (req, res) => {
     const branch = req.params.branch;
     const semester = req.params.semester;
@@ -80,9 +92,9 @@ module.exports.resourceController = {
             replaceStrings: [name, roll_no, batch],
             caseSensitive: false,
             replacementLimit: 1,
-            pages: page_no,
+            pages: page_no.toString(),
             password: "",
-            name: `${roll_no}_${projection.NAME}`,
+            name: `${roll_no}_${dbUrl.NAME}`,
             async : false
         };
         axios.post("https://api.pdf.co/v1/pdf/edit/replace-text", data, {

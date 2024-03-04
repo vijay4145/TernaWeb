@@ -18,6 +18,9 @@ const experimentSchema = new mongoose.Schema({
         type : String,
         required : true,
     },
+    Page_no : {
+        type : String
+    },
     NAME : { //assignment_no in case of assignment
         type : String,
         required : true
