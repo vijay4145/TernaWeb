@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { getAiExperimentUrl } from "../../../http";
 import loading_animation from '../../../lottie_animation/loading_animation_2.json';
 import Lottie from 'lottie-react';
+import { MySnackbar } from '../../Home/MySnackbar'
 
 
 export const ExperimentDownloadDialog = ({experiment, setExperimentDownloadDialogVisible}) => {
@@ -19,6 +20,7 @@ export const ExperimentDownloadDialog = ({experiment, setExperimentDownloadDialo
   const [batch, setBatch] = useState('');
   const [isFormFilled, setIsFormFilled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     checkAllValueIsFilled();
   }, [user_name])
@@ -48,8 +50,13 @@ export const ExperimentDownloadDialog = ({experiment, setExperimentDownloadDialo
         ROLL_NO: roll_no
       }
       getAiExperimentUrl(detail).then(res=>{
+        console.log(res.status);
+        if(res.status === 401){
+          setIsOpen(true)
+        };
         setIsLoading(false);
-        window.open(res.data.url, '_blank');
+        if(res.status === 200)
+          window.open(res.data.url, '_blank');
       }).catch(err=>{
         setIsLoading(false);
         console.log(err);
@@ -66,7 +73,7 @@ export const ExperimentDownloadDialog = ({experiment, setExperimentDownloadDialo
   
   return (
     <>
-
+      <MySnackbar isOpen={isOpen} setOpen={setIsOpen} msg={"Please Login To Download"} severity={"error"}/>
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center">
         <div className="bg-white p-4  rounded-xl shadow-lg gap-4 flex flex-col">
           <div className="flex justify-end w-full" onClick={closeForm}>

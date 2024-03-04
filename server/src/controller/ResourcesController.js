@@ -1,5 +1,6 @@
 const GcrLinkDb = require("../models/GcrLink");
 const ExperimentDb = require("../models/Resources");
+const mongoose = require('mongoose');
 const { default: axios } = require("axios");
 require('dotenv').config();
 
@@ -78,14 +79,13 @@ module.exports.resourceController = {
     const roll_no = req.body.ROLL_NO;
 
 
-    const query = { id };
+    const query = { _id : id };
     const projection = { _id: 0, URL: 1, Page_no : 1, NAME : 1 };
-
     ExperimentDb.findOne(query, projection)
       .then((dbUrl) => {
         const my_url = dbUrl._doc.URL;
         let page_no = 0;
-        if(dbUrl.hasOwnProperty('Page_no')) page_no = dbUrl.Page_no;
+        if(dbUrl._doc.hasOwnProperty('Page_no')) page_no = dbUrl._doc.Page_no;
         const data = {
             url: my_url,
             searchStrings: ["{name}", "{roll_no}", "{batch}"],

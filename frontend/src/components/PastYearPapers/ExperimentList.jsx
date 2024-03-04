@@ -3,26 +3,90 @@ import { ExperimentDownloadDialog } from './SubjectBar/ExperimentDownloadDialog'
 import LoadingDataForTable from './SubjectBar/LoadingDataForTable';
 import OutlineButton from '../Button/OutlineButton';
 import { FaCrown, FaDownload } from "react-icons/fa";
+import { GoogleAuthProvider, getAuth, onAuthStateChanged, signInWithRedirect } from 'firebase/auth';
+import { MySnackbar } from '../Home/MySnackbar';
 
 
 export const ExperimentList = ({list}) => {
     const [experimentDownloadDialogVisible, setExperimentDownloadDialogVisible] = useState(false);
-
+    const provider = new GoogleAuthProvider();
 
     const [isLoading, setIsLoading] = useState(true);
     const [expList, setExpList] = useState(null);
     const [experimentIdClicked, setExperimentIdClicked] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
 
 
 
 
     const openDialogBox = (clickedExp)=>{
-      setExperimentIdClicked(clickedExp);
-      setExperimentDownloadDialogVisible(true);
+      if(isLoggedIn === false){
+        setIsOpen(true);
+        var auth =  getAuth();
+        signInWithRedirect(auth, provider)
+          .then((result) => {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            // ...
+          }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            console.log(errorMessage);
+            // ...
+            // console.log("error code is " + errorCode);
+          });
+      }else {
+        setExperimentIdClicked(clickedExp);
+        setExperimentDownloadDialogVisible(true);
+      }
     }
 
+    
+    useEffect(()=>{
+      onAuthStateChanged(getAuth(), async (user) => {
+        if (user !== null) {
+          setIsLoggedIn(true);
+        }else{
+          setIsLoggedIn(false);
+        }
+      })
+    },[]);
     const openUrl = (url)=>{
-      window.open(url, '_blank');
+      if(isLoggedIn === false){
+        setIsOpen(true);
+        var auth =  getAuth();
+        signInWithRedirect(auth, provider)
+          .then((result) => {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            // ...
+          }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            console.log(errorMessage);
+            // ...
+            // console.log("error code is " + errorCode);
+          });
+      }
+      else
+        window.open(url, '_blank');
     }
 
     useEffect(()=>{
@@ -40,6 +104,8 @@ export const ExperimentList = ({list}) => {
     {experimentDownloadDialogVisible && <section id='ExperimentDowloadDialog' className='absolute top-6 z-20'>
         <ExperimentDownloadDialog experiment={experimentIdClicked} setExperimentDownloadDialogVisible={setExperimentDownloadDialogVisible}/>
     </section>}
+
+      <MySnackbar isOpen={isOpen} setOpen={setIsOpen} msg={"Please Login To Download"} severity={"error"}/>
 
 
 
@@ -71,9 +137,9 @@ export const ExperimentList = ({list}) => {
           </thead>
 
           <tbody>
-            {isLoading && <LoadingDataForTable column={4}/>}
-            {isLoading && <LoadingDataForTable column={4}/>}
-            {!isLoading && expList !== null && expList.map((ele, index) => {
+            {(isLoading || isLoggedIn === null) && <LoadingDataForTable column={4}/>}
+            {(isLoading || isLoggedIn === null) && <LoadingDataForTable column={4}/>}
+            {!isLoading && isLoggedIn !== null && expList !== null && expList.map((ele, index) => {
               return (
                 ele.TYPE === 'experiment' && <>
                   <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">

@@ -23,12 +23,21 @@ const api = async (endpoint, data,method)=>{
                 return response;
             }
             else if(method === 'post') {
-                // if(idToken === 'bearer') return {
-                //     success: false
-                // }
+                if(idToken === 'bearer') return {
+                    success: false
+                }
                 const response = await instance.post(endpoint, data);
                 return {
                     success : true
+                }
+            }else if(method === 'post_with_token_and_return_response'){
+                try{
+                    const response = await instance.post(endpoint, data);
+                    return response;
+                }catch(err){
+                    if(err.response.status === 401){
+                        return err.response;
+                    }else throw err;
                 }
             }
             else if(method === 'get') {
@@ -66,7 +75,7 @@ export const getGCRLink = async (branch, semester)=> await api('/resources/gcr/'
 export const getAvailableAssignment = async ()=> await api('/resources/get_assignment_experiment_list', "" , 'get');
 
 export const getExperimentList = async (branch, semester, subject)=> await api('/resources/get_experiment_list/' + branch+ '/' + semester + '/' + subject, "" , 'get');
-export const getAiExperimentUrl = async (data)=> await api('/resources/get_experiment_url', data , 'npost');
+export const getAiExperimentUrl = async (data)=> await api('/resources/get_experiment_url', data , 'post_with_token_and_return_response');
 export const getAiExperimentUrlNormal = async (data)=> await api('/resources/get_experiment_url_normal', data , 'npost');
 export default api;
 
