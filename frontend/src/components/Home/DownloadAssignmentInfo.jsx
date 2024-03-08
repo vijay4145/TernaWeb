@@ -21,7 +21,7 @@ const DownloadAssignmentInfo = ({showNote, setShowNote}) => {
           <h5 className='font-bold text-xl'>Get Your Assignment and Experiment Now!</h5>
           <div className=' hover:text-gray-100' onClick={()=>setShowNote(false)}><FaWindowClose/></div>
         </div>
-        <p>Your next Assignment and Experiments awaits! Download it now to stay ahead in your studies.</p>
+        <p>Your next Assignments and Experiments awaits! Download it now to stay ahead in your studies.</p>
       </div>
     </div>}
     </>

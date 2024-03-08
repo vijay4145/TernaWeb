@@ -29,10 +29,10 @@ export const Events = (props) => {
         <button type="submit" name="filter" value='recommended_event'  className={`p-2 rounded-xl ${filter === 'recommended_event' ? 'bg-gray-400 text-white':'bg-gray-100'} `}>Recommended Events</button>
         <button type="submit" name="filter" value='past_event' className={`p-2 rounded-xl  ${filter === 'past_event' ? 'bg-gray-400 text-white':'bg-gray-100'}`}>Past Events</button>
       </form>
-      <Link to='add-event' className="bg-blue-400 max-w-fit p-2 rounded-lg text-white flex items-center">
+      {/* <Link to='add-event' className="bg-blue-400 max-w-fit p-2 rounded-lg text-white flex items-center">
         <AiOutlinePlusSquare className="h-7 w-7"/>
         <p>&nbsp;Add Event</p>
-      </Link>
+      </Link> */}
       <EventList/>
 
     </section>

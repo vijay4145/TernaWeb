@@ -1,9 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSchedule } from 'react-icons/ai';
 import { Link } from "react-router-dom";
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { Card, CardActions, CardContent, Skeleton } from "@mui/material";
+import {getTimeLeft} from '../../Services/Utils';
 
 
 export const EventCard = ({event}) => {
+
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const handleImageLoad = ()=>{
+    setIsImageLoaded(true);
+  }
 
   const getHeading = ()=>{
     let newHeading = event.EVENT_HEADING;
@@ -17,23 +27,33 @@ export const EventCard = ({event}) => {
   
   return (
     <>
-    <Link to={'eventdetail/'+event._id} target="_blank" className="flex flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 gap-1 pb-3 cursor-pointer">
-      <div className="flex justify-center">
-          <img className="rounded-t-lg h-48 w-auto" src={event.EVENT_IMAGE_URL} alt=""/>
-      </div>
-      <div id="event_heading" className="px-3 mt-1">
-          <h5 className="break-all text-xl font-semibold tracking-tight text-gray-800 dark:text-white">{getHeading()}</h5>
-      </div>
-      <div id="event_schedule" className="flex px-3 items-center gap-1">
-        <AiOutlineSchedule color="blue" className="h-5 w-5"/>
-        <p>{event.EVENT_START.split('T')[0]}</p>
-      </div>
-      <div className="px-3">
-        <p>{event.EVENT_DESCRIPTION}</p>
-      </div>
-      <div className="flex px-3">
-        <button className="items-center flex gap-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 md:py-2 px-3  rounded">Explore</button>
-      </div>
+    <Link to={'eventdetail/'+event._id} target="_blank" className="flex flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 gap-1 cursor-pointer">
+
+       <Card sx={{ maxWidth: 300, }} >
+        {!isImageLoaded && <Skeleton variant='rectangular' height={220} className={`${isImageLoaded} ? 'hidden':''`}/> }
+      <CardMedia
+        component="img"
+        alt="green iguana"
+        className={`object-cover ${isImageLoaded ? 'h-60':'h-0 hidden'}`}
+        image={event.EVENT_IMAGE_URL}
+        onLoad={handleImageLoad}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div" className="truncate">
+          {getHeading()}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {getTimeLeft(event)}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {event.EVENT_DESCRIPTION}
+        </Typography>
+      </CardContent>
+      <CardActions className="flex justify-center">
+      <Button variant="outlined">APPLY</Button>
+      {/* <Button variant="outlined">FORM TEAM</Button> */}
+      </CardActions>
+    </Card>
     </Link>
     </>
   );

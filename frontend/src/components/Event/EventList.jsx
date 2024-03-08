@@ -4,8 +4,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getEventOverviewList } from '../../http';
 import { EventCard } from './EventCard';
-import loading_animation from '../../lottie_animation/loading_animation_2.json'
-import Lottie from 'lottie-react';
+import EventCardSkeleton from './EventCardSkeleton';
 
 export const EventList = (props) => {
     const [eventsList, setEventsList] = useState([]);
@@ -23,18 +22,22 @@ export const EventList = (props) => {
     
   return (
     <>
-<div className='w-full flex items-center justify-center' >
+        {isLoading === true && <div id="EventCardSkeleton" className="z-10 flex flex-wrap gap-4 grid-cols-3 overflow-scroll  scrollbar-hide ">
+            <EventCardSkeleton/>
+            <EventCardSkeleton/>
+            <EventCardSkeleton/>
+            <EventCardSkeleton/>
+            <EventCardSkeleton/>
+            <EventCardSkeleton/>
 
-    <section id='loading' className={`${isLoading ? '':'hidden'} top-0 max-w-md`}>
-      <Lottie animationData={loading_animation} />
-    </section>
-</div>
-        <div id="EventList" className="z-10 flex flex-wrap gap-4 grid-cols-3 overflow-scroll  scrollbar-hide ">
+        </div>}
+
+        {isLoading === false && <div id="EventList" className="z-10 flex flex-wrap gap-4 grid-cols-3 overflow-scroll  scrollbar-hide ">
             {eventsList && eventsList.length > 0 && eventsList.map((eve, i) => {
               return <EventCard event={eve} keys={i} key={i}/> ;
             })}
 
-        </div>
+        </div>}
     </>
   )
 }
