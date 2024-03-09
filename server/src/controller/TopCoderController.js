@@ -1,10 +1,18 @@
 const CodechefDb = require('../models/Codechef');
 const GithubDb = require('../models/Github');
+const GfgDb = require('../models/Geeksforgeeks');
 
 module.exports.topcoder = {
-    getLeetCodeData : (req, res)=>{
+    getGeeksForGeeksData : (req, res)=>{
         try{
-
+            const pipeline = [
+                { $sort: { "coding_score": -1 } }
+            ]
+            GfgDb.aggregate(pipeline).then(list=>{
+                res.status(200).json(list);
+            }).catch(err=>{
+                res.status(500);
+            })
         }catch(err){
             res.status(500);
         }

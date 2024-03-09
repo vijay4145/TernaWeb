@@ -8,6 +8,7 @@ const UserRoute = require('./src/routes/UserRoute');
 const ResourceRouter = require('./src/routes/ResourcesRoute')
 const connectToMongo = require('./src/services/Database/DbConnection');
 const TopCoderRoute = require('./src/routes/TopCoderRoute');
+require('./src/models/Geeksforgeeks')
 require('dotenv').config();
 
 const cors = require('cors');

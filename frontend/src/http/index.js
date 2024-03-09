@@ -81,7 +81,7 @@ export const getAiExperimentUrlNormal = async (data)=> await api('/resources/get
 // topcoder
 export const getCodechefUserData = async (data)=> await api('/topcoders/codechef', '' , 'get');
 export const getGithubUserData = async (data)=> await api('/topcoders/github', '' , 'get');
-export const getLeetcodeUserData = async (data)=> await api('/topcoders/leetcode', '' , 'get');
+export const getGfgUserData = async (data)=> await api('/topcoders/geeksforgeeks', '' , 'get');
 
 
 export default api;

@@ -23,11 +23,12 @@ const Codefchef = () => {
   }
   return (
     <div>
-      <p>
-        not seeing yourself{" "}
+      <p className="text-sm">
+        *not seeing yourself, add college name as {" "}
         <span className="underline hover:text-purple-600 cursor-pointer">
-          add here
+        Terna Engineering College, Nerul
         </span>
+        &nbsp;in your codechef handle
       </p>
       <br/>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
