@@ -126,13 +126,14 @@ export const ExperimentList = ({list}) => {
                 Experiment No.
               </th>
               <th scope="col" className="px-6 py-3">
-                Download
-              </th>
-              <th scope="col" className="px-6 py-3">
                 <span className='flex gap-0.5 items-center'>
                   <span className='text-red-500'><FaCrown/></span> Ai Completed
                 </span>
               </th>
+              <th scope="col" className="px-6 py-3">
+                Download
+              </th>
+              
             </tr>
           </thead>
 
@@ -156,12 +157,7 @@ export const ExperimentList = ({list}) => {
                     >
                         {`${ele.NAME}`}
                     </th>
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                        <span onClick={()=>openUrl(ele.URL)}><OutlineButton name={"Download"} icon={<FaDownload/>}/></span>
-                    </th>
+                    
                     <th
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -170,7 +166,12 @@ export const ExperimentList = ({list}) => {
                           <OutlineButton name={"Download Ai Completed"} icon={<FaDownload/>}/>
                         </span>
                     </th>
-                    
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                        <span onClick={()=>openUrl(ele.URL)}><OutlineButton name={"Download"} icon={<FaDownload/>}/></span>
+                    </th>
 
                   </tr>
                 </>
