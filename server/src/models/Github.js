@@ -2,19 +2,23 @@ const { mongoose } = require("mongoose");
 const DATABASE_TABLE_NAME = 'github'
 
 const githubSchema = new mongoose.Schema({
-    SEMESTER:{
+    link:{
         type: String,
         required: true
     },
-    BRANCH : {
+    total_commits : {
         type: String,
         required: true
     },
-    SUBJECT : {
+    total_pull_request : {
         type: String, 
         required: true
     },
-    LINK : {
+    star_earned : {
+        type: String,
+        required: true
+    },
+    name : {
         type: String,
         required: true
     }

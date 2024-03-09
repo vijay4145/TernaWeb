@@ -8,16 +8,14 @@ const Codefchef = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
   useEffect(()=>{
-    // hit api get list of codechef account
-    // setData
-    // setIsLoading false
     getCodechefUserData().then(res=>{
       if(res.status === 200){
         setData(res.data);
+        console.log(res.data);
         setIsLoading(false);
       }
     })
-  })
+  },[])
 
   const openLink = (username)=>{
     const url = `https://www.codechef.com/users/${username}`;
