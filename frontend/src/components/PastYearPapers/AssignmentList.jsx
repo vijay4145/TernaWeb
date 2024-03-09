@@ -14,7 +14,7 @@ const AssignmentList = ({list, type}) => {
           setAssignmentList(assignlist);
           setIsLoading(false);
         }
-      }, [list])
+      }, [])
 
       const openUrl = (url)=>{
         window.open(url, '_blank');

@@ -18,7 +18,8 @@ const GeeksForGeeks = () => {
   },[])
 
   const openLink = (userhandle)=>{
-
+    const url = `https://auth.geeksforgeeks.org/user/${userhandle}/?utm_source=geeksforgeeks&utm_medium=my_profile&utm_campaign=auth_user`
+    window.open(url, '_blank')
   }
 
   return (
