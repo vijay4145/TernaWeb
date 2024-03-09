@@ -1,0 +1,13 @@
+.platforms-option  {
+    @apply px-3 py-2 border border-black cursor-pointer flex gap-1 items-center shadow-lg ;
+}
+
+.ranklist-color > :nth-child(1){
+    @apply text-yellow-500
+}
+.ranklist-color > :nth-child(2){
+    @apply text-[#CD7F32]
+}
+.ranklist-color > :nth-child(3){
+    @apply text-gray-400
+}

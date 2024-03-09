@@ -77,6 +77,13 @@ export const getAvailableAssignment = async ()=> await api('/resources/get_assig
 export const getExperimentList = async (branch, semester, subject)=> await api('/resources/get_experiment_list/' + branch+ '/' + semester + '/' + subject, "" , 'get');
 export const getAiExperimentUrl = async (data)=> await api('/resources/get_experiment_url', data , 'post_with_token_and_return_response');
 export const getAiExperimentUrlNormal = async (data)=> await api('/resources/get_experiment_url_normal', data , 'npost');
+
+// topcoder
+export const getCodechefUserData = async (data)=> await api('/topcoders/codechef', '' , 'get');
+export const getGithubUserData = async (data)=> await api('/topcoders/github', '' , 'get');
+export const getLeetcodeUserData = async (data)=> await api('/topcoders/leetcode', '' , 'get');
+
+
 export default api;
 
 

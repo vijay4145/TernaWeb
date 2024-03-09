@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import "../config/firebase-config";
 import { AiFillHome, AiFillNotification } from "react-icons/ai";
-import { HiUserGroup } from "react-icons/hi";
+import { FaCode } from "react-icons/fa";
 import { ImBooks } from "react-icons/im";
 import { GiHamburgerMenu } from "react-icons/gi";
 import SignInWithGoogle from "./Button/SignInWithGoogle";
@@ -19,12 +19,13 @@ export const Navbar = (props) => {
 
   useEffect(() => {
     let path = location.pathname.split("/")[1];
-    let newItem = [false, false, false, false];
+    let newItem = [false, false, false, false, false];
 
     if (path === "events") newItem[1] = true;
     else if (path === "") newItem[0] = true;
     else if (path === "committees") newItem[2] = true;
     else if (path === "resource") newItem[3] = true;
+    else if(path === 'coder') newItem[4] = true;
     setSelectedItem(newItem);
   }, [location]);
 
@@ -135,6 +136,25 @@ export const Navbar = (props) => {
               to="/resource"
             >
               Resources
+            </Link>
+          </div>
+          
+          <div className="flex gap-2 items-center ulist-subitem max-md:pt-3">
+            <div
+              className={`bg-white font-medium rounded-sm ${
+                selectedItem[4] ? "bg-white" : "hidden"
+              }`}
+            >
+              &nbsp;
+            </div>
+            <FaCode color={`${selectedItem[4] ? "white" : "#CBD5E1"}`} />
+            <Link
+              className={`nav ${
+                selectedItem[4] ? "text-white" : "text-slate-300"
+              }`}
+              to="/coder"
+            >
+              Top Coders
             </Link>
           </div>
           

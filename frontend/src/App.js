@@ -24,7 +24,7 @@ function App() {
         <div className="max-sm:max-w-[100vw] max-sm:overflow-hidden">
 
       <LoadingBar
-        color='white'
+        color='blue'
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
         />

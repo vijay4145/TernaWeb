@@ -22,6 +22,7 @@ import HalfIconHalfButton from "./Button/HalfIconHalfButton";
 import DownloadAssignmentInfo from "./Home/DownloadAssignmentInfo";
 import { AssignmentForm } from "./AssignmentForm";
 import { ExpAssignPage } from './PastYearPapers/ExpAssignPage';
+import CoderTabIndex from "./CodersTab/CoderTabIndex";
 
 export const Home = (props) => {
   const { USER_NAME } = useSelector(state=> state.UserDetailsSlice);
@@ -117,6 +118,8 @@ export const Home = (props) => {
                 <Route exact path="/events/add-event" element={<AddEvent setProgress={props.setProgress}/>} />
                 <Route exact path="/committees/add-committee" element={<AddCommittee setProgress={props.setProgress}/>} />
                 <Route exact path="/events/:id" element={<EventDetailPage setProgress={props.setProgress}/>} />
+                <Route exact path="/coder" element={<CoderTabIndex setProgress={props.setProgress}/>} >
+                </Route>
               </Routes>
         </div>
     </div>
