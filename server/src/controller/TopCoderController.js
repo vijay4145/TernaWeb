@@ -1,6 +1,7 @@
 const CodechefDb = require('../models/Codechef');
 const GithubDb = require('../models/Github');
 const GfgDb = require('../models/Geeksforgeeks');
+const newgithubuserDb = require('../models/NewGithubUserAddRequest')
 
 module.exports.topcoder = {
     getGeeksForGeeksData : (req, res)=>{
@@ -47,5 +48,14 @@ module.exports.topcoder = {
             console.log(err);
             res.status(500)
         }
+    },
+    postNewGithubUserData : (req, res)=>{
+        console.log(req.body);
+        const data = new newgithubuserDb(req.body);
+        data.save().then(item=>{
+            res.status(200).json({});
+        }).catch(err=>{
+            res.status(500);
+        })
     }
 }

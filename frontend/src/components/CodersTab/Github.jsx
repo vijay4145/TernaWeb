@@ -3,10 +3,12 @@ import LoadingDataForTable from '../PastYearPapers/SubjectBar/LoadingDataForTabl
 import { FaTrophy } from 'react-icons/fa';
 import './codersTab.css';
 import { getGithubUserData } from '../../http';
+import AddGithubUser from './AddGithubUser';
 
 const Github = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
+  const [isAddGitUserDialogOpen, SetIsAddGitUserDialogOpen] = useState(false);
   useEffect(()=>{
     getGithubUserData().then(res=>{
       if(res.status === 200){
@@ -26,10 +28,11 @@ const Github = () => {
     <div>
     <p>
       not seeing yourself{" "}
-      <span className="underline hover:text-purple-600 cursor-pointer">
+      <span onClick={()=>SetIsAddGitUserDialogOpen(!isAddGitUserDialogOpen)} className="underline hover:text-purple-600 cursor-pointer">
         add here
       </span>
     </p>
+    {isAddGitUserDialogOpen && <AddGithubUser SetIsAddGitUserDialogOpen={SetIsAddGitUserDialogOpen}/>}
     <br/>
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
