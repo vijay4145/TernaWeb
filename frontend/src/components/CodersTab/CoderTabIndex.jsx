@@ -33,7 +33,7 @@ const CoderTabIndex = ({ setProgress }) => {
       <Typography variant="h2" gutterBottom>
         Top Coders of Terna
       </Typography>
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         <span onClick={()=>openLink('codechef')}>
 
         <Typography

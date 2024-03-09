@@ -10,7 +10,6 @@ import { MainHomePage } from "./components/MainHomePage";
 import { Account_settings } from "./components/DropDownItems/Account_settings";
 import { MyProfile } from "./components/DropDownItems/MyProfile";
 import { EventDetailPage } from "./components/Event/EventDetailPage/EventDetailPage";
-import { CommitteeDetailPage } from "./components/Committees/CommitteeDetailPage";
 import { GoogleAdHead } from "./components/GoogleAdHead";
 
 
@@ -36,7 +35,6 @@ function App() {
         <Route exact path="my-profile" element={<MyProfile/>}/>
         <Route exact path="/events/eventdetail/:id" element={<EventDetailPage/>}/>
         <Route exact path="/:section/:subsection/:id/:email" element={<MyProfile/>}/>
-        <Route exact path="/committees/committedetail/:id" element={<CommitteeDetailPage/>}/>
       </Routes>
           
       </div>

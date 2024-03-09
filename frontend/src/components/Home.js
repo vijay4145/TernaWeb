@@ -6,7 +6,6 @@ import { EventDetailPage } from './Event/EventDetailPage/EventDetailPage'
 
 import { Home2 } from "./Home/Home2";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { CommitteesList } from "./Committees/CommitteesList";
 import { PastYearPaper } from "./PastYearPapers/PastYearPaper";
 import { Events } from "./Event/Events";
 import { setUserDetailsSlice } from "../store/UserDetailsSlice";
@@ -15,7 +14,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AddEvent } from './Event/AddEvent'
-import { AddCommittee } from './Committees/AddCommittee'
 import spinner from '../lottie_animation/loader.gif';
 import { FaDownload } from "react-icons/fa";
 import HalfIconHalfButton from "./Button/HalfIconHalfButton";
@@ -110,13 +108,11 @@ export const Home = (props) => {
 
        <div className="min-h-[85vh]"> 
               <Routes>
-                <Route exact path="/committees" element={<CommitteesList setProgress={props.setProgress}/>}/>
                 <Route exact path="/" element={<Home2  setProgress={props.setProgress}/>} />
                 <Route exact path="/resource" element={<PastYearPaper  setProgress={props.setProgress}/>} />
                 <Route exact path="/resource/download-experiment" element={<ExpAssignPage  setProgress={props.setProgress}/>} />
                 <Route exact path="/events" element={<Events  setProgress={props.setProgress}/>} />
                 <Route exact path="/events/add-event" element={<AddEvent setProgress={props.setProgress}/>} />
-                <Route exact path="/committees/add-committee" element={<AddCommittee setProgress={props.setProgress}/>} />
                 <Route exact path="/events/:id" element={<EventDetailPage setProgress={props.setProgress}/>} />
                 <Route exact path="/coder" element={<CoderTabIndex setProgress={props.setProgress}/>} >
                 </Route>
