@@ -50,7 +50,7 @@ module.exports.topcoder = {
         }
     },
     postNewGithubUserData : (req, res)=>{
-        console.log(req.body);
+        // console.log(req.body);
         const data = new newgithubuserDb(req.body);
         data.save().then(item=>{
             res.status(200).json({});

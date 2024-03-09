@@ -27,7 +27,7 @@ export const EventCard = ({event}) => {
   
   return (
     <>
-    <Link to={'eventdetail/'+event._id} target="_blank" className="flex flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 gap-1 cursor-pointer">
+    <Link to={'eventdetail/'+event._id} target="_blank" className="flex flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow gap-1 cursor-pointer">
 
        <Card sx={{ maxWidth: 300, }} >
         {!isImageLoaded && <Skeleton variant='rectangular' height={220} className={`${isImageLoaded} ? 'hidden':''`}/> }

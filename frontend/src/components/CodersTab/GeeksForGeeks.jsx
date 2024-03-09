@@ -32,8 +32,8 @@ const GeeksForGeeks = () => {
       </p>
       <br/>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full text-sm text-left text-gray-500 ">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
             <tr>
               <th scope="col" className="px-6 py-3 w-7">
                 &nbsp;&nbsp;Rank
@@ -56,11 +56,11 @@ const GeeksForGeeks = () => {
             {isLoading && <LoadingDataForTable column={5}/>}
             {isLoading === false && data.map((ele, index) => {
             return (
-              <tr onClick={()=>openLink(ele.handle)} className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 cursor-pointer`}>
+              <tr onClick={()=>openLink(ele.handle)} className={`bg-white border-b hover:bg-gray-50 text-gray-900 cursor-pointer`}>
                   
                   <th
                     scope="row"
-                    className="px-6 py-4 font-medium  whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium  whitespace-nowrap "
                   >
                       <span className="flex justify-center items-center gap-0.5">
                         {index < 3 &&<FaTrophy />}
@@ -70,19 +70,19 @@ const GeeksForGeeks = () => {
                   </th>
                   <th
                     scope="row"
-                    className="px-6 py-4 font-medium whitespace-nowrap dark:text-white name"
+                    className="px-6 py-4 font-medium whitespace-nowrap  name"
                   >
                     {ele.handle}
                   </th>
                   <th
                     scope="row"
-                    className="px-6 py-4 font-medium whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium whitespace-nowrap "
                   >
                       {`${ele.coding_score}`}
                   </th>
                   <th
                     scope="row"
-                    className="px-6 py-4 font-medium whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium whitespace-nowrap "
                   >
                       {`${ele.total_problems_solved}`}
                   </th>
